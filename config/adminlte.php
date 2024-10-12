@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'title' => 'AdminLTE 3',
+    'title' => 'Clinica System',
     'title_prefix' => '',
     'title_postfix' => '',
 
@@ -324,8 +324,8 @@ return [
         ],
         ['header' => 'account_settings'],
         [
-            'text' => 'profile',
-            'url' => 'admin/settings',
+            'text' => 'Clinica',
+            'url' => 'clinicas',
             'icon' => 'fas fa-fw fa-user',
         ],
         [
