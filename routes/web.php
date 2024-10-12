@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Cadastro\ClienteController;
 use App\Http\Controllers\Cadastro\ClinicaController;
 use Illuminate\Support\Facades\Route;
 
@@ -12,3 +13,4 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::resource('clinicas', ClinicaController::class);
+Route::resource('clientes', ClienteController::class);
