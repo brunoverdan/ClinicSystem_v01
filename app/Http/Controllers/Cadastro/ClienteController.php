@@ -35,6 +35,7 @@ class ClienteController extends Controller
            'data_nascimento' => 'nullable|date',
        ]);
 
+       $request['user_id'] = 1;
        Cliente::create($request->all());
 
        return redirect()->route('clientes.index')->with('success', 'Cliente criado com sucesso!');
@@ -60,6 +61,7 @@ class ClienteController extends Controller
            'data_nascimento' => 'nullable|date',
        ]);
 
+       $request['user_id'] = 1;
        $cliente->update($request->all());
 
        return redirect()->route('clientes.index')->with('success', 'Cliente atualizado com sucesso!');

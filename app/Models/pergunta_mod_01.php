@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Ficha extends Model
+class pergunta_mod_01 extends Model
 {
     use HasFactory, SoftDeletes;
 

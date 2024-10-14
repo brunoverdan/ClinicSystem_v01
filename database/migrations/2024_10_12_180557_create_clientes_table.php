@@ -23,6 +23,7 @@ return new class extends Migration
             $table->date('data_nascimento')->nullable();
             $table->unsignedBigInteger('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

@@ -334,6 +334,11 @@ return [
             'icon' => 'fas fa-fw fa-lock',
         ],
         [
+            'text' => 'Evolução',
+            'url' => 'evolucoes',
+            'icon' => 'fas fa-fw fa-share',
+        ],
+        [
             'text' => 'multilevel',
             'icon' => 'fas fa-fw fa-share',
             'submenu' => [
