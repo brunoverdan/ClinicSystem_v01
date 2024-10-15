@@ -339,6 +339,30 @@ return [
             'icon' => 'fas fa-fw fa-share',
         ],
         [
+            'text' => 'Pergunta Mod 01',
+            'url' => 'pergunta_mod_01',
+            'icon_color' => 'red',
+            'icon' => 'fas fa-fw fa-share',
+        ],
+        [
+            'text' => 'Pergunta Mod 02',
+            'url' => 'pergunta_mod_02',
+            'icon_color' => 'yellow',
+            'icon' => 'fas fa-fw fa-share',
+        ],
+        [
+            'text' => 'Modelo Pergunta',
+            'url' => 'modelo_perguntas',
+            'icon_color' => 'blue',
+            'icon' => 'fas fa-fw fa-share',
+        ],
+        [
+            'text' => 'Ficha',
+            'url' => 'fichas',
+            'icon_color' => 'black',
+            'icon' => 'fas fa-fw fa-share',
+        ],
+        [
             'text' => 'multilevel',
             'icon' => 'fas fa-fw fa-share',
             'submenu' => [
