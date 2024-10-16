@@ -72,7 +72,8 @@
                         Conteúdo da Tab 02
                     </div>
                     <div class="tab-pane fade" id="tab3" role="tabpanel" aria-labelledby="tab3-tab">
-                        Conteúdo da Tab 03
+                        @include('Movimentacao.FichaCliente.form_evolucao')
+
                     </div>
                 </div>
             </div>
