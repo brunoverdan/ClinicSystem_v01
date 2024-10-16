@@ -10,7 +10,8 @@ class ModeloPerguntaController extends Controller
 {
     public function index()
     {
-        $modeloPerguntas = ModeloPergunta::all();
+        //$modeloPerguntas = ModeloPergunta::all();
+        $modeloPerguntas = ModeloPergunta::orderBy('modelo', 'asc')->get();
         return view('Cadastro.ModeloPergunta.index', compact('modeloPerguntas'));
     }
 

@@ -7,7 +7,9 @@ use App\Http\Controllers\Cadastro\PerguntaMod01Controller;
 use App\Http\Controllers\Cadastro\PerguntaMod02Controller;
 use App\Http\Controllers\Cadastro\ModeloPerguntaController;
 use App\Http\Controllers\Cadastro\FichaController;
+use App\Http\Controllers\Movimentacao\FichaClienteController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 Route::get('/', function () {
     return view('welcome');
@@ -24,3 +26,9 @@ Route::resource('pergunta_mod_01', PerguntaMod01Controller::class);
 Route::resource('pergunta_mod_02', PerguntaMod02Controller::class);
 Route::resource('modelo_perguntas', ModeloPerguntaController::class);
 Route::resource('fichas', FichaController::class);
+
+############# MOVIMENTAÇÃO ################
+
+Route::resource('ficha_cliente', FichaClienteController::class);
+Route::any('abrir_ficha_cliente/{id}', 'App\Http\Controllers\Movimentacao\FichaClienteController@abrir_ficha_cliente')->name('abrir_ficha_cliente');
+

@@ -17,7 +17,7 @@ class FichaController extends Controller
    }
     public function create()
     {
-        $perguntas = ModeloPergunta::all();
+        $perguntas = ModeloPergunta::orderBy('modelo', 'asc')->get();
         return view('Cadastro.Ficha.create', compact('perguntas'));
     }
 

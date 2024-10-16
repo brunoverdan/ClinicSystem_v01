@@ -363,6 +363,12 @@ return [
             'icon' => 'fas fa-fw fa-share',
         ],
         [
+            'text' => 'Ficha Cliente',
+            'url' => 'ficha_cliente',
+            'icon_color' => 'green',
+            'icon' => 'fas fa-fw fa-share',
+        ],
+        [
             'text' => 'multilevel',
             'icon' => 'fas fa-fw fa-share',
             'submenu' => [
