@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Movimentacao;
 
 use App\Http\Controllers\Controller;
 use App\Models\Cliente;
+use App\Models\File;
 use Illuminate\Http\Request;
 
 class FichaClienteController extends Controller
@@ -14,6 +15,7 @@ class FichaClienteController extends Controller
     public function index()
     {
         $clientes = Cliente::all();
+        
        return view('Movimentacao.FichaCliente.index', compact('clientes'));
     }
 
@@ -21,8 +23,8 @@ class FichaClienteController extends Controller
     {
         // Buscar o cliente pelo ID
         $cliente = Cliente::find($id);
-        
-        return view('Movimentacao.FichaCliente.ficha_cliente', compact('cliente'));
+        $files = File::all();
+        return view('Movimentacao.FichaCliente.ficha_cliente', compact('cliente', 'files'));
     }
 
 }

@@ -8,6 +8,7 @@ use App\Http\Controllers\Cadastro\PerguntaMod02Controller;
 use App\Http\Controllers\Cadastro\ModeloPerguntaController;
 use App\Http\Controllers\Cadastro\FichaController;
 use App\Http\Controllers\Movimentacao\FichaClienteController;
+use App\Http\Controllers\Movimentacao\FileController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -32,3 +33,7 @@ Route::resource('fichas', FichaController::class);
 Route::resource('ficha_cliente', FichaClienteController::class);
 Route::any('abrir_ficha_cliente/{id}', 'App\Http\Controllers\Movimentacao\FichaClienteController@abrir_ficha_cliente')->name('abrir_ficha_cliente');
 
+//File
+Route::get('/files', [FileController::class, 'index'])->name('files.index');
+Route::post('/files', [FileController::class, 'store'])->name('files.store');
+Route::get('/files/download/{id}', [FileController::class, 'download'])->name('files.download');
