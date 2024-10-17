@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('file_path');
-            $table->unsignedBigInteger('ficha_id')->unsigned();
-            $table->foreign('ficha_id')->references('id')->on('fichas')->nullable();
+            $table->unsignedBigInteger('cliente_id')->unsigned();
+            $table->foreign('cliente_id')->references('id')->on('clientes')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

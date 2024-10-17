@@ -34,7 +34,8 @@ class EvolucaoController extends Controller
 
         Evolucao::create($request->all());
 
-        return redirect()->route('evolucoes.index')->with('success', 'Evolução registrada com sucesso!');
+        return redirect()->back()->with('success', 'Arquivo salvo com sucesso!');
+        //return redirect()->route('evolucoes.index')->with('success', 'Evolução registrada com sucesso!');
     }
 
     // Mostra o formulário para editar uma evolução
@@ -59,10 +60,12 @@ class EvolucaoController extends Controller
     }
 
     // Remove uma evolução do banco de dados
-    public function destroy(Evolucao $evolucao)
+    public function destroy($id)
     {
+        $evolucao = Evolucao::find($id);
         $evolucao->delete();
 
-        return redirect()->route('evolucoes.index')->with('success', 'Evolução removida com sucesso!');
+        return redirect()->back()->with('danger', 'Arquivo excluido com sucesso!');
+        //return redirect()->route('evolucoes.index')->with('success', 'Evolução removida com sucesso!');
     }
 }

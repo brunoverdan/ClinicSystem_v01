@@ -4,7 +4,7 @@
     </div>
 @endif
 
-<form action="{{ route('files.store') }}" method="POST" enctype="multipart/form-data">
+<form action="{{ route('files.store', ['cliente_id' => $cliente->id]) }}" method="POST" enctype="multipart/form-data">
     @csrf
     <div class="form-group">
         <label for="name">Nome do Arquivo</label>
@@ -21,12 +21,24 @@
 
 <hr>
 
-<h3>Arquivos Cadastrados</h3>
-<ul>
-    @foreach($files as $file)
-        <li>
-            {{ $file->name }} 
-            <a href="{{ route('files.download', $file->id) }}">Baixar</a>
-        </li>
-    @endforeach
-</ul>
+<h3 class="my-4">Arquivos Cadastrados</h3>
+
+@if($files->isEmpty())
+    <p>Nenhum arquivo cadastrado.</p>
+@else
+    <div class="list-group">
+        @foreach($files as $file)
+            <div class="list-group-item d-flex justify-content-between align-items-center">
+                <span>
+                    <i class="bi bi-file-earmark"></i> <!-- Ícone de arquivo -->
+                    {{ $file->name }}
+                </span>
+                <a href="{{ route('files.download', $file->id) }}" class="btn btn-sm btn-primary">
+                    <i class="bi bi-download"></i> <!-- Ícone de download -->
+                    Baixar
+                </a>
+            </div>
+        @endforeach
+    </div>
+@endif
+

@@ -306,33 +306,33 @@ return [
         ],
 
         // Sidebar items:
-        [
-            'type' => 'sidebar-menu-search',
-            'text' => 'search',
-        ],
-        [
-            'text' => 'blog',
-            'url' => 'admin/blog',
-            'can' => 'manage-blog',
-        ],
-        [
-            'text' => 'pages',
-            'url' => 'admin/pages',
-            'icon' => 'far fa-fw fa-file',
-            'label' => 4,
-            'label_color' => 'success',
-        ],
-        ['header' => 'account_settings'],
+        
+        ['header' => 'Cadastro'],
         [
             'text' => 'Clinica',
             'url' => 'clinicas',
+            'icon_color' => 'red',
             'icon' => 'fas fa-fw fa-user',
         ],
         [
             'text' => 'Cliente',
             'url' => 'clientes',
-            'icon' => 'fas fa-fw fa-lock',
+            'icon' => 'fas fa-fw fa-user',
         ],
+        [
+            'text' => 'Pergunta',
+            'url' => 'modelo_perguntas',
+            'icon_color' => 'blue',
+            'icon' => 'fas fa-fw fa-user',
+        ],
+        ['header' => 'Ficha do Cliente'],
+        [
+            'text' => 'Ficha Cliente',
+            'url' => 'ficha_cliente',
+            'icon_color' => 'green',
+            'icon' => 'fas fa-fw fa-user',
+        ],
+        ['header' => 'Configuração'],
         [
             'text' => 'Evolução',
             'url' => 'evolucoes',
@@ -350,24 +350,14 @@ return [
             'icon_color' => 'yellow',
             'icon' => 'fas fa-fw fa-share',
         ],
-        [
-            'text' => 'Modelo Pergunta',
-            'url' => 'modelo_perguntas',
-            'icon_color' => 'blue',
-            'icon' => 'fas fa-fw fa-share',
-        ],
+        
         [
             'text' => 'Ficha',
             'url' => 'fichas',
             'icon_color' => 'black',
             'icon' => 'fas fa-fw fa-share',
         ],
-        [
-            'text' => 'Ficha Cliente',
-            'url' => 'ficha_cliente',
-            'icon_color' => 'green',
-            'icon' => 'fas fa-fw fa-share',
-        ],
+        
         [
             'text' => 'multilevel',
             'icon' => 'fas fa-fw fa-share',

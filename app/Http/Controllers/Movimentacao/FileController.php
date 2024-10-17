@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Movimentacao;
 
 use App\Http\Controllers\Controller;
+use App\Models\File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -23,6 +24,8 @@ class FileController extends Controller
             'file' => 'required|file|mimes:pdf,doc,docx,jpeg,png,jpg|max:2048',
         ]);
 
+        $clienteId = $request->input('cliente_id'); // Recupera o cliente_id
+
         // Salva o arquivo no storage
         if ($request->hasFile('file')) {
             $filePath = $request->file('file')->store('uploads', 'public');
@@ -31,6 +34,7 @@ class FileController extends Controller
             File::create([
                 'name' => $request->name,
                 'file_path' => $filePath,
+                'cliente_id' => $clienteId,
             ]);
 
             return redirect()->back()->with('success', 'Arquivo salvo com sucesso!');
