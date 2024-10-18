@@ -73,7 +73,9 @@
                         
                     </div>
                     <div class="tab-pane fade" id="tab2" role="tabpanel" aria-labelledby="tab2-tab">
-                        @if($respostas != null)
+                       
+
+                        @if(count($respostas) > 0)
                             @include('Movimentacao.Ficha.edit')
                         @else
                             @include('Movimentacao.Ficha.create')

@@ -32,7 +32,7 @@ class FichaClienteController extends Controller
         $evolucoes = Evolucao::where('cliente_id', $id)->get();
         $perguntas = ModeloPergunta::orderBy('modelo', 'asc')->get();
         $respostas = Resposta::where('cliente_id', $id)->get()->keyBy('pergunta_id');
-        $perguntas = ModeloPergunta::all(); // Supondo que você tenha um modelo Pergunta
+        
    
 
 
