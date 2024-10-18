@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'title' => 'Clinica System',
+    'title' => 'Clini Master',
     'title_prefix' => '',
     'title_postfix' => '',
 
@@ -63,8 +63,8 @@ return [
     |
     */
 
-    'logo' => '<b>Admin</b>LTE',
-    'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
+    'logo' => '<b>Clini</b>Master',
+    'logo_img' => 'vendor/adminlte/dist/img/logoCliniMaster.png',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
@@ -86,7 +86,7 @@ return [
     'auth_logo' => [
         'enabled' => false,
         'img' => [
-            'path' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
+            'path' => 'vendor/adminlte/dist/img/logoCliniMaster.png',
             'alt' => 'Auth Logo',
             'class' => '',
             'width' => 50,
@@ -113,8 +113,8 @@ return [
         'enabled' => true,
         'mode' => 'fullscreen',
         'img' => [
-            'path' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
-            'alt' => 'AdminLTE Preloader Image',
+            'path' => 'vendor/adminlte/dist/img/logoCliniMaster.png',
+            'alt' => 'CliniMaster',
             'effect' => 'animation__shake',
             'width' => 60,
             'height' => 60,
@@ -311,8 +311,7 @@ return [
         [
             'text' => 'Clinica',
             'url' => 'clinicas',
-            'icon_color' => 'red',
-            'icon' => 'fas fa-fw fa-user',
+            'icon' => 'fas fa-fw fa-building',
         ],
         [
             'text' => 'Cliente',
@@ -323,95 +322,28 @@ return [
             'text' => 'Pergunta',
             'url' => 'modelo_perguntas',
             'icon_color' => 'blue',
-            'icon' => 'fas fa-fw fa-user',
+            'icon' => 'fas fa-fw fa-question',
         ],
         ['header' => 'Ficha do Cliente'],
         [
             'text' => 'Ficha Cliente',
             'url' => 'ficha_cliente',
             'icon_color' => 'green',
-            'icon' => 'fas fa-fw fa-user',
+            'icon' => 'fas fa-fw fa-file-alt',
         ],
         ['header' => 'Configuração'],
         [
             'text' => 'Evolução',
             'url' => 'evolucoes',
-            'icon' => 'fas fa-fw fa-share',
+            'icon' => 'fas fa-fw fa-cog',
         ],
-        [
-            'text' => 'Pergunta Mod 01',
-            'url' => 'pergunta_mod_01',
-            'icon_color' => 'red',
-            'icon' => 'fas fa-fw fa-share',
-        ],
-        [
-            'text' => 'Pergunta Mod 02',
-            'url' => 'pergunta_mod_02',
-            'icon_color' => 'yellow',
-            'icon' => 'fas fa-fw fa-share',
-        ],
-        
         [
             'text' => 'Ficha',
             'url' => 'fichas',
             'icon_color' => 'black',
-            'icon' => 'fas fa-fw fa-share',
+            'icon' => 'fas fa-fw fa-cog',
         ],
         
-        [
-            'text' => 'multilevel',
-            'icon' => 'fas fa-fw fa-share',
-            'submenu' => [
-                [
-                    'text' => 'level_one',
-                    'url' => '#',
-                ],
-                [
-                    'text' => 'level_one',
-                    'url' => '#',
-                    'submenu' => [
-                        [
-                            'text' => 'level_two',
-                            'url' => '#',
-                        ],
-                        [
-                            'text' => 'level_two',
-                            'url' => '#',
-                            'submenu' => [
-                                [
-                                    'text' => 'level_three',
-                                    'url' => '#',
-                                ],
-                                [
-                                    'text' => 'level_three',
-                                    'url' => '#',
-                                ],
-                            ],
-                        ],
-                    ],
-                ],
-                [
-                    'text' => 'level_one',
-                    'url' => '#',
-                ],
-            ],
-        ],
-        ['header' => 'labels'],
-        [
-            'text' => 'important',
-            'icon_color' => 'red',
-            'url' => '#',
-        ],
-        [
-            'text' => 'warning',
-            'icon_color' => 'yellow',
-            'url' => '#',
-        ],
-        [
-            'text' => 'information',
-            'icon_color' => 'cyan',
-            'url' => '#',
-        ],
     ],
 
     /*

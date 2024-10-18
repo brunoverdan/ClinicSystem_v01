@@ -32,6 +32,7 @@ Route::resource('fichas', FichaController::class);
 
 Route::resource('ficha_cliente', FichaClienteController::class);
 Route::any('abrir_ficha_cliente/{id}', 'App\Http\Controllers\Movimentacao\FichaClienteController@abrir_ficha_cliente')->name('abrir_ficha_cliente');
+Route::put('/fichas/{cliente_id}', [FichaController::class, 'update'])->name('fichas.update');
 
 //File
 Route::get('/files', [FileController::class, 'index'])->name('files.index');

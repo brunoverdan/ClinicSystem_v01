@@ -1,58 +1,74 @@
-<div class="container">
-    <h1>Cadastrar Ficha de Cliente</h1>
-
-    <form action="{{ route('fichas.store', ['cliente_id' => $cliente->id]) }}" method="POST">
-        @csrf
-
-        <div class="form-group">
-            <label for="queixa">Queixa</label>
-            <textarea name="queixa" class="form-control" rows="3"></textarea>
+########################################### CReate
+<div class="container mt-5">
+    <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+            <h1 class="mb-0">Questionário do Cliente</h1>
         </div>
+        <div class="card-body">
+            <form action="{{ route('fichas.update', ['cliente_id' => $cliente->id]) }}" method="POST">
+                @csrf
+                @method('PUT')
 
-        <div class="form-group">
-            <label for="habito">Hábito</label>
-            <textarea name="habito" class="form-control" rows="3"></textarea>
-        </div>
+                <h2 class="mb-4">Perguntas</h2>
 
-        <div class="form-group">
-            <label for="anamnesia">Anamnese</label>
-            <textarea name="anamnesia" class="form-control" rows="3"></textarea>
-        </div>
+                @foreach($perguntas as $pergunta)
+                    <div class="form-group mb-4">
+                        <label class="form-label">{{ $pergunta->pergunta }}</label>
 
-        <div class="form-group">
-            <label for="data">Data</label>
-            <input type="date" name="data" class="form-control">
-        </div>
+                        @if($pergunta->modelo == 'modelo_01')
+                            <div class="mb-2">
+                                <textarea name="perguntas[{{ $pergunta->id }}][resposta]" class="form-control" rows="3" placeholder="Especifique se necessário">{{ $respostas[$pergunta->id]->resposta ?? '' }}</textarea>
+                                <input type="hidden" name="perguntas[{{ $pergunta->id }}][tipo_modelo]" value="modelo_01">
+                            </div>
 
-        <hr>
-        <h2>Perguntas</h2>
+                        @elseif($pergunta->modelo == 'modelo_02')
+                            <div class="mb-2">
+                                <label class="form-label d-block">Resposta:</label>
+                                <div class="form-check form-check-inline">
+                                    <input type="radio" name="perguntas[{{ $pergunta->id }}][resposta]" value="sim" class="form-check-input" {{ isset($respostas[$pergunta->id]) && $respostas[$pergunta->id]->resposta === 'sim' ? 'checked' : '' }}>
+                                    <input type="hidden" name="perguntas[{{ $pergunta->id }}][tipo_modelo]" value="modelo_02">
+                                    <label class="form-check-label">Sim</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input type="radio" name="perguntas[{{ $pergunta->id }}][resposta]" value="nao" class="form-check-input" {{ isset($respostas[$pergunta->id]) && $respostas[$pergunta->id]->resposta === 'nao' ? 'checked' : '' }}>
+                                    <label class="form-check-label">Não</label>
+                                </div>
+                            </div>
 
-        @foreach($perguntas as $pergunta)
-            <div class="form-group">
-                <label>{{ $pergunta->pergunta }}</label>
+                            <div class="form-group">
+                                <label for="quais" class="form-label">Quais?</label>
+                                <input type="text" name="perguntas[{{ $pergunta->id }}][quais]" class="form-control" placeholder="Especifique se necessário" value="{{ $respostas[$pergunta->id]->quais ?? '' }}">
+                                <input type="hidden" name="perguntas[{{ $pergunta->id }}][tipo_modelo]" value="modelo_02">
+                            </div>
 
-                @if($pergunta->modelo == 'modelo_01')
-                    <div>
-                        <label>Resposta:</label><br>
-                        <input type="radio" name="perguntas[{{ $pergunta->id }}][resposta]" value="sim"> Sim
-                        <input type="radio" name="perguntas[{{ $pergunta->id }}][resposta]" value="nao"> Não
+                        @elseif($pergunta->modelo == 'modelo_03')
+                            <div class="mt-2">
+                                <div class="form-check">
+                                    <input type="checkbox" name="perguntas[{{ $pergunta->id }}][mais]" value="1" class="form-check-input" {{ isset($respostas[$pergunta->id]) && $respostas[$pergunta->id]->mais ? 'checked' : '' }}>
+                                    <input type="hidden" name="perguntas[{{ $pergunta->id }}][tipo_modelo]" value="modelo_03">
+                                    <label class="form-check-label">Mais</label>
+                                </div>
+                                <div class="form-check">
+                                    <input type="checkbox" name="perguntas[{{ $pergunta->id }}][menos]" value="1" class="form-check-input" {{ isset($respostas[$pergunta->id]) && $respostas[$pergunta->id]->menos ? 'checked' : '' }}>
+                                    <label class="form-check-label">Menos</label>
+                                </div>
+                                <div class="form-check">
+                                    <input type="checkbox" name="perguntas[{{ $pergunta->id }}][direito]" value="1" class="form-check-input" {{ isset($respostas[$pergunta->id]) && $respostas[$pergunta->id]->direito ? 'checked' : '' }}>
+                                    <label class="form-check-label">Direito</label>
+                                </div>
+                                <div class="form-check">
+                                    <input type="checkbox" name="perguntas[{{ $pergunta->id }}][esquerdo]" value="1" class="form-check-input" {{ isset($respostas[$pergunta->id]) && $respostas[$pergunta->id]->esquerdo ? 'checked' : '' }}>
+                                    <label class="form-check-label">Esquerdo</label>
+                                </div>
+                            </div>
+                        @endif
                     </div>
-                    <div>
-                        <label>Quais?</label>
-                        <input type="text" name="perguntas[{{ $pergunta->id }}][quais]" class="form-control">
-                    </div>
+                @endforeach
 
-                @elseif($pergunta->modelo == 'modelo_02')
-                    <div>
-                        <input type="checkbox" name="perguntas[{{ $pergunta->id }}][mais]" value="1"> Mais
-                        <input type="checkbox" name="perguntas[{{ $pergunta->id }}][menos]" value="1"> Menos
-                        <input type="checkbox" name="perguntas[{{ $pergunta->id }}][direito]" value="1"> Direito
-                        <input type="checkbox" name="perguntas[{{ $pergunta->id }}][esquerdo]" value="1"> Esquerdo
-                    </div>
-                @endif
-            </div>
-        @endforeach
-
-        <button type="submit" class="btn btn-primary">Salvar Ficha</button>
-    </form>
+                <div class="text-end">
+                    <button type="submit" class="btn btn-success">Salvar Ficha</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>

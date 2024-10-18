@@ -3,7 +3,7 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-    <h1>Dashboard</h1>
+  
 @stop
 
 @section('content')
@@ -22,6 +22,7 @@
             <select name="modelo" class="form-control" required>
                 <option value="modelo_01" {{ old('modelo') == 'modelo_01' ? 'selected' : '' }}>Modelo 01</option>
                 <option value="modelo_02" {{ old('modelo') == 'modelo_02' ? 'selected' : '' }}>Modelo 02</option>
+                <option value="modelo_03" {{ old('modelo') == 'modelo_03' ? 'selected' : '' }}>Modelo 03</option>
             </select>
         </div>
 

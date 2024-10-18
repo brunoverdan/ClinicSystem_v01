@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('modelo_perguntas', function (Blueprint $table) {
             $table->id();
             $table->string('pergunta');
-            $table->enum('modelo', ['modelo_01', 'modelo_02']);  // Escolha entre modelo 01 e modelo 02
+            $table->enum('modelo', ['modelo_01', 'modelo_02', 'modelo_03']);  // Escolha entre modelo 01 e modelo 02
             $table->timestamps();
         });
     }
