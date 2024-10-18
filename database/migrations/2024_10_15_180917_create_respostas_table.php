@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('repostas', function (Blueprint $table) {
+        Schema::create('respostas', function (Blueprint $table) {
             $table->id();
             $table->string('tipo_modelo');
             $table->string('pergunta');
@@ -21,8 +21,8 @@ return new class extends Migration
             $table->integer('menos')->nullable();
             $table->integer('direito')->nullable();
             $table->integer('esquerdo')->nullable();
-            $table->unsignedBigInteger('ficha_id')->unsigned();
-            $table->foreign('ficha_id')->references('id')->on('fichas')->nullable();
+            $table->unsignedBigInteger('cliente_id')->unsigned();
+            $table->foreign('cliente_id')->references('id')->on('clientes')->nullable();
             $table->timestamps();
         });
     }

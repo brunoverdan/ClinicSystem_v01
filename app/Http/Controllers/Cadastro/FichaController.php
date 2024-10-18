@@ -23,6 +23,8 @@ class FichaController extends Controller
 
     public function store(Request $request)
     {
+        $cliente_id['cliente_id'] = $request->query('cliente_id');
+
         $request->validate([
             'queixa' => 'nullable|string',
             'habito' => 'nullable|string',
@@ -31,25 +33,37 @@ class FichaController extends Controller
             'cliente_id' => 'required|integer',
         ]);
 
-        $ficha = Ficha::create($request->all());
+      
+        $ficha = Ficha::create($request->only([
+            'queixa', 
+            'habito', 
+            'anamnesia', 
+            'data', 
+            'cliente_id'
+        ]));
 
         // Gravar as respostas
         foreach ($request->perguntas as $perguntaId => $respostaData) {
             $pergunta = ModeloPergunta::find($perguntaId);
             
-            Resposta::create([
-                'tipo_modelo' => $pergunta->modelo,
-                'pergunta' => $pergunta->pergunta,
-                'resposta' => $respostaData['resposta'] ?? null,
-                'quais' => $respostaData['quais'] ?? null,
-                'mais' => $respostaData['mais'] ?? null,
-                'menos' => $respostaData['menos'] ?? null,
-                'direito' => $respostaData['direito'] ?? null,
-                'esquerdo' => $respostaData['esquerdo'] ?? null,
-                'ficha_id' => $ficha->id,
-            ]);
+            try {
+                $gravaResposta = Resposta::create([
+                    'tipo_modelo' => $pergunta->modelo,
+                    'pergunta' => $pergunta->pergunta,
+                    'resposta' => $respostaData['resposta'] ?? 0,
+                    'quais' => $respostaData['quais'] ?? 0,
+                    'mais' => $respostaData['mais'] ?? 0,
+                    'menos' => $respostaData['menos'] ?? 0,
+                    'direito' => $respostaData['direito'] ?? 0,
+                    'esquerdo' => $respostaData['esquerdo'] ?? 0,
+                    'cliente_id' => $cliente_id ?? 0,
+                ]);
+            } catch (\Exception $e) {
+                dd($e->getMessage());  // Verifique se há algum erro
+            }
         }
 
-        return redirect()->route('fichas.index')->with('success', 'Ficha criada com sucesso!');
+        return redirect()->back()->with('success', 'Arquivo salvo com sucesso!');
+        //return redirect()->route('fichas.index')->with('success', 'Ficha criada com sucesso!');
     }
 }

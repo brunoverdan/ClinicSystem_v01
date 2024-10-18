@@ -73,7 +73,7 @@
                         
                     </div>
                     <div class="tab-pane fade" id="tab2" role="tabpanel" aria-labelledby="tab2-tab">
-                        Conteúdo da Tab 02
+                        @include('Movimentacao.Ficha.create')
                     </div>
                     <div class="tab-pane fade" id="tab3" role="tabpanel" aria-labelledby="tab3-tab">
                         @include('Movimentacao.FichaCliente.form_evolucao')

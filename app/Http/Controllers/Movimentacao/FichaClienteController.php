@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Cliente;
 use App\Models\Evolucao;
 use App\Models\File;
+use App\Models\ModeloPergunta;
 use Illuminate\Http\Request;
 
 class FichaClienteController extends Controller
@@ -26,7 +27,9 @@ class FichaClienteController extends Controller
         $cliente = Cliente::find($id);
         $files = File::all();
         $evolucoes = Evolucao::all();
-        return view('Movimentacao.FichaCliente.ficha_cliente', compact('cliente', 'files', 'evolucoes'));
+        $perguntas = ModeloPergunta::orderBy('modelo', 'asc')->get();
+
+        return view('Movimentacao.FichaCliente.ficha_cliente', compact('cliente', 'files', 'evolucoes', 'perguntas'));
     }
 
 }
