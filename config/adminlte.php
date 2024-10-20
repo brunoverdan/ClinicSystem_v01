@@ -331,18 +331,6 @@ return [
             'icon_color' => 'green',
             'icon' => 'fas fa-fw fa-file-alt',
         ],
-        ['header' => 'Configuração'],
-        [
-            'text' => 'Evolução',
-            'url' => 'evolucoes',
-            'icon' => 'fas fa-fw fa-cog',
-        ],
-        [
-            'text' => 'Ficha',
-            'url' => 'fichas',
-            'icon_color' => 'black',
-            'icon' => 'fas fa-fw fa-cog',
-        ],
         
     ],
 
