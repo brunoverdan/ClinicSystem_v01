@@ -10,4 +10,9 @@ class ModeloPergunta extends Model
     use HasFactory;
 
     protected $guarded = [];
+
+    public function respostas()
+    {
+        return $this->hasMany(Resposta::class, 'pergunta', 'pergunta');
+    }
 }

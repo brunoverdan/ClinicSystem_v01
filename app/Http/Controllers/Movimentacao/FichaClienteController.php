@@ -18,25 +18,29 @@ class FichaClienteController extends Controller
     public function index()
     {
         $clientes = Cliente::all();
-        
-       return view('Movimentacao.FichaCliente.index', compact('clientes'));
+
+        return view('Movimentacao.FichaCliente.index', compact('clientes'));
     }
 
     public function abrir_ficha_cliente($id)
     {
-        
-        
+
+
         // Buscar o cliente pelo ID
         $cliente = Cliente::findOrFail($id);
         $files = File::where('cliente_id', $id)->get();
         $evolucoes = Evolucao::where('cliente_id', $id)->get();
         $perguntas = ModeloPergunta::orderBy('modelo', 'asc')->get();
-        $respostas = Resposta::where('cliente_id', $id)->get()->keyBy('pergunta_id');
-        
-   
+        $respostas = Resposta::where('cliente_id', $id)->get();
 
+        //dd(count($valida_respostas));
+
+        if (count($respostas) > 0) {
+            $respostas = ModeloPergunta::with(['respostas' => function ($query) use ($id) {
+                $query->where('cliente_id', $id);
+            }])->orderBy('modelo', 'asc')->get();
+        } 
 
         return view('Movimentacao.FichaCliente.ficha_cliente', compact('cliente', 'files', 'evolucoes', 'perguntas', 'respostas'));
     }
-
 }

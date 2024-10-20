@@ -52,7 +52,7 @@
                                         </div>
                                     </div>
                                 </div>
-                        
+
                                 <!-- Coluna 2 -->
                                 <div class="col-md-6">
                                     <div class="card">
@@ -64,18 +64,17 @@
                                             <p><strong>Cidade:</strong> {{ $cliente->cidade }}</p>
                                             <p><strong>Estado (UF):</strong> {{ $cliente->uf }}</p>
                                             <p><strong>Sexo:</strong> {{ $cliente->sexo }}</p>
-                                            <p><strong>Data de Nascimento:</strong> {{ \Carbon\Carbon::parse($cliente->data_nascimento)->format('d/m/Y') }}</p>
+                                            <p><strong>Data de Nascimento:</strong>
+                                                {{ \Carbon\Carbon::parse($cliente->data_nascimento)->format('d/m/Y') }}</p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        
+
                     </div>
                     <div class="tab-pane fade" id="tab2" role="tabpanel" aria-labelledby="tab2-tab">
-                       
-
-                        @if(count($respostas) > 0)
+                        @if (count($respostas) > 0)
                             @include('Movimentacao.Ficha.edit')
                         @else
                             @include('Movimentacao.Ficha.create')
@@ -86,7 +85,7 @@
 
                     </div>
                     <div class="tab-pane fade" id="tab4" role="tabpanel" aria-labelledby="tab4-tab">
-                        
+
                         @include('Movimentacao.File.index')
 
                     </div>

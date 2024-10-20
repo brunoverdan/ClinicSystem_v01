@@ -10,4 +10,9 @@ class Resposta extends Model
     use HasFactory;
     
     protected $guarded = [];
+
+    public function cliente()
+    {
+        return $this->belongsTo(Cliente::class, 'cliente_id');
+    }
 }
