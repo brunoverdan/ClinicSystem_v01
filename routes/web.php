@@ -38,3 +38,8 @@ Route::put('/fichas/{cliente_id}', [FichaController::class, 'update'])->name('fi
 Route::get('/files', [FileController::class, 'index'])->name('files.index');
 Route::post('/files', [FileController::class, 'store'])->name('files.store');
 Route::get('/files/download/{id}', [FileController::class, 'download'])->name('files.download');
+
+
+######### Filtro ########
+
+Route::post('/ficha/pesquisar', [FichaClienteController::class, 'search'])->name('fichas.search');

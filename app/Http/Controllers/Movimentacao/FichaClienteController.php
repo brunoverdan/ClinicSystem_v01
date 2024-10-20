@@ -17,8 +17,29 @@ class FichaClienteController extends Controller
      */
     public function index()
     {
-        $clientes = Cliente::all();
+        $clientes = Cliente::paginate(10);
 
+        return view('Movimentacao.FichaCliente.index', compact('clientes'));
+    }
+
+
+    public function search(Request $request)
+    {
+        // Validação do campo de pesquisa
+        $request->validate([
+            'query' => 'required|string|max:255',
+        ]);
+
+        // Realiza a pesquisa por nome, telefone ou email
+        $query = $request->input('query');
+        $clientes = Cliente::where('nome', 'LIKE', "%{$query}%")
+                    ->orWhere('telefone', 'LIKE', "%{$query}%")
+                    ->orWhere('email', 'LIKE', "%{$query}%")
+                    ->paginate(10)
+                    ->appends(['query' => $query]);
+
+
+        // Retorna os resultados para a view
         return view('Movimentacao.FichaCliente.index', compact('clientes'));
     }
 

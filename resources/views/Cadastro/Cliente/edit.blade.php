@@ -1,15 +1,13 @@
 @extends('adminlte::page')
 
-@section('title', 'Dashboard')
+@section('title', 'Editar Cliente')
 
 @section('content_header')
-    <h1>Dashboard</h1>
+    <h1>Editar Cliente</h1>
 @stop
 
 @section('content')
 <div class="container">
-    <h1>Editar Cliente</h1>
-
     @if ($errors->any())
         <div class="alert alert-danger">
             <ul>
@@ -23,44 +21,53 @@
     <form action="{{ route('clientes.update', $cliente->id) }}" method="POST">
         @csrf
         @method('PUT')
-        <div class="form-group">
-            <label for="nome">Nome:</label>
-            <input type="text" class="form-control" name="nome" value="{{ $cliente->nome }}" required>
-        </div>
-        <div class="form-group">
-            <label for="endereco">Endereço:</label>
-            <input type="text" class="form-control" name="endereco" value="{{ $cliente->endereco }}">
-        </div>
-        <div class="form-group">
-            <label for="telefone">Telefone:</label>
-            <input type="text" class="form-control" name="telefone" value="{{ $cliente->telefone }}">
-        </div>
-        <div class="form-group">
-            <label for="email">E-mail:</label>
-            <input type="email" class="form-control" name="email" value="{{ $cliente->email }}">
-        </div>
-        <div class="form-group">
-            <label for="cidade">Cidade:</label>
-            <input type="text" class="form-control" name="cidade" value="{{ $cliente->cidade }}">
-        </div>
-        <div class="form-group">
-            <label for="uf">UF:</label>
-            <input type="text" class="form-control" name="uf" maxlength="2" value="{{ $cliente->uf }}">
-        </div>
-        <div class="form-group">
-            <label for="sexo">Sexo:</label>
-            <select class="form-control" name="sexo" required>
-                <option value="Masculino" {{ $cliente->sexo == 'Masculino' ? 'selected' : '' }}>Masculino</option>
-                <option value="Feminino" {{ $cliente->sexo == 'Feminino' ? 'selected' : '' }}>Feminino</option>
-                <option value="Nao Escolha" {{ $cliente->sexo == 'Nao Escolha' ? 'selected' : '' }}>Não Escolha</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="data_nascimento">Data de Nascimento:</label>
-            <input type="date" class="form-control" name="data_nascimento" value="{{ $cliente->data_nascimento }}">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="nome">Nome:</label>
+                    <input type="text" class="form-control" name="nome" value="{{ $cliente->nome }}" required>
+                </div>
+                <div class="form-group">
+                    <label for="telefone">Telefone:</label>
+                    <input type="text" class="form-control" name="telefone" value="{{ $cliente->telefone }}">
+                </div>
+                <div class="form-group">
+                    <label for="cidade">Cidade:</label>
+                    <input type="text" class="form-control" name="cidade" value="{{ $cliente->cidade }}">
+                </div>
+                <div class="form-group">
+                    <label for="sexo">Sexo:</label>
+                    <select class="form-control" name="sexo" required>
+                        <option value="">Selecione</option>
+                        <option value="Masculino" {{ $cliente->sexo == 'Masculino' ? 'selected' : '' }}>Masculino</option>
+                        <option value="Feminino" {{ $cliente->sexo == 'Feminino' ? 'selected' : '' }}>Feminino</option>
+                        <option value="Nao Escolha" {{ $cliente->sexo == 'Nao Escolha' ? 'selected' : '' }}>Não Escolha</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="data_nascimento">Data de Nascimento:</label>
+                    <input type="date" class="form-control" name="data_nascimento" value="{{ $cliente->data_nascimento }}">
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="endereco">Endereço:</label>
+                    <input type="text" class="form-control" name="endereco" value="{{ $cliente->endereco }}">
+                </div>
+                <div class="form-group">
+                    <label for="email">E-mail:</label>
+                    <input type="email" class="form-control" name="email" value="{{ $cliente->email }}">
+                </div>
+                <div class="form-group">
+                    <label for="uf">UF:</label>
+                    <input type="text" class="form-control" name="uf" maxlength="2" value="{{ $cliente->uf }}">
+                </div>
+            </div>
         </div>
 
         <button type="submit" class="btn btn-success">Salvar</button>
+        <a href="{{ route('clientes.index') }}" class="btn btn-secondary">Voltar</a>
     </form>
 </div>
 @stop

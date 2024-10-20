@@ -1,57 +1,108 @@
 @extends('adminlte::page')
 
-@section('title', 'Dashboard')
+@section('title', 'Clientes')
 
 @section('content_header')
-    <h1>Dashboard</h1>
+<h1>Clientes</h1>
 @stop
 
 @section('content')
 <div class="container">
-    <h1>Clientes</h1>
-    <a href="{{ route('clientes.create') }}" class="btn btn-primary mb-3">Adicionar Novo Cliente</a>
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <h2>Lista de Clientes</h2>
+        </div>
+        <div class="col-md-6 text-md-right">
+            <a href="{{ route('clientes.create') }}" class="btn btn-success">
+                <i class="fas fa-plus"></i> Adicionar Novo Cliente
+            </a>
+        </div>
+    </div>
 
+    {{-- Alerta de sucesso --}}
     @if (session('success'))
-        <div class="alert alert-success">
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
             {{ session('success') }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
         </div>
     @endif
 
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Nome</th>
-                <th>Email</th>
-                <th>Telefone</th>
-                <th>Sexo</th>
-                <th>Ações</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($clientes as $cliente)
-            <tr>
-                <td>{{ $cliente->id }}</td>
-                <td>{{ $cliente->nome }}</td>
-                <td>{{ $cliente->email }}</td>
-                <td>{{ $cliente->telefone }}</td>
-                <td>{{ $cliente->sexo }}</td>
-                <td>
-                    <a href="{{ route('abrir_ficha_cliente', $cliente->id) }}" class="btn btn-primary">Ficha</a>
+    {{-- Formulário de pesquisa --}}
+    <form action="{{ route('fichas.search') }}" method="POST" class="mb-4">
+        @csrf
+        <div class="input-group">
+            <input type="text" name="query" id="query" class="form-control" placeholder="Digite Nome, Telefone ou E-mail..." aria-label="Pesquisar Cliente">
+            <div class="input-group-append">
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-search"></i> Pesquisar
+                </button>
+            </div>
+        </div>
+    </form>
 
-                </td>
-            </tr>
-            @endforeach
-        </tbody>
-    </table>
+    {{-- Tabela de clientes --}}
+    <div class="table-responsive">
+        <table class="table table-hover table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Nome</th>
+                    <th>Email</th>
+                    <th>Telefone</th>
+                    <th>Sexo</th>
+                    <th class="text-center">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                @forelse ($clientes as $cliente)
+                    <tr>
+                        <td>{{ $cliente->nome }}</td>
+                        <td>{{ $cliente->email }}</td>
+                        <td>{{ $cliente->telefone }}</td>
+                        <td>{{ $cliente->sexo }}</td>
+                        <td class="text-center">
+                            <a href="{{ route('abrir_ficha_cliente', $cliente->id) }}" class="btn btn-info btn-sm">
+                                <i class="fas fa-folder-open"></i> Ficha
+                            </a>
+                           <a href="{{ route('clientes.edit', $cliente->id) }}" class="btn btn-warning btn-sm">
+                                <i class="fas fa-edit"></i> Editar
+                            </a>
+                            <form action="{{ route('clientes.destroy', $cliente->id) }}" method="POST" class="d-inline">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Tem certeza que deseja excluir este cliente?')">
+                                    <i class="fas fa-trash-alt"></i> Excluir
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                @empty
+                    <tr>
+                        <td colspan="6" class="text-center">Nenhum cliente encontrado.</td>
+                    </tr>
+                @endforelse
+            </tbody>
+        </table>
+    </div>
+
+    {{-- Paginação --}}
+    <div class="d-flex justify-content-center">
+        {{ $clientes->links() }}
+    </div>
 </div>
 @stop
 
 @section('css')
-    {{-- Add here extra stylesheets --}}
-    {{-- <link rel="stylesheet" href="/css/admin_custom.css"> --}}
+    {{-- Adicione aqui estilos adicionais --}}
+    <style>
+        .btn-sm {
+            padding: .25rem .5rem;
+            font-size: .875rem;
+        }
+    </style>
 @stop
 
 @section('js')
-    <script> console.log("Hi, I'm using the Laravel-AdminLTE package!"); </script>
+    <script> console.log('Clientes page loaded!'); </script>
 @stop
