@@ -13,10 +13,12 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('home');
 });
 
 Auth::routes();
+
+Route::group(['middleware' => 'auth'], function(){
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
@@ -43,3 +45,5 @@ Route::get('/files/download/{id}', [FileController::class, 'download'])->name('f
 ######### Filtro ########
 
 Route::post('/ficha/pesquisar', [FichaClienteController::class, 'search'])->name('fichas.search');
+
+});
