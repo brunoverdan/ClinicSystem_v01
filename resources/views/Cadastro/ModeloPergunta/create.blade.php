@@ -26,6 +26,31 @@
             </select>
         </div>
 
+        <!-- Descrição dos Modelos -->
+        <div class="mt-4">
+            <h4>Descrição dos Modelos:</h4>
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Modelo 01</h5>
+                    <p class="card-text">Este modelo contém apenas a <strong>pergunta simples</strong>.</p>
+                </div>
+            </div>
+            
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Modelo 02</h5>
+                    <p class="card-text">Este modelo contém uma pergunta com as alternativas de <strong>Sim</strong>, <strong>Não</strong> e uma pergunta adicional como <strong>Quais</strong>.</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Modelo 03</h5>
+                    <p class="card-text">Este modelo contém alternativas com sinais <strong>(+)</strong>, <strong>(-)</strong>, e direções como <strong>Esquerda</strong> ou <strong>Direita</strong>.</p>
+                </div>
+            </div>
+        </div>
+
         <button type="submit" class="btn btn-primary">Salvar</button>
     </form>
 </div>

@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
 Route::get('/', function () {
-    return redirect()->route('home');
+    return redirect()->route('fichacliente.fichacliente');
 });
 
 Auth::routes();
@@ -33,6 +33,8 @@ Route::resource('fichas', FichaController::class);
 ############# MOVIMENTAÇÃO ################
 
 Route::resource('ficha_cliente', FichaClienteController::class);
+Route::get('/ficha_cliente', [FichaClienteController::class, 'index'])->name('fichacliente.fichacliente');
+
 Route::any('abrir_ficha_cliente/{id}', 'App\Http\Controllers\Movimentacao\FichaClienteController@abrir_ficha_cliente')->name('abrir_ficha_cliente');
 Route::put('/fichas/{cliente_id}', [FichaController::class, 'update'])->name('fichas.update');
 

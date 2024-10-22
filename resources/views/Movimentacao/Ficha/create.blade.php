@@ -3,6 +3,8 @@
         <div class="card-header bg-primary text-white">
             <h1 class="mb-0">Questionario do Cliente</h1>
         </div>
+        <img src="{{ asset('storage/img_fichacliente.png') }}" alt="Imagem do Cliente" class="img-fluid mt-3 d-block mx-auto" style="max-width: 300px; max-height: 300px;">
+
         <div class="card-body">
             <form action="{{ route('fichas.store', ['cliente_id' => $cliente->id]) }}" method="POST">
                 @csrf

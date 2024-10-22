@@ -1,8 +1,10 @@
 <div class="container mt-5">
     <div class="card shadow-sm">
-        <div class="card-header bg-primary text-white">
+        <div class="card-header bg-secondary text-white">
             <h1 class="mb-0">Questionario do Cliente</h1>
-        </div>
+    </div>
+    <img src="{{ asset('storage/img_fichacliente.png') }}" alt="Imagem do Cliente" class="img-fluid mt-3 d-block mx-auto" style="max-width: 300px; max-height: 300px;">
+
         <div class="card-body">
             <form action="{{ route('fichas.update', ['cliente_id' => $cliente->id]) }}" method="POST">
                 @csrf
@@ -55,25 +57,25 @@
                         @elseif($pergunta->modelo == 'modelo_03')
                             <div class="mt-2">
                                 <div class="form-check">
-                                    <input type="checkbox" name="perguntas[{{ $pergunta->id }}][mais]" value="1" class="form-check-input" {{ ($respostas->get($pergunta->id)->mais ?? 0) ? 'checked' : '' }}>
+                                    <input type="checkbox" name="perguntas[{{ $pergunta->id }}][mais]" value="1" class="form-check-input" {{ ($resposta->mais ?? 0) ? 'checked' : '' }}>
                                     <input type="hidden" name="perguntas[{{ $pergunta->id }}][tipo_modelo]" value="modelo_03">
                                     <input type="hidden" name="perguntas[{{ $pergunta->id }}][pergunta_id]" value="{{ $pergunta->id }}">
                                     <label class="form-check-label">Mais</label>
                                 </div>
                                 <div class="form-check">
-                                    <input type="checkbox" name="perguntas[{{ $pergunta->id }}][menos]" value="1" class="form-check-input" {{ ($respostas->get($pergunta->id)->menos ?? 0) ? 'checked' : '' }}>
+                                    <input type="checkbox" name="perguntas[{{ $pergunta->id }}][menos]" value="1" class="form-check-input" {{ ($resposta->menos ?? 0) ? 'checked' : '' }}>
                                     <input type="hidden" name="perguntas[{{ $pergunta->id }}][tipo_modelo]" value="modelo_03">
                                     <input type="hidden" name="perguntas[{{ $pergunta->id }}][pergunta_id]" value="{{ $pergunta->id }}">
                                     <label class="form-check-label">Menos</label>
                                 </div>
                                 <div class="form-check">
-                                    <input type="checkbox" name="perguntas[{{ $pergunta->id }}][direito]" value="1" class="form-check-input" {{ ($respostas->get($pergunta->id)->direito ?? 0) ? 'checked' : '' }}>
+                                    <input type="checkbox" name="perguntas[{{ $pergunta->id }}][direito]" value="1" class="form-check-input" {{ ($resposta->direito ?? 0) ? 'checked' : '' }}>
                                     <input type="hidden" name="perguntas[{{ $pergunta->id }}][tipo_modelo]" value="modelo_03">
                                     <input type="hidden" name="perguntas[{{ $pergunta->id }}][pergunta_id]" value="{{ $pergunta->id }}">
                                     <label class="form-check-label">Direito</label>
                                 </div>
                                 <div class="form-check">
-                                    <input type="checkbox" name="perguntas[{{ $pergunta->id }}][esquerdo]" value="1" class="form-check-input" {{ ($respostas->get($pergunta->id)->esquerdo ?? 0) ? 'checked' : '' }}>
+                                    <input type="checkbox" name="perguntas[{{ $pergunta->id }}][esquerdo]" value="1" class="form-check-input" {{ ($resposta->esquerdo ?? 0) ? 'checked' : '' }}>
                                     <input type="hidden" name="perguntas[{{ $pergunta->id }}][tipo_modelo]" value="modelo_03">
                                     <input type="hidden" name="perguntas[{{ $pergunta->id }}][pergunta_id]" value="{{ $pergunta->id }}">
                                     <label class="form-check-label">Esquerdo</label>
