@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Cliente;
 use App\Models\Evolucao;
 use App\Models\File;
+use App\Models\Medida;
 use App\Models\Resposta;
 use App\Models\ModeloPergunta;
 use Illuminate\Http\Request;
@@ -50,6 +51,7 @@ class FichaClienteController extends Controller
         // Buscar o cliente pelo ID
         $cliente = Cliente::findOrFail($id);
         $files = File::where('cliente_id', $id)->get();
+        $medidas = Medida::where('cliente_id', $id)->get();
         $evolucoes = Evolucao::where('cliente_id', $id)->get();
         $perguntas = ModeloPergunta::orderBy('modelo', 'asc')->get();
         $respostas = Resposta::where('cliente_id', $id)->get();
@@ -57,11 +59,16 @@ class FichaClienteController extends Controller
         //dd(count($valida_respostas));
 
         if (count($respostas) > 0) {
-            $respostas = ModeloPergunta::with(['respostas' => function ($query) use ($id) {
+            // $respostas = ModeloPergunta::with(['respostas' => function ($query) use ($id) {
+            //     $query->where('cliente_id', $id);
+            // }])->orderBy('modelo', 'asc')->get();
+            $respostas = ModeloPergunta::with(['respostas' => function($query) use ($id) {
                 $query->where('cliente_id', $id);
             }])->orderBy('modelo', 'asc')->get();
         } 
 
-        return view('Movimentacao.FichaCliente.ficha_cliente', compact('cliente', 'files', 'evolucoes', 'perguntas', 'respostas'));
+        
+
+        return view('Movimentacao.FichaCliente.ficha_cliente', compact('cliente', 'files', 'evolucoes', 'perguntas', 'respostas', 'medidas'));
     }
 }

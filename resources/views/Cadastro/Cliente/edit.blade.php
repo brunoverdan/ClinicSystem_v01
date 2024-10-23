@@ -44,10 +44,7 @@
                         <option value="Nao Escolha" {{ $cliente->sexo == 'Nao Escolha' ? 'selected' : '' }}>Não Escolha</option>
                     </select>
                 </div>
-                <div class="form-group">
-                    <label for="data_nascimento">Data de Nascimento:</label>
-                    <input type="date" class="form-control" name="data_nascimento" value="{{ $cliente->data_nascimento }}">
-                </div>
+                
             </div>
 
             <div class="col-md-6">
@@ -62,6 +59,17 @@
                 <div class="form-group">
                     <label for="uf">UF:</label>
                     <input type="text" class="form-control" name="uf" maxlength="2" value="{{ $cliente->uf }}">
+                </div>
+                <div class="form-group">
+                    <label for="data_nascimento">Data de Nascimento:</label>
+                    <input type="date" class="form-control" name="data_nascimento" value="{{ $cliente->data_nascimento }}">
+                </div>
+                
+            </div>
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="observacao">Observacao:</label>
+                    <textarea type="text" class="form-control" name="observacao" rows="5">{{ $cliente->observacao }}</textarea>
                 </div>
             </div>
         </div>

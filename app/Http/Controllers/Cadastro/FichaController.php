@@ -88,7 +88,7 @@ public function store(Request $request)
     public function update(Request $request, $cliente_id)
 {
     
-   // dd($request->all()); // Verifica todos os dados recebidos
+    //dd($request->all()); // Verifica todos os dados recebidos
     
     // Recupera todas as perguntas enviadas do formulário
     $perguntas = $request->input('perguntas');
@@ -98,7 +98,7 @@ public function store(Request $request)
        //dd($respostaData);
         // Verifica se o campo 'tipo_modelo' existe para evitar erros
         if (isset($respostaData['tipo_modelo'])) {
-            
+            //dd($respostaData['pergunta']);
             // Atualiza ou cria a resposta no banco de dados
             Resposta::updateOrCreate(
                 [
@@ -107,12 +107,13 @@ public function store(Request $request)
                 ],
                 [
                     'tipo_modelo' => $respostaData['tipo_modelo'], // Grava o tipo de modelo
-                    'resposta' => $respostaData['resposta'] ?? null,
-                    'quais' => $respostaData['quais'] ?? null,
+                    'resposta' => $respostaData['resposta'] ?? "",
+                    'quais' => $respostaData['quais'] ?? "",
                     'mais' => isset($respostaData['mais']) ? 1 : 0,
                     'menos' => isset($respostaData['menos']) ? 1 : 0,
                     'direito' => isset($respostaData['direito']) ? 1 : 0,
                     'esquerdo' => isset($respostaData['esquerdo']) ? 1 : 0,
+                    'pergunta' => $respostaData['pergunta'] ?? "", // Adicione este campo
                 ]
             );
         } else {

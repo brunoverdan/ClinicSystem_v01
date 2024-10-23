@@ -25,6 +25,7 @@ return new class extends Migration
             $table->foreign('cliente_id')->references('id')->on('clientes')->nullable();
             $table->unsignedBigInteger('pergunta_id')->unsigned();
             $table->foreign('pergunta_id')->references('id')->on('modelo_perguntas')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

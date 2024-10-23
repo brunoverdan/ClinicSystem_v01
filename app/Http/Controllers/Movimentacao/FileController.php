@@ -45,6 +45,7 @@ class FileController extends Controller
     {
         $file = File::findOrFail($id);
 
-        return Storage::disk('public')->download($file->file_path);
+        // Use response()->file() para abrir o arquivo em outra aba
+    return response()->file(storage_path('app/public/' . $file->file_path));
     }
 }

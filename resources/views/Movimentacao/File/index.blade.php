@@ -33,10 +33,11 @@
                     <i class="bi bi-file-earmark"></i> <!-- Ícone de arquivo -->
                     {{ $file->name }}
                 </span>
-                <a href="{{ route('files.download', $file->id) }}" class="btn btn-sm btn-primary">
+                <a href="{{ route('files.download', $file->id) }}" class="btn btn-sm btn-primary" target="_blank">
                     <i class="bi bi-download"></i> <!-- Ícone de download -->
-                    Baixar
+                    Abrir
                 </a>
+                
             </div>
         @endforeach
     </div>

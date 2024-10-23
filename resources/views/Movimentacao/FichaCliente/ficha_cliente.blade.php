@@ -29,6 +29,10 @@
                         <button class="nav-link" id="tab4-tab" data-bs-toggle="tab" data-bs-target="#tab4" type="button"
                             role="tab" aria-controls="tab4" aria-selected="false">Arquivo</button>
                     </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="tab5-tab" data-bs-toggle="tab" data-bs-target="#tab5" type="button"
+                            role="tab" aria-controls="tab5" aria-selected="false">Medidas</button>
+                    </li>
                     <li class="nav-item ms-auto">
                         <a href="#" class="nav-link text-muted"><i class="fa fa-gear"></i></a>
                     </li>
@@ -49,6 +53,7 @@
                                             <p><strong>Nome:</strong> {{ $cliente->nome }}</p>
                                             <p><strong>Endereço:</strong> {{ $cliente->endereco }}</p>
                                             <p><strong>Telefone:</strong> {{ $cliente->telefone }}</p>
+                                            <p><strong>Observação:</strong> {{ $cliente->observacao}}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -87,6 +92,11 @@
                     <div class="tab-pane fade" id="tab4" role="tabpanel" aria-labelledby="tab4-tab">
 
                         @include('Movimentacao.File.index')
+
+                    </div>
+                    <div class="tab-pane fade" id="tab5" role="tabpanel" aria-labelledby="tab5-tab">
+
+                        @include('Movimentacao.Medida.index')
 
                     </div>
                 </div>

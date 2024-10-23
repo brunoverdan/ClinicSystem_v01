@@ -24,7 +24,7 @@ class ModeloPerguntaController extends Controller
     {
         $request->validate([
             'pergunta' => 'required|string|max:255',
-            'modelo' => 'required|in:modelo_01,modelo_02',
+            'modelo' => 'required|in:modelo_01,modelo_02,modelo_03',
         ]);
 
         ModeloPergunta::create($request->all());

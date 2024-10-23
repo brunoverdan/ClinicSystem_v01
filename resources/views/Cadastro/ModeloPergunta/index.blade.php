@@ -3,13 +3,13 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-    <h1>Dashboard</h1>
+    <h1>Lista de Perguntas</h1>
 @stop
 
 @section('content')
 
 <div class="container">
-    <h1>Lista de Perguntas</h1>
+    
     <a href="{{ route('modelo_perguntas.create') }}" class="btn btn-primary mb-3">Adicionar Nova Pergunta</a>
 
     @if(session('success'))
