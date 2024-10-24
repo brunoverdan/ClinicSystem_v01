@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('medidas', function (Blueprint $table) {
             $table->id();
-            $table->integer('peso');
+            $table->decimal('peso', 10, 2);
             $table->date('data');
             $table->unsignedBigInteger('cliente_id')->unsigned();
             $table->foreign('cliente_id')->references('id')->on('clientes')->nullable();
