@@ -62,9 +62,11 @@
                         <td>{{ $cliente->telefone }}</td>
                         <td>{{ $cliente->sexo }}</td>
                         <td class="text-center">
+                        @if (auth()->check() && auth()->user()->nivel !== 'administrativo')
                             <a href="{{ route('abrir_ficha_cliente', $cliente->id) }}" class="btn btn-info btn-sm">
                                 <i class="fas fa-folder-open"></i> Ficha
                             </a>
+                        @endif
                            <a href="{{ route('clientes.edit', $cliente->id) }}" class="btn btn-warning btn-sm">
                                 <i class="fas fa-edit"></i> Editar
                             </a>

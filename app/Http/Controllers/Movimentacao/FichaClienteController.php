@@ -53,19 +53,23 @@ class FichaClienteController extends Controller
         $files = File::where('cliente_id', $id)->get();
         $medidas = Medida::where('cliente_id', $id)->get();
         $evolucoes = Evolucao::where('cliente_id', $id)->get();
-        $perguntas = ModeloPergunta::orderBy('modelo', 'asc')->get();
+        //$perguntas = ModeloPergunta::orderBy('modelo', 'asc')->get();
         $respostas = Resposta::where('cliente_id', $id)->get();
 
-        //dd(count($valida_respostas));
-
+        // Filtrar perguntas pelo user_id
+        $perguntas = ModeloPergunta::where('user_id', auth()->user()->id)
+        ->orderBy('modelo', 'asc')
+        ->get();
+        
+             
         if (count($respostas) > 0) {
-            // $respostas = ModeloPergunta::with(['respostas' => function ($query) use ($id) {
-            //     $query->where('cliente_id', $id);
-            // }])->orderBy('modelo', 'asc')->get();
             $respostas = ModeloPergunta::with(['respostas' => function($query) use ($id) {
                 $query->where('cliente_id', $id);
-            }])->orderBy('modelo', 'asc')->get();
-        } 
+            }])
+            ->where('user_id', auth()->user()->id)
+            ->orderBy('modelo', 'asc')
+            ->get();
+        }
 
         
 

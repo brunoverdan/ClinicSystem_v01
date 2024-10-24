@@ -21,38 +21,7 @@ class FichaController extends Controller
         return view('Cadastro.Ficha.create', compact('perguntas'));
     }
 
-   /*
-    public function store(Request $request)
-    {
-        //dd($request);
-        $cliente_id['cliente_id'] = $request->query('cliente_id');
-
-        
-        // Gravar as respostas
-        foreach ($request->perguntas as $perguntaId => $respostaData) {
-            $pergunta = ModeloPergunta::find($perguntaId);
-            //dd($cliente_id);
-            try {
-                $gravaResposta = Resposta::create([
-                    'tipo_modelo' => $pergunta->modelo,
-                    'pergunta' => $pergunta->pergunta,
-                    'resposta' => $respostaData['resposta'] ?? 0,
-                    'quais' => $respostaData['quais'] ?? 0,
-                    'mais' => $respostaData['mais'] ?? 0,
-                    'menos' => $respostaData['menos'] ?? 0,
-                    'direito' => $respostaData['direito'] ?? 0,
-                    'esquerdo' => $respostaData['esquerdo'] ?? 0,
-                    'cliente_id' => $cliente_id['cliente_id'] ?? 0,
-                ]);
-            } catch (\Exception $e) {
-                dd($e->getMessage());  // Verifique se há algum erro
-            }
-        }
-
-        return redirect()->back()->with('success', 'Perguntas gravadas com sucesso!');
-        //return redirect()->route('fichas.index')->with('success', 'Ficha criada com sucesso!');
-    }
-*/
+   
 public function store(Request $request)
 {
     // Captura o cliente_id vindo da query
