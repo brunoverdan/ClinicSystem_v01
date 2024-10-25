@@ -1,7 +1,7 @@
 <div class="container mt-5">
     <div class="card shadow-sm">
         <div class="card-header bg-secondary text-white">
-            <h1 class="mb-0">Questionario do Cliente CREATE1</h1>
+            <h1 class="mb-0">Questionario do Cliente</h1>
         </div>
 
         <div class="card-body">
@@ -24,6 +24,8 @@
                                     value="{{ $pergunta->id }}">
                                 <input type="hidden" name="perguntas[{{ $pergunta->id }}][pergunta]"
                                     value="{{ $pergunta->pergunta }}">
+                                    <input type="hidden" name="perguntas[{{ $pergunta->id }}][aba]"
+                                    value="{{ $pergunta->aba}}">
                             </div>
                         @elseif($pergunta->modelo == 'modelo_02')
                             <div class="mb-2">
@@ -37,6 +39,8 @@
                                         value="{{ $pergunta->id }}">
                                     <input type="hidden" name="perguntas[{{ $pergunta->id }}][pergunta]"
                                         value="{{ $pergunta->pergunta }}">
+                                        <input type="hidden" name="perguntas[{{ $pergunta->id }}][aba]"
+                                    value="{{ $pergunta->aba}}">
                                     <label class="form-check-label">Sim</label>
                                 </div>
                                 <div class="form-check form-check-inline">
@@ -48,6 +52,8 @@
                                         value="{{ $pergunta->id }}">
                                     <input type="hidden" name="perguntas[{{ $pergunta->id }}][pergunta]"
                                         value="{{ $pergunta->pergunta }}">
+                                        <input type="hidden" name="perguntas[{{ $pergunta->id }}][aba]"
+                                    value="{{ $pergunta->aba}}">
                                     <label class="form-check-label">Não</label>
                                 </div>
                             </div>
@@ -62,6 +68,8 @@
                                     value="{{ $pergunta->id }}">
                                 <input type="hidden" name="perguntas[{{ $pergunta->id }}][pergunta]"
                                     value="{{ $pergunta->pergunta }}">
+                                    <input type="hidden" name="perguntas[{{ $pergunta->id }}][aba]"
+                                    value="{{ $pergunta->aba}}">
                             </div>
                         @elseif($pergunta->modelo == 'modelo_03')
                             <div class="mt-2">
@@ -74,6 +82,8 @@
                                         value="{{ $pergunta->id }}">
                                     <input type="hidden" name="perguntas[{{ $pergunta->id }}][pergunta]"
                                         value="{{ $pergunta->pergunta }}">
+                                        <input type="hidden" name="perguntas[{{ $pergunta->id }}][aba]"
+                                    value="{{ $pergunta->aba}}">
                                     <label class="form-check-label">Mais</label>
                                 </div>
                                 <div class="form-check">
@@ -85,6 +95,8 @@
                                         value="{{ $pergunta->id }}">
                                     <input type="hidden" name="perguntas[{{ $pergunta->id }}][pergunta]"
                                         value="{{ $pergunta->pergunta }}">
+                                        <input type="hidden" name="perguntas[{{ $pergunta->id }}][aba]"
+                                    value="{{ $pergunta->aba}}">
                                     <label class="form-check-label">Menos</label>
                                 </div>
                                 <div class="form-check">
@@ -96,6 +108,8 @@
                                         value="{{ $pergunta->id }}">
                                     <input type="hidden" name="perguntas[{{ $pergunta->id }}][pergunta]"
                                         value="{{ $pergunta->pergunta }}">
+                                        <input type="hidden" name="perguntas[{{ $pergunta->id }}][aba]"
+                                    value="{{ $pergunta->aba}}">
                                     <label class="form-check-label">Direito</label>
                                 </div>
                                 <div class="form-check">
@@ -107,6 +121,8 @@
                                         value="{{ $pergunta->id }}">
                                     <input type="hidden" name="perguntas[{{ $pergunta->id }}][pergunta]"
                                         value="{{ $pergunta->pergunta }}">
+                                        <input type="hidden" name="perguntas[{{ $pergunta->id }}][aba]"
+                                    value="{{ $pergunta->aba}}">
                                     <label class="form-check-label">Esquerdo</label>
                                 </div>
                             </div>

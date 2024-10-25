@@ -1,7 +1,7 @@
 <div class="container mt-5">
     <div class="card shadow-sm">
         <div class="card-header bg-secondary text-white">
-            <h1 class="mb-0">Questionario do Cliente Edit</h1>
+            <h1 class="mb-0">Questionario do Cliente</h1>
         </div>
         <div class="card-body">
             <form action="{{ route('fichas.update', ['cliente_id' => $cliente->id]) }}" method="POST">
@@ -27,6 +27,7 @@
                                 <input type="hidden" name="perguntas[{{ $pergunta->id }}][tipo_modelo]" value="modelo_01">
                                 <input type="hidden" name="perguntas[{{ $pergunta->id }}][pergunta_id]" value="{{ $pergunta->id }}">
                                 <input type="hidden" name="perguntas[{{ $pergunta->id }}][pergunta]" value="{{ $pergunta->pergunta }}">
+                                <input type="hidden" name="perguntas[{{ $pergunta->id }}][aba]" value="{{ $pergunta->aba }}">
                             </div>
 
                         @elseif($pergunta->modelo == 'modelo_02')
@@ -37,6 +38,7 @@
                                     <input type="hidden" name="perguntas[{{ $pergunta->id }}][tipo_modelo]" value="modelo_02">
                                     <input type="hidden" name="perguntas[{{ $pergunta->id }}][pergunta_id]" value="{{ $pergunta->id }}">
                                     <input type="hidden" name="perguntas[{{ $pergunta->id }}][pergunta]" value="{{ $pergunta->pergunta }}">
+                                    <input type="hidden" name="perguntas[{{ $pergunta->id }}][aba]" value="{{ $pergunta->aba }}">
                                     <label class="form-check-label">Sim</label>
                                 </div>
                                 <div class="form-check form-check-inline">
@@ -44,6 +46,7 @@
                                     <input type="hidden" name="perguntas[{{ $pergunta->id }}][tipo_modelo]" value="modelo_02">
                                     <input type="hidden" name="perguntas[{{ $pergunta->id }}][pergunta_id]" value="{{ $pergunta->id }}">
                                     <input type="hidden" name="perguntas[{{ $pergunta->id }}][pergunta]" value="{{ $pergunta->pergunta }}">
+                                    <input type="hidden" name="perguntas[{{ $pergunta->id }}][aba]" value="{{ $pergunta->aba }}">
                                     <label class="form-check-label">Não</label>
                                 </div>
                             </div>
@@ -54,6 +57,7 @@
                                 <input type="hidden" name="perguntas[{{ $pergunta->id }}][tipo_modelo]" value="modelo_02">
                                 <input type="hidden" name="perguntas[{{ $pergunta->id }}][pergunta_id]" value="{{ $pergunta->id }}">
                                 <input type="hidden" name="perguntas[{{ $pergunta->id }}][pergunta]" value="{{ $pergunta->pergunta }}">
+                                <input type="hidden" name="perguntas[{{ $pergunta->id }}][aba]" value="{{ $pergunta->aba }}">
                             </div>
 
                         @elseif($pergunta->modelo == 'modelo_03')
@@ -63,7 +67,7 @@
                                     <input type="hidden" name="perguntas[{{ $pergunta->id }}][tipo_modelo]" value="modelo_03">
                                     <input type="hidden" name="perguntas[{{ $pergunta->id }}][pergunta_id]" value="{{ $pergunta->id }}">
                                     <input type="hidden" name="perguntas[{{ $pergunta->id }}][pergunta]" value="{{ $pergunta->pergunta }}">
-                                    
+                                    <input type="hidden" name="perguntas[{{ $pergunta->id }}][aba]" value="{{ $pergunta->aba }}">
                                     <label class="form-check-label">Mais</label>
                                 </div>
                                 <div class="form-check">
@@ -71,6 +75,7 @@
                                     <input type="hidden" name="perguntas[{{ $pergunta->id }}][tipo_modelo]" value="modelo_03">
                                     <input type="hidden" name="perguntas[{{ $pergunta->id }}][pergunta_id]" value="{{ $pergunta->id }}">
                                     <input type="hidden" name="perguntas[{{ $pergunta->id }}][pergunta]" value="{{ $pergunta->pergunta }}">
+                                    <input type="hidden" name="perguntas[{{ $pergunta->id }}][aba]" value="{{ $pergunta->aba }}">
                                     <label class="form-check-label">Menos</label>
                                 </div>
                                 <div class="form-check">
@@ -78,6 +83,7 @@
                                     <input type="hidden" name="perguntas[{{ $pergunta->id }}][tipo_modelo]" value="modelo_03">
                                     <input type="hidden" name="perguntas[{{ $pergunta->id }}][pergunta_id]" value="{{ $pergunta->id }}">
                                     <input type="hidden" name="perguntas[{{ $pergunta->id }}][pergunta]" value="{{ $pergunta->pergunta }}">
+                                    <input type="hidden" name="perguntas[{{ $pergunta->id }}][aba]" value="{{ $pergunta->aba }}">
                                     <label class="form-check-label">Direito</label>
                                 </div>
                                 <div class="form-check">
@@ -85,6 +91,7 @@
                                     <input type="hidden" name="perguntas[{{ $pergunta->id }}][tipo_modelo]" value="modelo_03">
                                     <input type="hidden" name="perguntas[{{ $pergunta->id }}][pergunta_id]" value="{{ $pergunta->id }}">
                                     <input type="hidden" name="perguntas[{{ $pergunta->id }}][pergunta]" value="{{ $pergunta->pergunta }}">
+                                    <input type="hidden" name="perguntas[{{ $pergunta->id }}][aba]" value="{{ $pergunta->aba }}">
 
                                     <label class="form-check-label">Esquerdo</label>
                                 </div>

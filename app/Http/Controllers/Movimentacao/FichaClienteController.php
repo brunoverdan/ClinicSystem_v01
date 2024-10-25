@@ -10,6 +10,7 @@ use App\Models\Medida;
 use App\Models\Resposta;
 use App\Models\ModeloPergunta;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 
 class FichaClienteController extends Controller
 {
@@ -34,10 +35,10 @@ class FichaClienteController extends Controller
         // Realiza a pesquisa por nome, telefone ou email
         $query = $request->input('query');
         $clientes = Cliente::where('nome', 'LIKE', "%{$query}%")
-                    ->orWhere('telefone', 'LIKE', "%{$query}%")
-                    ->orWhere('email', 'LIKE', "%{$query}%")
-                    ->paginate(10)
-                    ->appends(['query' => $query]);
+            ->orWhere('telefone', 'LIKE', "%{$query}%")
+            ->orWhere('email', 'LIKE', "%{$query}%")
+            ->paginate(10)
+            ->appends(['query' => $query]);
 
 
         // Retorna os resultados para a view
@@ -51,27 +52,26 @@ class FichaClienteController extends Controller
         // Buscar o cliente pelo ID
         $cliente = Cliente::findOrFail($id);
         $files = File::where('cliente_id', $id)->get();
-        $medidas = Medida::where('cliente_id', $id)->get();
+        $medidas = Medida::where('cliente_id', $id)->orderBy('data')->get();
         $evolucoes = Evolucao::where('cliente_id', $id)->get();
-        //$perguntas = ModeloPergunta::orderBy('modelo', 'asc')->get();
         $respostas = Resposta::where('cliente_id', $id)->get();
 
         // Filtrar perguntas pelo user_id
         $perguntas = ModeloPergunta::where('user_id', auth()->user()->id)
-        ->orderBy('modelo', 'asc')
-        ->get();
-        
-             
-        if (count($respostas) > 0) {
-            $respostas = ModeloPergunta::with(['respostas' => function($query) use ($id) {
-                $query->where('cliente_id', $id);
-            }])
-            ->where('user_id', auth()->user()->id)
             ->orderBy('modelo', 'asc')
             ->get();
+
+
+        if (count($respostas) > 0) {
+            $respostas = ModeloPergunta::with(['respostas' => function ($query) use ($id) {
+                $query->where('cliente_id', $id);
+            }])
+                ->where('user_id', auth()->user()->id)
+                ->orderBy('modelo', 'asc')
+                ->get();
         }
 
-        
+
 
         return view('Movimentacao.FichaCliente.ficha_cliente', compact('cliente', 'files', 'evolucoes', 'perguntas', 'respostas', 'medidas'));
     }

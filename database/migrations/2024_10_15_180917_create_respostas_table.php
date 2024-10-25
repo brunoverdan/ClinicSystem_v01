@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('tipo_modelo');
             $table->string('pergunta');
             $table->string('resposta')->nullable();
+            $table->string('aba')->nullable(); 
             $table->string('quais')->nullable();
             $table->integer('mais')->nullable();
             $table->integer('menos')->nullable();

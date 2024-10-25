@@ -8,7 +8,8 @@
         
         <div class="form-group">
             <label for="peso">Peso</label>
-            <input type="number" name="peso" id="peso" class="form-control" required>
+            <input type="text" name="peso" id="peso" class="form-control" required>
+
         </div>
         <div class="form-group">
             <label for="data">Data</label>
@@ -18,7 +19,42 @@
     </form>
 
     <hr>
+    <!-- Grafico -->
 
+    <div style="width: 50%;">
+        <canvas id="pesoChart"></canvas>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const ctx = document.getElementById('pesoChart').getContext('2d');
+        const data = {
+            labels: @json($medidas->pluck('data')->toArray()), // Obtém as datas
+            datasets: [{
+                label: 'Peso (kg)',
+                data: @json($medidas->pluck('peso')->toArray()), // Obtém os pesos
+                borderColor: 'rgba(75, 192, 192, 1)',
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderWidth: 1,
+                fill: true,
+            }]
+        };
+
+        const config = {
+            type: 'line',
+            data: data,
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        };
+
+        const pesoChart = new Chart(ctx, config);
+    </script>
+    <hr>
     <!-- Tabela para listar medidas -->
     <h2>Lista de Medidas</h2>
     <table class="table">
@@ -30,6 +66,7 @@
             </tr>
         </thead>
         <tbody>
+         
         @if($medidas->isEmpty())
             <p>Nenhuma Medida cadastrado.</p>
         @else
@@ -50,4 +87,15 @@
         </tbody>
     </table>
 </div>
+
+<script>
+    document.getElementById('peso').addEventListener('input', function (event) {
+        let value = this.value.replace(/\./g, '').replace(',', '.');
+        if (!isNaN(value) && value.includes('.')) {
+            this.value = value.replace('.', ',');
+        }
+    });
+</script>
+
+
 

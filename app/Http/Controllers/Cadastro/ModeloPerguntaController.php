@@ -14,8 +14,12 @@ class ModeloPerguntaController extends Controller
 {
     public function index()
 {
-    // Buscar todas as perguntas, ordenadas por 'modelo'
-    $modeloPerguntas = ModeloPergunta::orderBy('modelo', 'asc')->get();
+    $usuarioId = auth()->user()->id; // ou use qualquer método que você tenha para obter o ID
+
+    // Filtrando pelo ID do usuário
+    $modeloPerguntas = ModeloPergunta::where('user_id', $usuarioId)
+        ->orderBy('modelo', 'asc')
+        ->get();
 
     // Verificar se o usuário logado é de nível 'administrativo'
     if (auth()->user()->nivel == 'administrativo') {

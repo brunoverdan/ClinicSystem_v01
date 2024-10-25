@@ -54,13 +54,14 @@
                 </select>
             </div>
 
-            <div class="form-group">
+            {{--  <div class="form-group">
                 <label for="aba">aba</label>
                 <select name="aba" class="form-control" required>
                     <option value="Cervical" {{ old('aba') == 'Cervical' ? 'selected' : '' }}>Cervical</option>
                     <option value="Lombar" {{ old('aba') == 'Lombar' ? 'selected' : '' }}>Lombar</option>
                 </select>
-            </div>
+            </div>  --}}
+            <input type="hidden" name="aba" value="Lombar">
 
             <!-- Descrição dos Modelos -->
             <div class="mt-4">
