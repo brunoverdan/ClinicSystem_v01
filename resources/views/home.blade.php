@@ -3,12 +3,14 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-    <h1>Dashboard</h1>
+    <h1>Sistema Revigora</h1>
 @stop
 
 @section('content')
-<div class="bg-container">
-    <p class="text-white">Seja bem vindo ao sistema Gerenciamento de Cliente</p>
+
+<div class="bg-container text-center">
+    <img src="{{ asset('fundoRevegora.jpg') }}" alt="Imagem de Fundo" class="img-fluid">
+    <p class="text-white mt-3">Seja bem vindo ao sistema Gerenciamento de Cliente</p>
 </div>
 @stop
 
@@ -17,9 +19,6 @@
     {{-- <link rel="stylesheet" href="/css/admin_custom.css"> --}}
     <style>
         .bg-container {
-            background-image: url('{{ asset('fundoRevegora.jpg') }}'); /* Caminho atualizado */ /* Caminho para sua imagem */
-            background-size: cover;
-            background-position: center;
             min-height: 100vh; /* Altura total da visualização */
             color: white;
         }
