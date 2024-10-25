@@ -315,7 +315,7 @@ return [
         ],
         [
             'text' => 'Cliente',
-            'url' => route('clientes.create'),
+            'url' => 'clientes.create',
             'icon' => 'fas fa-fw fa-user',
         ],
         [
