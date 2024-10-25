@@ -18,7 +18,7 @@ class ClienteController extends Controller
     // Mostra o formulário de criação de um novo cliente
     public function create()
     {
-        $sexos = ['Masculino', 'Feminino', 'Não Escolha'];
+        $sexos = ['Masculino', 'Feminino'];
         return view('Cadastro.Cliente.create', compact('sexos'));
     }
 
