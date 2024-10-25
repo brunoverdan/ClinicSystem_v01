@@ -62,11 +62,25 @@ class FichaClienteController extends Controller
             ->get();
 
 
+        // if (count($respostas) > 0) {
+        //     $respostas = ModeloPergunta::with(['respostas' => function ($query) use ($id) {
+        //         $query->where('cliente_id', $id);
+        //     }])
+        //         ->where('user_id', auth()->user()->id)
+        //         ->orderBy('modelo', 'asc')
+        //         ->get();
+        // }
+
         if (count($respostas) > 0) {
+            // Verifica se o usuário logado não é de nível "profissional"
+            $userId = auth()->user()->nivel !== 'profissional'
+                ? User::where('nivel', 'profissional')->value('id') // Busca o primeiro ID de usuário com nível "profissional"
+                : auth()->user()->id;
+        
             $respostas = ModeloPergunta::with(['respostas' => function ($query) use ($id) {
-                $query->where('cliente_id', $id);
-            }])
-                ->where('user_id', auth()->user()->id)
+                    $query->where('cliente_id', $id);
+                }])
+                ->where('user_id', $userId)
                 ->orderBy('modelo', 'asc')
                 ->get();
         }

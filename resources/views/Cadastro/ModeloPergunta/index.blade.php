@@ -9,11 +9,15 @@
 @section('content')
 
 <div class="container">
+    
+
+    @if (auth()->check() && auth()->user()->nivel !== 'alterar')
     <!-- Botão para adicionar nova pergunta -->
-    <div class="d-flex justify-content-between align-items-center mb-3">
-        <h2 class="mb-0">Perguntas</h2>
-        <a href="{{ route('modelo_perguntas.create') }}" class="btn btn-primary">Adicionar Nova Pergunta</a>
-    </div>
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h2 class="mb-0">Perguntas</h2>
+            <a href="{{ route('modelo_perguntas.create') }}" class="btn btn-primary">Adicionar Nova Pergunta</a>
+        </div>
+    @endif
 
     <!-- Mensagem de sucesso -->
     @if(session('success'))
