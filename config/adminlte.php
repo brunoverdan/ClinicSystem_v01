@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'title' => 'Clini Master',
+    'title' => 'Revigora',
     'title_prefix' => '',
     'title_postfix' => '',
 
@@ -63,7 +63,7 @@ return [
     |
     */
 
-    'logo' => '<b>Clini</b>Master',
+    'logo' => '<b>Revi</b>gora',
     'logo_img' => 'vendor/adminlte/dist/img/logoCliniMaster.png',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
@@ -315,7 +315,7 @@ return [
         ],
         [
             'text' => 'Cliente',
-            'url' => 'clientes',
+            'url' => 'clientes.create',
             'icon' => 'fas fa-fw fa-user',
         ],
         [

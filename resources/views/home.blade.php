@@ -7,12 +7,23 @@
 @stop
 
 @section('content')
-    <p>Welcome to this beautiful admin panel.</p>
+<div class="bg-container">
+    <p class="text-white">Seja bem vindo ao sistema Gerenciamento de Cliente</p>
+</div>
 @stop
 
 @section('css')
     {{-- Add here extra stylesheets --}}
     {{-- <link rel="stylesheet" href="/css/admin_custom.css"> --}}
+    <style>
+        .bg-container {
+            background-image: url('{{ asset('fundoRevegora.jpg') }}'); /* Caminho atualizado */ /* Caminho para sua imagem */
+            background-size: cover;
+            background-position: center;
+            min-height: 100vh; /* Altura total da visualização */
+            color: white;
+        }
+    </style>
 @stop
 
 @section('js')
