@@ -64,7 +64,7 @@ class FichaClienteController extends Controller
         }else {
             $userId = auth()->user()->id;
         }
-        
+        dd($userId);
         // Filtrar perguntas pelo user_id
         $perguntas = ModeloPergunta::where('user_id', $userId)
             ->orderBy('modelo', 'asc')
