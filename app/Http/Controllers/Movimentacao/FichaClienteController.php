@@ -56,27 +56,22 @@ class FichaClienteController extends Controller
         $evolucoes = Evolucao::where('cliente_id', $id)->get();
         $respostas = Resposta::where('cliente_id', $id)->get();
 
+        
+        if( $userId = auth()->user()->nivel !== 'profissional')
+        {
+            $user = User::where('nivel', 'profissional')->first();
+        }else {
+            $userId = auth()->user()->id;
+        }
+        
         // Filtrar perguntas pelo user_id
-        $perguntas = ModeloPergunta::where('user_id', auth()->user()->id)
+        $perguntas = ModeloPergunta::where('user_id', $userId)
             ->orderBy('modelo', 'asc')
             ->get();
 
 
-        // if (count($respostas) > 0) {
-        //     $respostas = ModeloPergunta::with(['respostas' => function ($query) use ($id) {
-        //         $query->where('cliente_id', $id);
-        //     }])
-        //         ->where('user_id', auth()->user()->id)
-        //         ->orderBy('modelo', 'asc')
-        //         ->get();
-        // }
-
         if (count($respostas) > 0) {
-            // Verifica se o usuário logado não é de nível "profissional"
-            $userId = auth()->user()->nivel !== 'profissional'
-                ? User::where('nivel', 'profissional')->value('id') // Busca o primeiro ID de usuário com nível "profissional"
-                : auth()->user()->id;
-        
+                   
             $respostas = ModeloPergunta::with(['respostas' => function ($query) use ($id) {
                     $query->where('cliente_id', $id);
                 }])
