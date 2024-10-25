@@ -9,6 +9,7 @@ use App\Models\File;
 use App\Models\Medida;
 use App\Models\Resposta;
 use App\Models\ModeloPergunta;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 
