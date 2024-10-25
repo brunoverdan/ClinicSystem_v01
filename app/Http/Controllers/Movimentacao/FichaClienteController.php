@@ -61,6 +61,7 @@ class FichaClienteController extends Controller
         if( $userId = auth()->user()->nivel !== 'profissional')
         {
             $userId = User::where('nivel', 'profissional')->first();
+            $userId = $userId->id;
         }else {
             $userId = auth()->user()->id;
         }
