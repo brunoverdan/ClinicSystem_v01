@@ -23,7 +23,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::resource('clinicas', ClinicaController::class);
 Route::resource('clientes', ClienteController::class);
-Route::get('cliente_create', [ClienteController::class, 'create'])->name('clientes.create');
+Route::get('cliente/create', [ClienteController::class, 'create'])->name('clientes.create');
 Route::resource('evolucoes', EvolucaoController::class);
 Route::resource('modelo_perguntas', ModeloPerguntaController::class);
 Route::resource('fichas', FichaController::class);
