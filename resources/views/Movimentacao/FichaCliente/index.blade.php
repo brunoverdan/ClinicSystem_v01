@@ -50,7 +50,7 @@
                     <th>Nome</th>
                     <th>Email</th>
                     <th>Telefone</th>
-                    <th>Sexo</th>
+                    <th>Profissional</th>
                     <th class="text-center">Ações</th>
                 </tr>
             </thead>
@@ -60,7 +60,7 @@
                         <td>{{ $cliente->nome }}</td>
                         <td>{{ $cliente->email }}</td>
                         <td>{{ $cliente->telefone }}</td>
-                        <td>{{ $cliente->sexo }}</td>
+                        <td>{{ $cliente->user->name }}</td>
                         <td class="text-center">
                         @if (auth()->check() && auth()->user()->nivel !== 'alterar')
                             <a href="{{ route('abrir_ficha_cliente', $cliente->id) }}" class="btn btn-info btn-sm">

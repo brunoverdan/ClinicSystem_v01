@@ -52,7 +52,7 @@
                 <td>{{ \Carbon\Carbon::parse($evolucao->data)->format('d/m/Y') }}</td>
                 <td style="max-width: 100px; word-break: break-word;">{{ $evolucao->descricao }}</td>
                 <td>
-                    <a href="{{ route('evolucoes.edit', $evolucao->id) }}" class="btn btn-sm btn-warning">Editar</a>
+                    <a href="{{ route('evolucoes.edit', $evolucao->id) }}" class="btn btn-sm btn-warning">Editar-{{$evolucao->id}}</a>
 
                     <!-- Botão para abrir o modal de exclusão -->
                     <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#modal-delete-{{ $evolucao->id }}">

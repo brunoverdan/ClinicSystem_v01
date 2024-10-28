@@ -39,10 +39,10 @@ class EvolucaoController extends Controller
     }
 
     // Mostra o formulário para editar uma evolução
-    public function edit(Evolucao $evolucao)
+    public function edit($id)
     {
-        $clientes = Cliente::all();
-        return view('Cadastro.Evolucao.edit', compact('evolucao', 'clientes'));
+        $evolucao = Evolucao::find($id);
+        return view('Cadastro.Evolucao.edit', compact('evolucao'));
     }
 
     // Atualiza uma evolução no banco de dados

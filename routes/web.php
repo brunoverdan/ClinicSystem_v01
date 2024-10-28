@@ -12,7 +12,8 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
 Route::get('/', function () {
-    return redirect()->route('fichacliente.fichacliente');
+    //return redirect()->route('fichacliente.fichacliente');
+    return redirect()->route('home');
 });
 
 Auth::routes();
@@ -25,6 +26,7 @@ Route::resource('clinicas', ClinicaController::class);
 Route::resource('clientes', ClienteController::class);
 Route::get('cliente', [ClienteController::class, 'create'])->name('cliente.create');
 Route::resource('evolucoes', EvolucaoController::class);
+Route::get('/evolucoes/{evolucao}/edit', [EvolucaoController::class, 'edit'])->name('evolucoes.edit');
 Route::resource('modelo_perguntas', ModeloPerguntaController::class);
 Route::resource('fichas', FichaController::class);
 Route::resource('medidas', MedidaController::class);
