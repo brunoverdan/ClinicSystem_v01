@@ -89,7 +89,7 @@
     </div>
 
     {{-- Paginação --}}
-    <div class="d-flex justify-content-center">
+    <div class="d-flex justify-content-end">
         {{ $clientes->onEachSide(0)->links() }}
     </div>
 </div>
