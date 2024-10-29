@@ -40,7 +40,7 @@
                         <option value="">Selecione</option>
                         <option value="Masculino">Masculino</option>
                         <option value="Feminino">Feminino</option>
-                        <option value="Nao Escolha">Não Escolha</option>
+                        <option value="Nao_Informar">Não Informar</option>
                     </select>
                 </div>
                
@@ -71,6 +71,20 @@
                     <textarea type="text" class="form-control" name="observacao" rows="5"></textarea>
                 </div>
             </div>
+            {{-- Select de Profissionais apenas se o usuário for Administrador --}}
+            @if (auth()->check() && auth()->user()->nivel === 'administrativo')
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="user_id">Selecionar Profissional:</label>
+                        <select class="form-control" name="user_id">
+                            <option value="">Selecione um profissional</option>
+                            @foreach ($profissionais as $profissional)
+                                <option value="{{ $profissional->id }}">{{ $profissional->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+            @endif
         </div>
 
         <button type="submit" class="btn btn-success">Salvar</button>

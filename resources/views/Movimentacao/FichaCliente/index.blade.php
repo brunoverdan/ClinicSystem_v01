@@ -3,7 +3,7 @@
 @section('title', 'Clientes')
 
 @section('content_header')
-<h1>Clientes</h1>
+<h5>Cadastro>Ficha Cliente</h5>
 @stop
 
 @section('content')
@@ -33,7 +33,7 @@
     <form action="{{ route('fichas.search') }}" method="POST" class="mb-4">
         @csrf
         <div class="input-group">
-            <input type="text" name="query" id="query" class="form-control" placeholder="Digite Nome, Telefone ou E-mail..." aria-label="Pesquisar Cliente">
+            <input type="text" name="query" id="query" class="form-control" placeholder="{{$descricaoBarraBusca}}" aria-label="Pesquisar Cliente">
             <div class="input-group-append">
                 <button type="submit" class="btn btn-primary">
                     <i class="fas fa-search"></i> Pesquisar
