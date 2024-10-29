@@ -90,7 +90,7 @@
 
     {{-- Paginação --}}
     <div class="d-flex justify-content-center">
-        {{ $clientes->links() }}
+        {{ $clientes->onEachSide(0)->links() }}
     </div>
 </div>
 @stop
