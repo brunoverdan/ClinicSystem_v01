@@ -83,7 +83,7 @@
                         <div class="tab-pane fade" id="tab{{ $loop->index + 2 }}" role="tabpanel"
                             aria-labelledby="tab{{ $loop->index + 2 }}-tab">
                             @if (count($respostas) > 0)
-                                @include('Movimentacao.Ficha.edit', ['perguntas' => $questions])
+                                @include('Movimentacao.Ficha.show', ['perguntas' => $questions])
                             @else
                                 @include('Movimentacao.Ficha.create', ['perguntas' => $questions])
                             @endif

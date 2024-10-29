@@ -1,3 +1,12 @@
+@extends('adminlte::page')
+
+@section('title', 'Dashboard')
+
+@section('content_header')
+    <h1>Dashboard</h1>
+@stop
+
+@section('content')
 <div class="container mt-5">
     <div class="card shadow-sm">
         <div class="card-header bg-secondary text-white">
@@ -61,8 +70,8 @@
                             </div>
 
                         @elseif($pergunta->modelo == 'modelo_03')
-                            <div class="mt-2">
-                                <div class="form-check">
+                            <div class="mt-2 d-inline-flex align-items-center">
+                                <div class="form-check me-3">
                                     <input type="checkbox" name="perguntas[{{ $pergunta->id }}][mais]" value="1" class="form-check-input" {{ ($resposta->mais ?? 0) ? 'checked' : '' }}>
                                     <input type="hidden" name="perguntas[{{ $pergunta->id }}][tipo_modelo]" value="modelo_03">
                                     <input type="hidden" name="perguntas[{{ $pergunta->id }}][pergunta_id]" value="{{ $pergunta->id }}">
@@ -70,7 +79,7 @@
                                     <input type="hidden" name="perguntas[{{ $pergunta->id }}][aba]" value="{{ $pergunta->aba }}">
                                     <label class="form-check-label">Mais</label>
                                 </div>
-                                <div class="form-check">
+                                <div class="form-check me-3">
                                     <input type="checkbox" name="perguntas[{{ $pergunta->id }}][menos]" value="1" class="form-check-input" {{ ($resposta->menos ?? 0) ? 'checked' : '' }}>
                                     <input type="hidden" name="perguntas[{{ $pergunta->id }}][tipo_modelo]" value="modelo_03">
                                     <input type="hidden" name="perguntas[{{ $pergunta->id }}][pergunta_id]" value="{{ $pergunta->id }}">
@@ -78,7 +87,7 @@
                                     <input type="hidden" name="perguntas[{{ $pergunta->id }}][aba]" value="{{ $pergunta->aba }}">
                                     <label class="form-check-label">Menos</label>
                                 </div>
-                                <div class="form-check">
+                                <div class="form-check me-3">
                                     <input type="checkbox" name="perguntas[{{ $pergunta->id }}][direito]" value="1" class="form-check-input" {{ ($resposta->direito ?? 0) ? 'checked' : '' }}>
                                     <input type="hidden" name="perguntas[{{ $pergunta->id }}][tipo_modelo]" value="modelo_03">
                                     <input type="hidden" name="perguntas[{{ $pergunta->id }}][pergunta_id]" value="{{ $pergunta->id }}">
@@ -107,3 +116,14 @@
         </div>
     </div>
 </div>
+
+@stop
+
+@section('css')
+    {{-- Add here extra stylesheets --}}
+    {{-- <link rel="stylesheet" href="/css/admin_custom.css"> --}}
+@stop
+
+@section('js')
+    <script> console.log("oi, todos direitos reservados para @CliniMaster!"); </script>
+@stop

@@ -36,7 +36,9 @@ Route::resource('medidas', MedidaController::class);
 Route::resource('ficha_cliente', FichaClienteController::class);
 Route::get('/ficha_cliente', [FichaClienteController::class, 'index'])->name('fichacliente.fichacliente');
 
+
 Route::any('abrir_ficha_cliente/{id}', 'App\Http\Controllers\Movimentacao\FichaClienteController@abrir_ficha_cliente')->name('abrir_ficha_cliente');
+Route::get('/fichas_edit', [FichaController::class, 'edit'])->name('fichas.edit');
 Route::put('/fichas/{cliente_id}', [FichaController::class, 'update'])->name('fichas.update');
 
 //File

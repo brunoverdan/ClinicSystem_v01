@@ -25,6 +25,28 @@ class FichaController extends Controller
         return view('Cadastro.Ficha.create', compact('perguntas'));
     }
 
+    public function edit(Request $request)
+    {
+        $cliente_id = $request->input('cliente_id');
+        
+        $cliente = Cliente::findOrFail($cliente_id);
+        $respostas = Resposta::where('cliente_id', $cliente_id)->get();
+
+    
+        if (count($respostas) > 0) {
+            $respostas = ModeloPergunta::with(['respostas' => function ($query) use ($cliente_id) {
+                $query->where('cliente_id', $cliente_id);
+            }])
+                ->where('user_id', auth()->user()->id)
+                ->orderBy('modelo', 'asc')
+                ->get();
+        }
+
+        
+
+        return view('Movimentacao.Ficha.edit', compact('cliente', 'respostas'));
+    }
+
 
     public function store(Request $request)
     {
@@ -123,7 +145,6 @@ class FichaController extends Controller
                 );
             } else {
                 // Caso o 'tipo_modelo' não esteja definido, pode gerar uma mensagem de erro ou log
-
                 return redirect()->back()->with('error', 'Tipo de modelo não encontrado para uma das perguntas.');
             }
         }
