@@ -48,7 +48,6 @@
             <thead class="thead-dark">
                 <tr>
                     <th>Nome</th>
-                    <th>Email</th>
                     <th>Telefone</th>
                     <th>Profissional</th>
                     <th class="text-center">Ações</th>
@@ -58,7 +57,6 @@
                 @forelse ($clientes as $cliente)
                     <tr>
                         <td>{{ $cliente->nome }}</td>
-                        <td>{{ $cliente->email }}</td>
                         <td>{{ $cliente->telefone }}</td>
                         <td>{{ $cliente->user->name }}</td>
                         <td class="text-center">
@@ -89,7 +87,7 @@
     </div>
 
     {{-- Paginação --}}
-    <div class="d-flex justify-content-end">
+    <div class="d-flex justify-content-center">
         {{ $clientes->onEachSide(0)->links() }}
     </div>
 </div>
