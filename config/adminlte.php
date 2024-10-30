@@ -321,8 +321,14 @@ return [
         [
             'text' => 'Pergunta',
             'url' => 'modelo_perguntas',
-            'icon_color' => 'blue',
+            'icon_color' => 'green',
             'icon' => 'fas fa-fw fa-question',
+        ],
+        [
+            'text' => 'Aba',
+            'url' => 'abas',
+            'icon_color' => 'yellow',
+            'icon' => 'fas fa-fw fa-folder',
         ],
         ['header' => 'Ficha do Cliente'],
         [

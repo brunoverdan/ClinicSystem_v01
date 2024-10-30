@@ -6,6 +6,8 @@ use App\Http\Controllers\Cadastro\EvolucaoController;
 use App\Http\Controllers\Cadastro\ModeloPerguntaController;
 use App\Http\Controllers\Cadastro\FichaController;
 use App\Http\Controllers\Cadastro\MedidaController;
+use App\Http\Controllers\Cadastro\TermsController;
+use App\Http\Controllers\Cadastro\AbaController;
 use App\Http\Controllers\Movimentacao\FichaClienteController;
 use App\Http\Controllers\Movimentacao\FileController;
 use Illuminate\Support\Facades\Route;
@@ -22,6 +24,14 @@ Route::group(['middleware' => 'auth'], function(){
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+########### TERMO DE USO #################
+
+Route::get('/terms', [TermsController::class, 'show'])->name('terms.show');
+Route::post('/terms/accept', [TermsController::class, 'accept'])->name('terms.accept');
+
+
+################# CADASTRO ###########################
+
 Route::resource('clinicas', ClinicaController::class);
 Route::resource('clientes', ClienteController::class);
 Route::get('cliente', [ClienteController::class, 'create'])->name('cliente.create');
@@ -30,6 +40,7 @@ Route::get('/evolucoes/{evolucao}/edit', [EvolucaoController::class, 'edit'])->n
 Route::resource('modelo_perguntas', ModeloPerguntaController::class);
 Route::resource('fichas', FichaController::class);
 Route::resource('medidas', MedidaController::class);
+Route::resource('abas', AbaController::class);
 
 ############# MOVIMENTAÇÃO ################
 
