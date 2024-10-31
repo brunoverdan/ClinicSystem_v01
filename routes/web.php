@@ -8,6 +8,7 @@ use App\Http\Controllers\Cadastro\FichaController;
 use App\Http\Controllers\Cadastro\MedidaController;
 use App\Http\Controllers\Cadastro\TermsController;
 use App\Http\Controllers\Cadastro\AbaController;
+use App\Http\Controllers\Cadastro\ServicoController;
 use App\Http\Controllers\Movimentacao\FichaClienteController;
 use App\Http\Controllers\Movimentacao\FileController;
 use Illuminate\Support\Facades\Route;
@@ -41,6 +42,7 @@ Route::resource('modelo_perguntas', ModeloPerguntaController::class);
 Route::resource('fichas', FichaController::class);
 Route::resource('medidas', MedidaController::class);
 Route::resource('abas', AbaController::class);
+Route::resource('servicos', ServicoController::class);
 
 ############# MOVIMENTAÇÃO ################
 

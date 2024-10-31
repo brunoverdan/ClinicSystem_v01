@@ -329,6 +329,14 @@ return [
             'url' => 'abas',
             'icon_color' => 'yellow',
             'icon' => 'fas fa-fw fa-folder',
+            'can' => 'bloqueio'
+        ],
+        [
+            'text' => 'Serviço',
+            'url' => 'servicos',
+            'icon_color' => 'yellow',
+            'icon' => 'fas fa-fw fa-hard-hat',
+            'can' => 'bloqueio'
         ],
         ['header' => 'Ficha do Cliente'],
         [
