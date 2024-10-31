@@ -60,6 +60,8 @@ Route::get('/files/download/{id}', [FileController::class, 'download'])->name('f
 
 ######### Filtro ########
 
-Route::post('/ficha/pesquisar', [FichaClienteController::class, 'search'])->name('fichas.search');
+//Route::post('/ficha/pesquisar', [FichaClienteController::class, 'search'])->name('fichas.search');
+Route::match(['get', 'post'], 'ficha/pesquisar', [FichaClienteController::class, 'search'])->name('fichas.search');
+
 
 });
