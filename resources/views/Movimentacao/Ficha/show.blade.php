@@ -6,23 +6,24 @@
         <div class="card-body">
             <h2 class="mb-4">Perguntas</h2>
 
-            @foreach($respostas as $pergunta)
+            @foreach ($perguntas as $pergunta)
                 <div class="mb-4">
                     <h5 class="font-weight-bold">{{ $pergunta->pergunta }}</h5>
 
                     @php
-                        $resposta = $pergunta->respostas->first() ?? new \App\Models\Resposta;
+                        // Procurar a resposta correspondente à pergunta na coleção filtrada de respostas
+                        $resposta =
+                            $responsesFiltered->where('pergunta_id', $pergunta->id)->first() ??
+                            new \App\Models\Resposta();
                     @endphp
 
-                    @if($pergunta->modelo == 'modelo_01')
+                    @if ($pergunta->modelo == 'modelo_01')
                         <p><strong>Resposta:</strong> {{ $resposta->resposta ?? 'Não especificado' }}</p>
-                    
                     @elseif($pergunta->modelo == 'modelo_02')
-                        <p><strong>Resposta:</strong> {{ ($resposta->resposta == 'sim') ? 'Sim' : 'Não' }}</p>
+                        <p><strong>Resposta:</strong> {{ $resposta->resposta == 'sim' ? 'Sim' : 'Não' }}</p>
                         <p><strong>Quais:</strong> {{ $resposta->quais ?? 'Não especificado' }}</p>
-
                     @elseif($pergunta->modelo == 'modelo_03')
-                    <div class="mt-2 d-inline-flex align-items-center">
+                        <div class="mt-2 d-inline-flex align-items-center">
                             <span class="badge bg-primary me-3">{{ $resposta->mais ? 'Mais' : '' }}</span>
                             <span class="badge bg-primary me-3">{{ $resposta->menos ? 'Menos' : '' }}</span>
                             <span class="badge bg-primary me-3">{{ $resposta->direito ? 'Direito' : '' }}</span>
@@ -31,6 +32,7 @@
                     @endif
                 </div>
             @endforeach
+
 
             <!-- Botão de Editar -->
             <div class="text-end mt-4">

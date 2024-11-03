@@ -54,15 +54,15 @@
                 </select>
             </div>
 
-            {{--  <div class="form-group">
+            <div class="form-group">
                 <label for="aba">aba</label>
                 <select name="aba" class="form-control" required>
-                    <option value="Cervical" {{ old('aba') == 'Cervical' ? 'selected' : '' }}>Cervical</option>
-                    <option value="Lombar" {{ old('aba') == 'Lombar' ? 'selected' : '' }}>Lombar</option>
+                    @foreach ($abas as $aba)
+                    <option value="{{$aba->aba}}">{{$aba->aba}}</option>
+                    @endforeach  
                 </select>
-            </div>  --}}
-            <input type="hidden" name="aba" value="Lombar">
-
+            </div>
+            
             <!-- Descrição dos Modelos -->
             <div class="mt-4">
                 <h4>Descrição dos Modelos:</h4>

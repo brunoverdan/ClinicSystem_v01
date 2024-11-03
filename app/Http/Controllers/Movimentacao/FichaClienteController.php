@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Movimentacao;
 
 use App\Http\Controllers\Controller;
+use App\Models\Aba;
 use App\Models\Cliente;
 use App\Models\Evolucao;
 use App\Models\File;
@@ -107,6 +108,10 @@ class FichaClienteController extends Controller
             ->orderBy('modelo', 'asc')
             ->get();
 
+        $abas = Aba::where('user_id', $userId)
+            ->orderBy('aba', 'asc')
+            ->get();
+
 
         if (count($respostas) > 0) {
 
@@ -118,8 +123,23 @@ class FichaClienteController extends Controller
                 ->get();
         }
 
+       // Organizar as respostas por aba para fácil acesso na view
+    $respostasPorAba = [];
+    foreach ($abas as $aba) {
+        $respostasPorAba[$aba->aba] = Resposta::where('cliente_id', $id)
+            ->where('aba', $aba->aba)
+            ->get();
+    }
 
-
-        return view('Movimentacao.FichaCliente.ficha_cliente', compact('cliente', 'files', 'evolucoes', 'perguntas', 'respostas', 'medidas'));
+        return view('Movimentacao.FichaCliente.ficha_cliente', compact(
+            'cliente',
+            'files',
+            'evolucoes',
+            'perguntas',
+            'respostas',
+            'medidas',
+            'abas',
+            'respostasPorAba'
+        ));
     }
 }

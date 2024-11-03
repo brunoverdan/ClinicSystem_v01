@@ -15,13 +15,25 @@
                         <button class="nav-link active" id="tab1-tab" data-bs-toggle="tab" data-bs-target="#tab1"
                             type="button" role="tab" aria-controls="tab1" aria-selected="true">Cliente</button>
                     </li>
-                    @foreach ($perguntas->groupBy('aba') as $aba => $questions)
+                    {{--  @foreach ($perguntas->groupBy('aba') as $aba => $questions)
                         <li class="nav-item" role="presentation">
                             <button class="nav-link" id="tab{{ $loop->index + 2 }}-tab" data-bs-toggle="tab"
                                 data-bs-target="#tab{{ $loop->index + 2 }}" type="button" role="tab"
                                 aria-controls="tab{{ $loop->index + 2 }}" aria-selected="false">{{ ucfirst($aba) }}</button>
                         </li>
-                    @endforeach
+                    @endforeach  --}}
+                    @php
+                    {{$numtab = 1; }}
+                    @endphp
+                    @foreach ($abas as $aba)
+                    @php
+                    {{$numtab += 1; }}
+                    @endphp
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="tab{{$numtab}}-tab" data-bs-toggle="tab" data-bs-target="#tab{{$numtab}}" type="button"
+                            role="tab" aria-controls="tab{{$numtab}}" aria-selected="false">{{$aba->aba}}</button>
+                    </li>
+                    @endforeach  
                     <li class="nav-item" role="presentation">
                         <button class="nav-link" id="tab5-tab" data-bs-toggle="tab" data-bs-target="#tab5" type="button"
                             role="tab" aria-controls="tab5" aria-selected="false">Medidas</button>
@@ -79,7 +91,7 @@
                         </div>
                     </div>
 
-                    @foreach ($perguntas->groupBy('aba') as $aba => $questions)
+                    {{--  @foreach ($perguntas->groupBy('aba') as $aba => $questions)
                         <div class="tab-pane fade" id="tab{{ $loop->index + 2 }}" role="tabpanel"
                             aria-labelledby="tab{{ $loop->index + 2 }}-tab">
                             @if (count($respostas) > 0)
@@ -88,7 +100,76 @@
                                 @include('Movimentacao.Ficha.create', ['perguntas' => $questions])
                             @endif
                         </div>
-                    @endforeach
+                    @endforeach  --}}
+
+                    {{--  @php
+                    $numtab = 1;
+                    @endphp
+                    
+                    @foreach ($abas as $aba)
+                        @php
+                            // Filtrar as perguntas relacionadas à aba atual
+                            $questionsFiltered = $perguntas->where('aba', $aba->aba);
+                            $numtab += 1;
+                            
+                        @endphp
+                    
+                        <div class="tab-pane fade" id="tab{{$numtab}}" role="tabpanel" aria-labelledby="tab{{$numtab}}-tab">
+                            @if (count($respostas->aba==$aba->aba) > 0)
+                                @include('Movimentacao.Ficha.show', ['perguntas' => $questionsFiltered])
+                            @else
+                                @include('Movimentacao.Ficha.create', ['perguntas' => $questionsFiltered])
+                            @endif
+                        </div>
+                    @endforeach  --}}
+
+                    {{--  @php
+                    $numtab = 1;
+                    @endphp
+                    @foreach ($abas as $aba)
+                    @php
+                        // Filtrar as perguntas relacionadas à aba atual
+                        $questionsFiltered = $perguntas->where('aba', $aba->aba);
+                        $responsesFiltered = $respostas->where('aba', $aba->aba); // Filtra as respostas para a aba atual
+                        $numtab += 1;
+
+                        dd($responsesFiltered);
+                    @endphp
+
+                    <div class="tab-pane fade" id="tab{{$numtab}}" role="tabpanel" aria-labelledby="tab{{$numtab}}-tab">
+                        @if ($responsesFiltered->count() > 0)
+                            @include('Movimentacao.Ficha.show', ['perguntas' => $questionsFiltered])
+                        @else
+                            @include('Movimentacao.Ficha.create', ['perguntas' => $questionsFiltered])
+                        @endif
+                    </div>
+                @endforeach  --}}
+
+
+                @php
+                    $numtab = 1;
+                @endphp
+
+                @foreach ($abas as $aba)
+                    @php
+                        // Filtrar as perguntas relacionadas à aba atual
+                        $questionsFiltered = $perguntas->where('aba', $aba->aba);
+                        $responsesFiltered = $respostasPorAba[$aba->aba] ?? collect(); // Obter respostas para a aba atual ou coleção vazia
+                        $numtab += 1;
+                    @endphp
+
+                    <div class="tab-pane fade" id="tab{{$numtab}}" role="tabpanel" aria-labelledby="tab{{$numtab}}-tab">
+                        @if ($responsesFiltered->count() > 0)
+                            @include('Movimentacao.Ficha.show', [
+                                'perguntas' => $questionsFiltered,
+                                'responsesFiltered' => $responsesFiltered
+                            ])
+                        @else
+                            @include('Movimentacao.Ficha.create', ['perguntas' => $questionsFiltered])
+                        @endif
+                    </div>
+                @endforeach
+
 
                     <div class="tab-pane fade" id="tab5" role="tabpanel" aria-labelledby="tab5-tab">
                         @include('Movimentacao.Medida.index')

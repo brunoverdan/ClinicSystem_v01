@@ -329,7 +329,7 @@ return [
             'url' => 'abas',
             'icon_color' => 'yellow',
             'icon' => 'fas fa-fw fa-folder',
-            'can' => 'bloqueio'
+            //'can' => 'bloqueio'
         ],
         [
             'text' => 'Serviço',

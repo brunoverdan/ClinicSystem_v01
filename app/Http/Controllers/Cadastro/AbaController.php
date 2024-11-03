@@ -12,7 +12,19 @@ class AbaController extends Controller
 {
     public function index()
     {
-        $abas = Aba::all();
+        // Verificar se o usuário logado é de nível 'administrativo'
+        if (auth()->user()->nivel == 'administrativo') {
+            // Se for administrativo, buscar os usuários com nível 'profissional'
+            $abas = Aba::all();
+            
+        } else {
+            // Se o usuário não for administrativo, não passamos nada para 'profissionais'
+            $usuarioId = auth()->user()->id;
+            $abas = Aba::where('user_id', $usuarioId)
+            ->orderBy('aba', 'asc')
+            ->get();
+        }
+
         return view('Cadastro.Aba.index', compact('abas'));
     }
 

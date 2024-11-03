@@ -57,7 +57,15 @@
                 </select>
             </div>  --}}
 
-            <input type="hidden" name="aba" value="Lombar">
+            <div class="form-group">
+                <label for="aba">aba</label>
+                <select name="aba" class="form-control" required>
+                    <option value="{{$modeloPergunta->aba}}">{{$modeloPergunta->aba}}</option>
+                    @foreach ($abas as $aba)
+                    <option value="{{$aba->aba}}">{{$aba->aba}}</option>
+                    @endforeach  
+                </select>
+            </div>
 
             <!-- Descrição dos Modelos -->
             <div class="mt-4">

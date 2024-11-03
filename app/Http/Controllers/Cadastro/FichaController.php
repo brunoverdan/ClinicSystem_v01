@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Cadastro;
 
 use App\Http\Controllers\Controller;
+use App\Models\Aba;
 use App\Models\Cliente;
 use App\Models\Evolucao;
 use Illuminate\Http\Request;
@@ -87,8 +88,15 @@ class FichaController extends Controller
 
         // Filtrar perguntas pelo user_id
        
-            $perguntas = ModeloPergunta::where('user_id', auth()->user()->id)
+        $usuarioId = auth()->user()->id;    
+        
+        $perguntas = ModeloPergunta::where('user_id', $usuarioId)
             ->orderBy('modelo', 'asc')
+            ->get();
+
+            
+        $abas = Aba::where('user_id', $usuarioId)
+            ->orderBy('aba', 'asc')
             ->get();
 
 
@@ -101,9 +109,15 @@ class FichaController extends Controller
                 ->get();
         }
 
+        $respostasPorAba = [];
+        foreach ($abas as $aba) {
+            $respostasPorAba[$aba->aba] = Resposta::where('cliente_id', $cliente_id)
+                ->where('aba', $aba->aba)
+                ->get();
+        }
 
 
-        return view('Movimentacao.FichaCliente.ficha_cliente', compact('cliente', 'files', 'evolucoes', 'perguntas', 'respostas', 'medidas'));
+        return view('Movimentacao.FichaCliente.ficha_cliente', compact('cliente', 'files', 'evolucoes', 'perguntas', 'respostas', 'medidas','abas','respostasPorAba'));
 
 
         // return redirect()->back()->with('success', 'Perguntas gravadas com sucesso!');
@@ -158,8 +172,15 @@ class FichaController extends Controller
         $respostas = Resposta::where('cliente_id', $cliente_id)->get();
 
         // Filtrar perguntas pelo user_id
-        $perguntas = ModeloPergunta::where('user_id', auth()->user()->id)
+
+        $usuarioId = auth()->user()->id;    
+
+        $perguntas = ModeloPergunta::where('user_id', $usuarioId)
             ->orderBy('modelo', 'asc')
+            ->get();
+        
+        $abas = Aba::where('user_id', $usuarioId)
+            ->orderBy('aba', 'asc')
             ->get();
 
 
@@ -172,9 +193,16 @@ class FichaController extends Controller
                 ->get();
         }
 
+       
+        $respostasPorAba = [];
+        foreach ($abas as $aba) {
+            $respostasPorAba[$aba->aba] = Resposta::where('cliente_id', $cliente_id)
+                ->where('aba', $aba->aba)
+                ->get();
+        }
+        
 
-
-        return view('Movimentacao.FichaCliente.ficha_cliente', compact('cliente', 'files', 'evolucoes', 'perguntas', 'respostas', 'medidas'));
+        return view('Movimentacao.FichaCliente.ficha_cliente', compact('cliente', 'files', 'evolucoes', 'perguntas', 'respostas', 'medidas', 'abas','respostasPorAba'));
 
         //return redirect()->back()->with('success', 'Perguntas gravadas com sucesso!');
     }

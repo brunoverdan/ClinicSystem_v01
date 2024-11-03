@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Cadastro;
 
 use App\Http\Controllers\Controller;
+use App\Models\Aba;
 use App\Models\ModeloPergunta;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -20,7 +21,7 @@ class ModeloPerguntaController extends Controller
     $modeloPerguntas = ModeloPergunta::where('user_id', $usuarioId)
         ->orderBy('modelo', 'asc')
         ->get();
-
+    
     // Verificar se o usuário logado é de nível 'administrativo'
     if (auth()->user()->nivel == 'administrativo') {
         // Se for administrativo, buscar os usuários com nível 'profissional'
@@ -40,13 +41,19 @@ public function create()
     if (auth()->user()->nivel == 'administrativo') {
         // Se for administrativo, buscar os usuários com nível 'profissional'
         $profissionais = User::where('nivel', 'profissional')->get();
+        $abas = Aba::orderBy('aba', 'asc')
+            ->get();
     } else {
         // Se o usuário não for administrativo, não passamos nada para 'profissionais'
         $profissionais = null;
+        $usuarioId = auth()->user()->id;
+        $abas = Aba::where('user_id', $usuarioId)
+            ->orderBy('aba', 'asc')
+            ->get();
     }
 
     // Passar as variáveis para a view
-    return view('Cadastro.ModeloPergunta.create', compact('profissionais'));
+    return view('Cadastro.ModeloPergunta.create', compact('profissionais', 'abas'));
 }
 
 
@@ -66,11 +73,17 @@ public function create()
         // Apenas para usuários administrativos, buscar profissionais
         if (auth()->user()->nivel == 'administrativo') {
             $profissionais = User::where('nivel', 'profissional')->get();
+            $abas = Aba::orderBy('aba', 'asc')
+                ->get();
         } else {
             $profissionais = null;
+            $usuarioId = auth()->user()->id;
+            $abas = Aba::where('user_id', $usuarioId)
+                ->orderBy('aba', 'asc')
+                ->get();
         }
 
-        return view('Cadastro.ModeloPergunta.edit', compact('modeloPergunta','profissionais'));
+        return view('Cadastro.ModeloPergunta.edit', compact('modeloPergunta','profissionais', 'abas'));
     }
 
     public function update(Request $request, ModeloPergunta $modeloPergunta)
