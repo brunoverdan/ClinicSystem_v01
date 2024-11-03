@@ -3,7 +3,7 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-    <h1>Dashboard</h1>
+    <h1>Editar Aba {{$aba}}</h1>
 @stop
 
 @section('content')
@@ -19,7 +19,7 @@
                 
                 <h2 class="mb-4">Perguntas</h2>
 
-                @foreach($respostas as $pergunta)
+                @foreach($perguntas as $pergunta)
                 
                     <div class="form-group mb-4">
                         <label class="form-label">{{ $pergunta->pergunta }}</label>

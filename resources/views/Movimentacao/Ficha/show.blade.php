@@ -34,9 +34,8 @@
             @endforeach
 
 
-            <!-- Botão de Editar -->
             <div class="text-end mt-4">
-                <a href="{{ route('fichas.edit', ['cliente_id' => $cliente->id]) }}" class="btn btn-primary">
+                <a href="{{ route('fichas.edit', ['cliente_id' => $cliente->id, 'aba' => $aba->aba]) }}" class="btn btn-primary">
                     Editar Questionário
                 </a>
             </div>

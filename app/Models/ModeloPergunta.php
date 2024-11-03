@@ -17,6 +17,13 @@ class ModeloPergunta extends Model
         return $this->hasMany(Resposta::class, 'pergunta', 'pergunta');
     }
 
+    // ModeloPergunta.php
+    public function respostasShow()
+    {
+        return $this->hasMany(Resposta::class, 'pergunta_id');
+    }
+
+
     public function user()
     {
         return $this->belongsTo(User::class);

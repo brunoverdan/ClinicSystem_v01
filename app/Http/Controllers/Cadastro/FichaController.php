@@ -29,24 +29,32 @@ class FichaController extends Controller
     public function edit(Request $request)
     {
         $cliente_id = $request->input('cliente_id');
-        
-        $cliente = Cliente::findOrFail($cliente_id);
-        $respostas = Resposta::where('cliente_id', $cliente_id)->get();
+        $aba = $request->input('aba'); // Capturar o valor da aba
 
-    
-        if (count($respostas) > 0) {
-            $respostas = ModeloPergunta::with(['respostas' => function ($query) use ($cliente_id) {
+        $cliente = Cliente::findOrFail($cliente_id);
+
+        // Filtrar as respostas com base no cliente e na aba
+        $respostas = Resposta::where('cliente_id', $cliente_id)
+            ->where('aba', $aba)
+            ->get();
+
+        if ($respostas->count() > 0) {
+            // Obter as perguntas filtradas pelo usuário e pela aba
+            $perguntas = ModeloPergunta::with(['respostasShow' => function ($query) use ($cliente_id) {
                 $query->where('cliente_id', $cliente_id);
             }])
                 ->where('user_id', auth()->user()->id)
+                ->where('aba', $aba)
                 ->orderBy('modelo', 'asc')
                 ->get();
+        } else {
+            $perguntas = collect(); // Ou null, dependendo de como você quer tratar
         }
 
-        
-
-        return view('Movimentacao.Ficha.edit', compact('cliente', 'respostas'));
+        return view('Movimentacao.Ficha.edit', compact('cliente', 'respostas', 'perguntas', 'aba'));
     }
+
+
 
 
     public function store(Request $request)
@@ -87,14 +95,14 @@ class FichaController extends Controller
         $respostas = Resposta::where('cliente_id', $cliente_id)->get();
 
         // Filtrar perguntas pelo user_id
-       
-        $usuarioId = auth()->user()->id;    
-        
+
+        $usuarioId = auth()->user()->id;
+
         $perguntas = ModeloPergunta::where('user_id', $usuarioId)
             ->orderBy('modelo', 'asc')
             ->get();
 
-            
+
         $abas = Aba::where('user_id', $usuarioId)
             ->orderBy('aba', 'asc')
             ->get();
@@ -117,7 +125,7 @@ class FichaController extends Controller
         }
 
 
-        return view('Movimentacao.FichaCliente.ficha_cliente', compact('cliente', 'files', 'evolucoes', 'perguntas', 'respostas', 'medidas','abas','respostasPorAba'));
+        return view('Movimentacao.FichaCliente.ficha_cliente', compact('cliente', 'files', 'evolucoes', 'perguntas', 'respostas', 'medidas', 'abas', 'respostasPorAba'));
 
 
         // return redirect()->back()->with('success', 'Perguntas gravadas com sucesso!');
@@ -173,12 +181,12 @@ class FichaController extends Controller
 
         // Filtrar perguntas pelo user_id
 
-        $usuarioId = auth()->user()->id;    
+        $usuarioId = auth()->user()->id;
 
         $perguntas = ModeloPergunta::where('user_id', $usuarioId)
             ->orderBy('modelo', 'asc')
             ->get();
-        
+
         $abas = Aba::where('user_id', $usuarioId)
             ->orderBy('aba', 'asc')
             ->get();
@@ -193,16 +201,16 @@ class FichaController extends Controller
                 ->get();
         }
 
-       
+
         $respostasPorAba = [];
         foreach ($abas as $aba) {
             $respostasPorAba[$aba->aba] = Resposta::where('cliente_id', $cliente_id)
                 ->where('aba', $aba->aba)
                 ->get();
         }
-        
 
-        return view('Movimentacao.FichaCliente.ficha_cliente', compact('cliente', 'files', 'evolucoes', 'perguntas', 'respostas', 'medidas', 'abas','respostasPorAba'));
+
+        return view('Movimentacao.FichaCliente.ficha_cliente', compact('cliente', 'files', 'evolucoes', 'perguntas', 'respostas', 'medidas', 'abas', 'respostasPorAba'));
 
         //return redirect()->back()->with('success', 'Perguntas gravadas com sucesso!');
     }
