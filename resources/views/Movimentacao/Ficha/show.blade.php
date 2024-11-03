@@ -20,7 +20,7 @@
                     @if ($pergunta->modelo == 'modelo_01')
                         <p><strong>Resposta:</strong> {{ $resposta->resposta ?? 'Não especificado' }}</p>
                     @elseif($pergunta->modelo == 'modelo_02')
-                        <p><strong>Resposta:</strong> {{ $resposta->resposta == 'sim' ? 'Sim' : 'Não' }}</p>
+                        <p><strong>Resposta:</strong> {{ $resposta->resposta ?? 'Não especificado' }}</p>
                         <p><strong>Quais:</strong> {{ $resposta->quais ?? 'Não especificado' }}</p>
                     @elseif($pergunta->modelo == 'modelo_03')
                         <div class="mt-2 d-inline-flex align-items-center">
@@ -35,10 +35,12 @@
 
 
             <div class="text-end mt-4">
-                <a href="{{ route('fichas.edit', ['cliente_id' => $cliente->id, 'aba' => $aba->aba]) }}" class="btn btn-primary">
+                <a href="{{ route('fichas.custom_edit', ['cliente_id' => $cliente->id, 'aba' => $aba->aba]) }}" class="btn btn-primary">
                     Editar Questionário
                 </a>
             </div>
+            
+            
         </div>
     </div>
 </div>
