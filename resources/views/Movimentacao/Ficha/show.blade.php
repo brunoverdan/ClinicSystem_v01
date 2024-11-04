@@ -34,11 +34,11 @@
             @endforeach
 
 
-            <div class="text-end mt-4">
+            {{--  <div class="text-end mt-4">
                 <a href="{{ route('fichas.custom_edit', ['cliente_id' => $cliente->id, 'aba' => $aba->aba]) }}" class="btn btn-primary">
                     Editar Questionário
                 </a>
-            </div>
+            </div>  --}}
             
             
         </div>
