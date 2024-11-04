@@ -59,7 +59,7 @@ class FichaController extends Controller
     public function edit($cliente_id, $aba)
 {
     // Recebe o valor de 'aba' da requisição
-    
+        
     $aba = $aba;
 
     // Obtenha o usuário logado
@@ -71,6 +71,7 @@ class FichaController extends Controller
         ->orderBy('modelo', 'asc')
         ->get();
 
+
     // Carrega todas as respostas vinculadas ao cliente e pergunta específica
     $respostas = Resposta::where('cliente_id', $cliente_id)
         ->whereIn('pergunta_id', $perguntas->pluck('id'))
@@ -80,7 +81,7 @@ class FichaController extends Controller
     // Buscar o cliente pelo ID
     $cliente = Cliente::findOrFail($cliente_id);
 
-    dd($perguntas);
+    //dd($respostas);
 
     return view('Movimentacao.Ficha.edit', compact('cliente', 'perguntas', 'respostas', 'aba'));
     

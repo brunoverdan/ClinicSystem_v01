@@ -47,17 +47,34 @@ class EvolucaoController extends Controller
 
     // Atualiza uma evolução no banco de dados
     public function update(Request $request, Evolucao $evolucao)
-    {
-        $request->validate([
-            'descricao' => 'nullable|string',
-            'data' => 'nullable|date',
-            'cliente_id' => 'required|exists:clientes,id',
-        ]);
+{
+    
+   
+    
+    $evolucao = Evolucao::find($request->evolucao_id);
+    
+    $cliente_id = $evolucao->cliente_id;
+    
+    $request->validate([
+        'descricao' => 'nullable|string',
+        'data' => 'nullable|date',
+        
+    ]);
 
-        $evolucao->update($request->all());
+    $data = $request->only(['descricao', 'data']);
 
-        return redirect()->route('evolucoes.index')->with('success', 'Evolução atualizada com sucesso!');
+    $evolucao->update($data);
+
+    // Tente obter o cliente associado
+    
+
+    if ($cliente_id) {
+        return redirect()->route('abrir_ficha_cliente', $cliente_id)->with('success', 'Evolução atualizada com sucesso!');
+    } else {
+        return redirect()->route('evolucoes.index')->with('error', 'Cliente não encontrado para esta evolução.');
     }
+}
+
 
     // Remove uma evolução do banco de dados
     public function destroy($id)

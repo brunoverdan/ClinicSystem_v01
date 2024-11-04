@@ -53,7 +53,7 @@
                                 @if ($pergunta->modelo == 'modelo_01')
                                     <div class="mb-2">
                                         <textarea type="text" name="perguntas[{{ $pergunta->id }}][resposta]" class="form-control" rows="3"
-                                            placeholder="Especifique se necessário">{{ $resposta->resposta ?? '' }}</textarea>
+                                            placeholder="Especifique se necessário">{{ $resposta->resposta ?? '' }} ID = {{$pergunta->id}}</textarea>
                                         <input type="hidden" name="perguntas[{{ $pergunta->id }}][tipo_modelo]"
                                             value="modelo_01">
                                         <input type="hidden" name="perguntas[{{ $pergunta->id }}][pergunta_id]"
