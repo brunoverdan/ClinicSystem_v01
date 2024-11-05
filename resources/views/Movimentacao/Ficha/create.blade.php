@@ -1,7 +1,7 @@
 <div class="container mt-5">
     <div class="card shadow-sm">
         <div class="card-header bg-secondary text-white">
-            <h1 class="mb-0">Questionario do Cliente</h1>
+            <h1 class="mb-0">Questionario do Cliente {{ $aba->aba }}</h1>
         </div>
 
         <div class="card-body">
