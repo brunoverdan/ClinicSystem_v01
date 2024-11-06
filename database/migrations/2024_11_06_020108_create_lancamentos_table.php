@@ -19,7 +19,8 @@ return new class extends Migration
             $table->date('data');
             $table->decimal('desconto', 10, 2)->default(0);
             $table->string('arquivo')->nullable();
-            $table->enum('status', ['lancamento', 'baixa'])->default('lancamento');
+            $table->enum('status', ['atendimento', 'pagamento'])->default('atendimento');
+            $table->string('observacao');
             $table->foreign('servico_id')->references('id')->on('servicos');
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('cliente_id')->references('id')->on('clientes');

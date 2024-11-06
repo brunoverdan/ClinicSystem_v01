@@ -32,6 +32,13 @@
         <div class="mb-3">
             <label for="data" class="form-label">Data:</label>
             <input type="date" name="data" id="data" class="form-control" required>
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    const dataInput = document.getElementById('data');
+                    const today = new Date().toISOString().split('T')[0];  // Formata a data no formato YYYY-MM-DD
+                    dataInput.value = today;  // Define o valor do campo de data como a data atual
+                });
+            </script>
             <div class="invalid-feedback">Por favor, insira uma data válida.</div>
         </div>
 
@@ -42,22 +49,25 @@
             <small class="form-text text-muted" id="valor_final">Valor Final: R$ 0,00</small>
         </div>
 
-        <!-- Upload do Comprovante -->
+        {{--  <!-- Upload do Comprovante -->
         <div class="mb-3">
             <label for="arquivo" class="form-label">Comprovante de Pagamento:</label>
             <input type="file" name="arquivo" id="arquivo" accept=".jpg, .png, .pdf" class="form-control">
             <div class="form-text">Formatos permitidos: JPG, PNG, PDF.</div>
-        </div>
+        </div>  --}}
 
-        <!-- Status -->
+        <!-- Upload do Comprovante -->
         <div class="mb-3">
-            <label for="status" class="form-label">Status:</label>
-            <select name="status" id="status" class="form-select">
-                <option value="lancamento">Lançamento</option>
-                <option value="baixa">Baixa</option>
-            </select>
+            <label for="arquivo" class="form-label">Observação</label>
+            <input type="text" name="observacao" class="form-control"  placeholder="Observação">
+            
         </div>
-
+        
+        
+        
+        <!-- Status -->
+        <input type="hidden" name="status" value="Atendimento">
+        
         <!-- Botão de Envio -->
         <div class="text-center">
             <button type="submit" class="btn btn-primary">
