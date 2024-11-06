@@ -46,6 +46,10 @@
                         <button class="nav-link" id="tab7-tab" data-bs-toggle="tab" data-bs-target="#tab7" type="button"
                             role="tab" aria-controls="tab7" aria-selected="false">Arquivo</button>
                     </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="tab8-tab" data-bs-toggle="tab" data-bs-target="#tab8" type="button"
+                            role="tab" aria-controls="tab8" aria-selected="false">Financeiro</button>
+                    </li>
                     <li class="nav-item ms-auto">
                         <a href="#" class="nav-link text-muted"><i class="fa fa-gear"></i></a>
                     </li>
@@ -91,61 +95,6 @@
                         </div>
                     </div>
 
-                    {{--  @foreach ($perguntas->groupBy('aba') as $aba => $questions)
-                        <div class="tab-pane fade" id="tab{{ $loop->index + 2 }}" role="tabpanel"
-                            aria-labelledby="tab{{ $loop->index + 2 }}-tab">
-                            @if (count($respostas) > 0)
-                                @include('Movimentacao.Ficha.show', ['perguntas' => $questions])
-                            @else
-                                @include('Movimentacao.Ficha.create', ['perguntas' => $questions])
-                            @endif
-                        </div>
-                    @endforeach  --}}
-
-                    {{--  @php
-                    $numtab = 1;
-                    @endphp
-                    
-                    @foreach ($abas as $aba)
-                        @php
-                            // Filtrar as perguntas relacionadas à aba atual
-                            $questionsFiltered = $perguntas->where('aba', $aba->aba);
-                            $numtab += 1;
-                            
-                        @endphp
-                    
-                        <div class="tab-pane fade" id="tab{{$numtab}}" role="tabpanel" aria-labelledby="tab{{$numtab}}-tab">
-                            @if (count($respostas->aba==$aba->aba) > 0)
-                                @include('Movimentacao.Ficha.show', ['perguntas' => $questionsFiltered])
-                            @else
-                                @include('Movimentacao.Ficha.create', ['perguntas' => $questionsFiltered])
-                            @endif
-                        </div>
-                    @endforeach  --}}
-
-                    {{--  @php
-                    $numtab = 1;
-                    @endphp
-                    @foreach ($abas as $aba)
-                    @php
-                        // Filtrar as perguntas relacionadas à aba atual
-                        $questionsFiltered = $perguntas->where('aba', $aba->aba);
-                        $responsesFiltered = $respostas->where('aba', $aba->aba); // Filtra as respostas para a aba atual
-                        $numtab += 1;
-
-                        dd($responsesFiltered);
-                    @endphp
-
-                    <div class="tab-pane fade" id="tab{{$numtab}}" role="tabpanel" aria-labelledby="tab{{$numtab}}-tab">
-                        @if ($responsesFiltered->count() > 0)
-                            @include('Movimentacao.Ficha.show', ['perguntas' => $questionsFiltered])
-                        @else
-                            @include('Movimentacao.Ficha.create', ['perguntas' => $questionsFiltered])
-                        @endif
-                    </div>
-                @endforeach  --}}
-
-
                 @php
                     $numtab = 1;
                 @endphp
@@ -181,6 +130,11 @@
                     <div class="tab-pane fade" id="tab7" role="tabpanel" aria-labelledby="tab7-tab">
 
                         @include('Movimentacao.File.index')
+
+                    </div>
+                    <div class="tab-pane fade" id="tab8" role="tabpanel" aria-labelledby="tab8-tab">
+
+                        @include('Movimentacao.Lancamento.create')
 
                     </div>
                 </div>

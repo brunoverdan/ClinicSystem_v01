@@ -24,7 +24,7 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text">R$</span>
                 </div>
-                <input type="text" id="valores" name="valores" step="0.01" 
+                <input type="number" step="0.01" id="valores" name="valores" step="0.01" 
                 class="form-control" required maxlength="10" placeholder="Digite o valor">
             </div>
         </div>

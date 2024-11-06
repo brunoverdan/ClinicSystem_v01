@@ -10,6 +10,7 @@ use App\Models\File;
 use App\Models\Medida;
 use App\Models\Resposta;
 use App\Models\ModeloPergunta;
+use App\Models\servico;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -94,6 +95,7 @@ class FichaClienteController extends Controller
         $medidas = Medida::where('cliente_id', $id)->orderBy('data')->get();
         $evolucoes = Evolucao::where('cliente_id', $id)->get();
         $respostas = Resposta::where('cliente_id', $id)->get();
+        
 
 
         if ($userId = auth()->user()->nivel !== 'profissional') {
@@ -131,6 +133,8 @@ class FichaClienteController extends Controller
             ->get();
     }
 
+    $servicos = servico::where('user_id', $userId)->get();
+
         return view('Movimentacao.FichaCliente.ficha_cliente', compact(
             'cliente',
             'files',
@@ -139,7 +143,8 @@ class FichaClienteController extends Controller
             'respostas',
             'medidas',
             'abas',
-            'respostasPorAba'
+            'respostasPorAba',
+            'servicos',
         ));
     }
 }

@@ -25,7 +25,7 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text">R$</span>
                 </div>
-                <input type="number" name="valores" value="{{ $servico->valores }}" step="0.01" 
+                <input type="number" step="0.01" name="valores" value="{{ $servico->valores }}" step="0.01" 
                class="form-control" required maxlength="10" placeholder="Digite o valor">
             </div>
         </div>

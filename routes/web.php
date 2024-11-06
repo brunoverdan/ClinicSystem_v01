@@ -11,6 +11,7 @@ use App\Http\Controllers\Cadastro\AbaController;
 use App\Http\Controllers\Cadastro\ServicoController;
 use App\Http\Controllers\Movimentacao\FichaClienteController;
 use App\Http\Controllers\Movimentacao\FileController;
+use App\Http\Controllers\Movimentacao\LancamentoController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -44,6 +45,7 @@ Route::resource('fichas', FichaController::class);
 Route::resource('medidas', MedidaController::class);
 Route::resource('abas', AbaController::class);
 Route::resource('servicos', ServicoController::class);
+Route::resource('lancamentos', LancamentoController::class);
 
 ############# MOVIMENTAÇÃO ################
 

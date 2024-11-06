@@ -55,4 +55,9 @@ class User extends Authenticatable
         // Exemplo com campo 'nivel' que verifica se é 'administrativo'
         return $this->nivel === 'super';
     }
+
+    public function servicos()
+    {
+        return $this->hasMany(Servico::class);
+    }
 }

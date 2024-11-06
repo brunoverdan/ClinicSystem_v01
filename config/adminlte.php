@@ -332,12 +332,13 @@ return [
             'icon' => 'fas fa-fw fa-folder',
             'can' => 'is-super',
         ],
+        ['header' => 'Financeiro'],
         [
             'text' => 'Serviço',
             'url' => 'servicos',
             'icon_color' => 'yellow',
             'icon' => 'fas fa-fw fa-hard-hat',
-            'can' => 'is-super',
+            //'can' => 'is-super',
         ],
         ['header' => 'Ficha do Cliente'],
         [
@@ -346,6 +347,7 @@ return [
             'icon_color' => 'green',
             'icon' => 'fas fa-fw fa-file-alt',
         ],
+        
         
     ],
 
