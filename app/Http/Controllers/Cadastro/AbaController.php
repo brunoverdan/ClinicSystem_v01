@@ -7,6 +7,7 @@ use App\Models\Aba;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class AbaController extends Controller
 {
@@ -80,7 +81,10 @@ class AbaController extends Controller
 
     public function destroy(Aba $aba)
     {
-        $aba->delete();
+        if(Gate::allows('is-super')){
+            $aba->delete();
+        }
+        
         return redirect()->route('abas.index')->with('success', 'Aba excluída com sucesso!');
     }
 }

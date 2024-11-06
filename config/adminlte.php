@@ -323,20 +323,21 @@ return [
             'url' => 'modelo_perguntas',
             'icon_color' => 'green',
             'icon' => 'fas fa-fw fa-question',
+            'can' => 'is-super',
         ],
         [
             'text' => 'Aba',
             'url' => 'abas',
             'icon_color' => 'yellow',
             'icon' => 'fas fa-fw fa-folder',
-            //'can' => 'bloqueio'
+            'can' => 'is-super',
         ],
         [
             'text' => 'Serviço',
             'url' => 'servicos',
             'icon_color' => 'yellow',
             'icon' => 'fas fa-fw fa-hard-hat',
-            'can' => 'bloqueio'
+            'can' => 'is-super',
         ],
         ['header' => 'Ficha do Cliente'],
         [

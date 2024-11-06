@@ -48,4 +48,11 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function isAdm()
+    {
+        // Verifique o campo que identifica o nível do usuário
+        // Exemplo com campo 'nivel' que verifica se é 'administrativo'
+        return $this->nivel === 'super';
+    }
 }
