@@ -347,6 +347,13 @@ return [
             'icon' => 'fas fa-fw fa-file-alt',
             //'can' => 'is-super',
         ],
+        [
+            'text' => 'Pagamento',
+            'url' => 'listaClientePagamento',
+            'icon_color' => 'green',
+            'icon' => 'fas fa-fw fa-money-bill-alt',
+            //'can' => 'is-super',
+        ],
         ['header' => 'Ficha do Cliente'],
         [
             'text' => 'Ficha Cliente',

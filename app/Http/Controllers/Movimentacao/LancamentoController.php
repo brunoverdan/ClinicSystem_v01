@@ -197,5 +197,46 @@ class LancamentoController extends Controller
     
     }
 
+    public function listaClientePagamento(Request $request)
+    {
+        {
+            // Captura o usuário logado e seu nível
+            $user = auth()->user();
+            $nivel = $user->nivel;
+    
+            // Busca os profissionais apenas se o usuário logado não for de nível 'profissional'
+            $profissionais = [];
+            if ($nivel !== 'profissional') {
+                $profissionais = User::where('nivel', 'profissional')->get();
+            }
+    
+            // Configura a query base para buscar clientes
+            $query = Cliente::query();
+            
+            // Filtro por nome do cliente
+            if ($request->filled('cliente')) {
+                $query->where('nome', 'like', '%' . $request->cliente . '%');
+            }
+    
+            // Filtro por profissional se o usuário logado não for 'profissional'
+            if ($nivel !== 'profissional' && $request->filled('user_id')) {
+                $query->where('user_id', $request->user_id);
+            } 
+            // Se o usuário for 'profissional', filtra pelo seu próprio `user_id`
+            elseif ($nivel === 'profissional') {
+                $query->where('user_id', $user->id);
+            }
+    
+            // Ordenação dos resultados (padrão: por nome)
+            $clientes = $query->orderBy('nome')->get();
+    
+            // Retorna a view com os dados filtrados
+            return view('Movimentacao.Lancamento.filtroClientePagamento', [
+                'clientes' => $clientes,
+                'profissionais' => $profissionais,
+            ]);
+        }
+    }
+
     
 }
