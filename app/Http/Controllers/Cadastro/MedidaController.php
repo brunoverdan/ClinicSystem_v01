@@ -50,18 +50,7 @@ class MedidaController extends Controller
      Medida::create($request->except('medida_id'));
      return redirect()->back()->with('success', 'Arquivo salvo com sucesso!');
 
-    // if ($request->medida_id) {
-    //     // Atualiza a medida existente
-    //     $medida = Medida::findOrFail($request->medida_id);
-    //     $medida->update($request->all());
-    //     return redirect()->back()->with('success', 'Arquivo salvo com sucesso!');
-    //     //return redirect()->route('medidas.index')->with('success', 'Medida atualizada com sucesso!');
-    // } else {
-    //     // Cria uma nova medida
-    //     Medida::create($request->except('medida_id'));
-    //     return redirect()->back()->with('success', 'Arquivo salvo com sucesso!');
-    //     //return redirect()->route('medidas.index')->with('success', 'Medida cadastrada com sucesso!');
-    // }
+    
 }
 
 
@@ -70,27 +59,12 @@ class MedidaController extends Controller
         return view('medidas.show', compact('medida'));
     }
 
-    // public function edit(Medida $medida)
-    // {
-    //     return view('medidas.edit', compact('medida'));
-    // }
-
-    // public function update(Request $request, Medida $medida)
-    // {
-    //     $request->validate([
-    //         'peso' => 'required|integer',
-    //         'data' => 'required|date',
-    //         'cliente_id' => 'required|exists:clientes,id',
-    //     ]);
-
-    //     $medida->update($request->all());
-    //     return redirect()->route('medidas.index')->with('success', 'Medida atualizada com sucesso!');
-    // }
+    
 
     public function destroy(Medida $medida)
     {
         $medida->delete();
         return redirect()->back()->with('danger', 'Arquivo excluida com sucesso!');
-        //return redirect()->route('medidas.index')->with('success', 'Medida removida com sucesso!');
+       
     }
 }

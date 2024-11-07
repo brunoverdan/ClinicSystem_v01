@@ -17,7 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('cliente_id');
             $table->date('data');
-            $table->decimal('desconto', 10, 2)->default(0);
+            $table->decimal('valor', 10, 2)->default(0);
             $table->string('arquivo')->nullable();
             $table->enum('status', ['atendimento', 'pagamento'])->default('atendimento');
             $table->string('observacao');

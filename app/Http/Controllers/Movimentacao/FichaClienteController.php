@@ -7,6 +7,7 @@ use App\Models\Aba;
 use App\Models\Cliente;
 use App\Models\Evolucao;
 use App\Models\File;
+use App\Models\Lancamento;
 use App\Models\Medida;
 use App\Models\Resposta;
 use App\Models\ModeloPergunta;
@@ -134,6 +135,8 @@ class FichaClienteController extends Controller
     }
 
     $servicos = servico::where('user_id', $userId)->get();
+    // Obtenha os lançamentos, ordenados pela data
+    $lancamentos = Lancamento::where('cliente_id', $id)->orderBy('data', 'asc')->get();
 
         return view('Movimentacao.FichaCliente.ficha_cliente', compact(
             'cliente',
@@ -145,6 +148,7 @@ class FichaClienteController extends Controller
             'abas',
             'respostasPorAba',
             'servicos',
+            'lancamentos',
         ));
     }
 }

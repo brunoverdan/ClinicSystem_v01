@@ -76,4 +76,14 @@ Route::get('/files/download/{id}', [FileController::class, 'download'])->name('f
 Route::match(['get', 'post'], 'ficha/pesquisar', [FichaClienteController::class, 'search'])->name('fichas.search');
 
 
+############# Lançamento ##########
+
+Route::post('/lancamentos/{cliente_id}', [LancamentoController::class, 'store'])->name('lancamentos.store');
+Route::get('/lancamentos/relatorio_lancamentos', [LancamentoController::class, 'relatorio'])->name('relatorio.lancamentos');
+
+Route::get('/lancamentos/indexRelatorio', [LancamentoController::class, 'indexRelatorio'])->name('lancamentos.indexRelatorio');
+
+
+
+
 });

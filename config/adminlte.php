@@ -340,6 +340,13 @@ return [
             'icon' => 'fas fa-fw fa-hard-hat',
             //'can' => 'is-super',
         ],
+        [
+            'text' => 'Relatorio',
+            'url' => 'lancamentos/indexRelatorio',
+            'icon_color' => 'yellow',
+            'icon' => 'fas fa-fw fa-file-alt',
+            //'can' => 'is-super',
+        ],
         ['header' => 'Ficha do Cliente'],
         [
             'text' => 'Ficha Cliente',

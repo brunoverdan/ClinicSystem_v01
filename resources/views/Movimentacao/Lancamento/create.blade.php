@@ -28,6 +28,12 @@
             <div class="invalid-feedback">Por favor, selecione um serviço.</div>
         </div>
 
+        <!-- Valor -->
+        <div class="mb-3">
+            <label for="valor" class="form-label">Valor:</label>
+            R$<input type="text" name="valor" id="valor" class="form-control" readonly>
+        </div>
+
         <!-- Data -->
         <div class="mb-3">
             <label for="data" class="form-label">Data:</label>
@@ -35,35 +41,25 @@
             <script>
                 document.addEventListener('DOMContentLoaded', function () {
                     const dataInput = document.getElementById('data');
-                    const today = new Date().toISOString().split('T')[0];  // Formata a data no formato YYYY-MM-DD
-                    dataInput.value = today;  // Define o valor do campo de data como a data atual
+                    const today = new Date().toISOString().split('T')[0];
+                    dataInput.value = today;
                 });
             </script>
             <div class="invalid-feedback">Por favor, insira uma data válida.</div>
         </div>
 
-        <!-- Desconto -->
+        {{--  <!-- Desconto -->
         <div class="mb-3">
             <label for="desconto" class="form-label">Desconto:</label>
             <input type="number" name="desconto" id="desconto" step="0.01" value="0.00" class="form-control">
             <small class="form-text text-muted" id="valor_final">Valor Final: R$ 0,00</small>
-        </div>
-
-        {{--  <!-- Upload do Comprovante -->
-        <div class="mb-3">
-            <label for="arquivo" class="form-label">Comprovante de Pagamento:</label>
-            <input type="file" name="arquivo" id="arquivo" accept=".jpg, .png, .pdf" class="form-control">
-            <div class="form-text">Formatos permitidos: JPG, PNG, PDF.</div>
         </div>  --}}
 
         <!-- Upload do Comprovante -->
         <div class="mb-3">
             <label for="arquivo" class="form-label">Observação</label>
-            <input type="text" name="observacao" class="form-control"  placeholder="Observação">
-            
+            <input type="text" name="observacao" class="form-control" placeholder="Observação">
         </div>
-        
-        
         
         <!-- Status -->
         <input type="hidden" name="status" value="Atendimento">
@@ -77,12 +73,19 @@
     </form>
 </div>
 
-<!-- Script para Calcular o Valor Final -->
+<!-- Script para Calcular o Valor Final e Preencher o Campo Valor -->
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const servicoSelect = document.getElementById('servico_id');
+        const valorInput = document.getElementById('valor');
         const descontoInput = document.getElementById('desconto');
         const valorFinalLabel = document.getElementById('valor_final');
+
+        function updateValor() {
+            const servicoValor = parseFloat(servicoSelect.options[servicoSelect.selectedIndex].getAttribute('data-valor') || 0);
+            valorInput.value = `${servicoValor.toFixed(2).replace('.', ',')}`;
+            updateValorFinal();
+        }
 
         function updateValorFinal() {
             const servicoValor = parseFloat(servicoSelect.options[servicoSelect.selectedIndex].getAttribute('data-valor') || 0);
@@ -92,10 +95,9 @@
             valorFinalLabel.textContent = `Valor Final: R$ ${valorFinal.toFixed(2).replace('.', ',')}`;
         }
 
-        servicoSelect.addEventListener('change', updateValorFinal);
+        servicoSelect.addEventListener('change', updateValor);
         descontoInput.addEventListener('input', updateValorFinal);
 
-        // Bootstrap form validation
         (function () {
             'use strict'
             const forms = document.querySelectorAll('.needs-validation')
@@ -111,4 +113,3 @@
         })()
     });
 </script>
-

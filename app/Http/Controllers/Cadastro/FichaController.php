@@ -26,36 +26,7 @@ class FichaController extends Controller
         return view('Cadastro.Ficha.create', compact('perguntas'));
     }
 
-    // public function edit(Request $request)
-    // {
-    //     $cliente_id = $request->input('cliente_id');
-    //     $aba = $request->input('aba'); // Capturar o valor da aba
-
-    //     $cliente = Cliente::findOrFail($cliente_id);
-
-    //     // Filtrar as respostas com base no cliente e na aba
-    //     $respostas = Resposta::where('cliente_id', $cliente_id)
-    //         ->where('aba', $aba)
-    //         ->get();
-
-    //     if ($respostas->count() > 0) {
-    //         // Obter as perguntas filtradas pelo usuário e pela aba
-    //         $perguntas = ModeloPergunta::with(['respostas' => function ($query) use ($cliente_id) {
-    //             $query->where('cliente_id', $cliente_id);
-    //         }])
-    //             ->where('user_id', auth()->user()->id)
-    //             ->where('aba', $aba)
-    //             ->orderBy('modelo', 'asc')
-    //             ->get();
-    //     } else {
-    //         $perguntas = collect(); // Ou null, dependendo de como você quer tratar
-    //     }
-
-
-    //     //dd($respostas);
-    //     return view('Movimentacao.Ficha.edit', compact('cliente', 'respostas', 'perguntas', 'aba'));
-    // }
-
+   
     public function edit($cliente_id, $aba)
 {
     // Recebe o valor de 'aba' da requisição

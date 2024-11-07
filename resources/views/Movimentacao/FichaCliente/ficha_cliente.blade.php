@@ -47,8 +47,16 @@
                             role="tab" aria-controls="tab7" aria-selected="false">Arquivo</button>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="tab8-tab" data-bs-toggle="tab" data-bs-target="#tab8" type="button"
-                            role="tab" aria-controls="tab8" aria-selected="false">Financeiro</button>
+                        <button class="nav-link {{ request('aba') == 'tab8' ? 'active' : '' }}" 
+                                id="tab8-tab" 
+                                data-bs-toggle="tab" 
+                                data-bs-target="#tab8" 
+                                type="button"
+                                role="tab" 
+                                aria-controls="tab8" 
+                                aria-selected="{{ request('aba') == 'tab8' ? 'true' : 'false' }}">
+                            Financeiro
+                        </button>
                     </li>
                     <li class="nav-item ms-auto">
                         <a href="#" class="nav-link text-muted"><i class="fa fa-gear"></i></a>
@@ -132,9 +140,11 @@
                         @include('Movimentacao.File.index')
 
                     </div>
-                    <div class="tab-pane fade" id="tab8" role="tabpanel" aria-labelledby="tab8-tab">
+                    <div class="tab-pane fade {{ request('aba') == 'tab8' ? 'show active' : '' }}" id="tab8" role="tabpanel" aria-labelledby="tab8-tab">
 
                         @include('Movimentacao.Lancamento.create')
+                        <hr>
+                        @include('Movimentacao.Lancamento.listaLancamentoCliente')
 
                     </div>
                 </div>
