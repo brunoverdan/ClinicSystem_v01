@@ -10,6 +10,7 @@
 <div class="container mt-5">
     <h2 class="text-center mb-4">Novo Lançamento de Serviço</h2>
 
+    <!-- Exibição de mensagens de erro -->
     @if ($errors->any())
         <div class="alert alert-danger">
             <ul class="mb-0">
@@ -20,10 +21,11 @@
         </div>
     @endif
 
+    <!-- Formulário de Lançamento -->
     <form action="{{ route('lancamentos.store', ['cliente_id' => $cliente->id]) }}" method="POST" enctype="multipart/form-data" class="needs-validation" novalidate>
         @csrf
 
-        <!-- Seleção do Serviço -->
+        <!-- Seleção de Serviço -->
         <div class="mb-3">
             <label for="servico_id" class="form-label">Serviço:</label>
             <select name="servico_id" id="servico_id" class="form-select" required>
@@ -37,23 +39,19 @@
             <div class="invalid-feedback">Por favor, selecione um serviço.</div>
         </div>
 
-        <!-- Valor -->
+        <!-- Exibição do Valor -->
         <div class="mb-3">
             <label for="valor" class="form-label">Valor:</label>
-            R$<input type="text" name="valor" id="valor" class="form-control" readonly>
+            <div class="input-group">
+                <span class="input-group-text">R$</span>
+                <input type="text" name="valor" id="valor" class="form-control" readonly>
+            </div>
         </div>
 
-        <!-- Data -->
+        <!-- Seleção de Data -->
         <div class="mb-3">
             <label for="data" class="form-label">Data:</label>
             <input type="date" name="data" id="data" class="form-control" required>
-            <script>
-                document.addEventListener('DOMContentLoaded', function () {
-                    const dataInput = document.getElementById('data');
-                    const today = new Date().toISOString().split('T')[0];
-                    dataInput.value = today;
-                });
-            </script>
             <div class="invalid-feedback">Por favor, insira uma data válida.</div>
         </div>
 
@@ -63,8 +61,7 @@
             <input type="file" name="arquivo" id="arquivo" accept=".jpg, .png, .pdf" class="form-control">
             <div class="form-text">Formatos permitidos: JPG, PNG, PDF.</div>
         </div>
-        
-        
+
         <!-- Observação -->
         <div class="mb-3">
             <label for="observacao" class="form-label">Observação</label>
@@ -126,8 +123,7 @@
 @stop
 
 @section('css')
-    {{-- Add here extra stylesheets --}}
-    {{-- <link rel="stylesheet" href="/css/admin_custom.css"> --}}
+    {{-- Adicione estilos personalizados aqui --}}
 @stop
 
 @section('js')

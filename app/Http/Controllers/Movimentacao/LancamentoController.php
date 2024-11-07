@@ -67,10 +67,20 @@ class LancamentoController extends Controller
         // Crie o lançamento com os dados
         Lancamento::create($data);
         
+       
+       if($request['status'] == "pagamento" ){
+        
+        return "cadastrou pagamento";
+
+       } else {
+
         return redirect()->back()->with([
             'sucesso' => 'Lançamento incluido com sucesso!',
             'aba' => 'tab8' // Adiciona o parâmetro para manter a aba "Financeiro" ativa
         ]);
+
+       }
+        
 
 
     }
@@ -199,6 +209,8 @@ class LancamentoController extends Controller
 
     public function listaClientePagamento(Request $request)
     {
+        
+       
         {
             // Captura o usuário logado e seu nível
             $user = auth()->user();
@@ -215,7 +227,9 @@ class LancamentoController extends Controller
             
             // Filtro por nome do cliente
             if ($request->filled('cliente')) {
+                
                 $query->where('nome', 'like', '%' . $request->cliente . '%');
+                
             }
     
             // Filtro por profissional se o usuário logado não for 'profissional'
@@ -236,6 +250,16 @@ class LancamentoController extends Controller
                 'profissionais' => $profissionais,
             ]);
         }
+    }
+
+    public function cadastroPagamento($id)
+    {
+        
+        //dd($id);
+        $servicos = Servico::all();
+        $cliente = Cliente::findOrFail($id);
+       
+        return view('Movimentacao.Lancamento.pagamento', compact('servicos', 'cliente'));
     }
 
     

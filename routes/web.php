@@ -81,6 +81,7 @@ Route::match(['get', 'post'], 'ficha/pesquisar', [FichaClienteController::class,
 Route::post('/lancamentos/{cliente_id}', [LancamentoController::class, 'store'])->name('lancamentos.store');
 Route::get('/lancamentos/relatorio_lancamentos', [LancamentoController::class, 'relatorio'])->name('relatorio.lancamentos');
 Route::get('/listaClientePagamento', [LancamentoController::class, 'listaClientePagamento'])->name('listaClientePagamento');
+Route::get('/cadastroPagamento/{id}', 'App\Http\Controllers\Movimentacao\LancamentoController@cadastroPagamento')->name('cadastroPagamento');
 
 Route::get('/lancamentos/indexRelatorio', [LancamentoController::class, 'indexRelatorio'])->name('lancamentos.indexRelatorio');
 

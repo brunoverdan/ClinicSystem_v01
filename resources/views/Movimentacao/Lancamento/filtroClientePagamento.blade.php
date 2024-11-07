@@ -1,8 +1,14 @@
-@extends('layouts.app')
+@extends('adminlte::page')
+
+@section('title', 'Adicionar Clínica')
+
+@section('content_header')
+    <h2 class="my-4">Relatório de Clientes</h2>
+@stop
 
 @section('content')
 <div class="container">
-    <h2 class="my-4">Relatório de Clientes</h2>
+    
 
     <!-- Mensagens de erro -->
     @if ($errors->any())
@@ -71,11 +77,11 @@
         <tbody>
             @foreach ($clientes as $cliente)
                 <tr>
-                    <td>{{ $cliente->name }}</td>
+                    <td>{{ $cliente->nome }}</td>
                     <td>{{ $cliente->data }}</td>
-                    <td>{{ $cliente->profissional->name ?? 'N/A' }}</td>
+                    <td>{{ $cliente->user->name ?? 'N/A' }}</td>
                     <td>
-                        <a href="{{ route('clientes.show', $cliente->id) }}" class="btn btn-sm btn-info">Visualizar</a>
+                        <a href="{{ route('cadastroPagamento', $cliente->id) }}" class="btn btn-sm btn-info">Cad.Pagamento</a>
                     </td>
                 </tr>
             @endforeach
@@ -99,4 +105,14 @@
         rows.forEach(row => table.appendChild(row));
     }
 </script>
-@endsection
+@stop
+
+@section('css')
+    {{-- Add here extra stylesheets --}}
+    {{-- <link rel="stylesheet" href="/css/admin_custom.css"> --}}
+@stop
+
+@section('js')
+    <script> console.log("Hi, I'm using the Laravel-AdminLTE package!"); </script>
+@stop
+
