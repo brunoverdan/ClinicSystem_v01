@@ -11,7 +11,8 @@ class ServicoController extends Controller
 {
     public function index()
     {
-        $servicos = servico::all();
+        $userId = auth()->user()->id;
+        $servicos = Servico::where('user_id', $userId)->get();
         return view('Cadastro.Servico.index', compact('servicos'));
     }
 

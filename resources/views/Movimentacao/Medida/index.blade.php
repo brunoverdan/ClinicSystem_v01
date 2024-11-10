@@ -7,7 +7,7 @@
         <input type="hidden" name="medida_id" id="medida_id" value="">
         
         <div class="form-group">
-            <label for="peso">Peso</label>
+            <label for="peso">{{$medida_label->medida_label}}</label>
             <input type="text" name="peso" id="peso" class="form-control" required>
 
         </div>
@@ -30,7 +30,7 @@
         const data = {
             labels: @json($medidas->pluck('data')->toArray()), // Obtém as datas
             datasets: [{
-                label: 'Peso (kg)',
+                label: '{{$medida_label->medida_label}}',
                 data: @json($medidas->pluck('peso')->toArray()), // Obtém os pesos
                 borderColor: 'rgba(75, 192, 192, 1)',
                 backgroundColor: 'rgba(75, 192, 192, 0.2)',
@@ -60,7 +60,7 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Peso</th>
+                <th>{{$medida_label->medida_label}}</th>
                 <th>Data</th>
                 <th>Ações</th>
             </tr>

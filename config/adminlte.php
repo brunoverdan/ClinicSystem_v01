@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'title' => 'Revigora',
+    'title' => 'CliniMaster',
     'title_prefix' => '',
     'title_postfix' => '',
 
@@ -63,7 +63,7 @@ return [
     |
     */
 
-    'logo' => '<b>Revi</b>gora',
+    'logo' => '<b>Clini</b>Master',
     'logo_img' => 'vendor/adminlte/dist/img/logoCliniMaster.png',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
@@ -318,20 +318,6 @@ return [
             'url' => 'cliente',
             'icon' => 'fas fa-fw fa-user',
         ],
-        [
-            'text' => 'Pergunta',
-            'url' => 'modelo_perguntas',
-            'icon_color' => 'green',
-            'icon' => 'fas fa-fw fa-question',
-            'can' => 'is-super',
-        ],
-        [
-            'text' => 'Aba',
-            'url' => 'abas',
-            'icon_color' => 'yellow',
-            'icon' => 'fas fa-fw fa-folder',
-            'can' => 'is-super',
-        ],
         ['header' => 'Financeiro'],
         [
             'text' => 'Serviço',
@@ -360,6 +346,28 @@ return [
             'url' => 'ficha_cliente',
             'icon_color' => 'green',
             'icon' => 'fas fa-fw fa-file-alt',
+        ],
+        ['header' => 'Configurações'],
+        [
+            'text' => 'Pergunta',
+            'url' => 'modelo_perguntas',
+            'icon_color' => 'green',
+            'icon' => 'fas fa-fw fa-question',
+            'can' => 'is-super',
+        ],
+        [
+            'text' => 'Aba',
+            'url' => 'abas',
+            'icon_color' => 'yellow',
+            'icon' => 'fas fa-fw fa-folder',
+            'can' => 'is-super',
+        ],
+        [
+            'text' => 'Medida Label',
+            'url' => 'medida_labels',
+            'icon_color' => 'yellow',
+            'icon' => 'fas fa-fw fa-ruler',
+            'can' => 'is-super',
         ],
         
         

@@ -11,15 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('clinicas', function (Blueprint $table) {
+        Schema::create('medida_labels', function (Blueprint $table) {
             $table->id();
-            $table->string('nome')->nullable();
-            $table->string('endereco')->nullable();
-            $table->string('telefone')->nullable();
-            $table->string('email')->nullable();
-            $table->string('cidade')->nullable();
-            $table->string('uf')->nullable();
-            $table->string('logo')->nullable();
+            $table->string('medida_label');
+            $table->unsignedBigInteger('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users');
             $table->softDeletes();
             $table->timestamps();
         });
@@ -30,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('clinicas');
+        Schema::dropIfExists('medida_labels');
     }
 };

@@ -9,6 +9,7 @@ use App\Http\Controllers\Cadastro\MedidaController;
 use App\Http\Controllers\Cadastro\TermsController;
 use App\Http\Controllers\Cadastro\AbaController;
 use App\Http\Controllers\Cadastro\ServicoController;
+use App\Http\Controllers\Cadastro\MedidaLabelController;
 use App\Http\Controllers\Movimentacao\FichaClienteController;
 use App\Http\Controllers\Movimentacao\FileController;
 use App\Http\Controllers\Movimentacao\LancamentoController;
@@ -46,6 +47,7 @@ Route::resource('medidas', MedidaController::class);
 Route::resource('abas', AbaController::class);
 Route::resource('servicos', ServicoController::class);
 Route::resource('lancamentos', LancamentoController::class);
+Route::resource('medida_labels', MedidaLabelController::class);
 
 ############# MOVIMENTAÇÃO ################
 

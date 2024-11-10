@@ -3,7 +3,7 @@
 @section('title', 'Editar Cliente')
 
 @section('content_header')
-    <h1>Profissional Responsavel <label for="profissional">{{$cliente->user->name}}</label></h1>
+    <h1>Editar Cliente: <label for="profissional">{{ $cliente->user->name }}</label></h1>
 @stop
 
 @section('content')
@@ -23,9 +23,8 @@
         @method('PUT')
         <input type="hidden" name="user_id" value="{{ $cliente->user_id }}" required>
         <div class="row">
+            <!-- Coluna Esquerda -->
             <div class="col-md-6">
-                
-                
                 <div class="form-group">
                     <label for="nome">Nome:</label>
                     <input type="text" class="form-control" name="nome" value="{{ $cliente->nome }}" required>
@@ -47,9 +46,23 @@
                         <option value="Nao_Informar" {{ $cliente->sexo == 'Nao_Informar' ? 'selected' : '' }}>Não Informar</option>
                     </select>
                 </div>
-                
+                <div class="form-group">
+                    <label for="EstadoCivil">Estado Civil:</label>
+                    <select class="form-control" name="EstadoCivil">
+                        <option value="">Selecione</option>
+                        <option value="Solteiro" {{ $cliente->EstadoCivil == 'Solteiro' ? 'selected' : '' }}>Solteiro</option>
+                        <option value="Casado" {{ $cliente->EstadoCivil == 'Casado' ? 'selected' : '' }}>Casado</option>
+                        <option value="Divorciado" {{ $cliente->EstadoCivil == 'Divorciado' ? 'selected' : '' }}>Divorciado</option>
+                        <option value="Viúvo" {{ $cliente->EstadoCivil == 'Viúvo' ? 'selected' : '' }}>Viúvo</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="CPF">CPF:</label>
+                    <input type="text" class="form-control" name="CPF" value="{{ $cliente->CPF }}">
+                </div>
             </div>
 
+            <!-- Coluna Direita -->
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="endereco">Endereço:</label>
@@ -61,33 +74,54 @@
                 </div>
                 <div class="form-group">
                     <label for="uf">UF:</label>
-                    <input type="text" class="form-control" name="uf" maxlength="2" value="{{ $cliente->uf }}">
+                    <input type="text" class="form-control" name="uf" value="{{ $cliente->uf }}" maxlength="2">
                 </div>
                 <div class="form-group">
                     <label for="data_nascimento">Data de Nascimento:</label>
                     <input type="date" class="form-control" name="data_nascimento" value="{{ $cliente->data_nascimento }}">
                 </div>
-                
+                <div class="form-group">
+                    <label for="Filhos">Filhos:</label>
+                    <input type="number" class="form-control" name="Filhos" value="{{ $cliente->Filhos }}" min="0">
+                </div>
+                <div class="form-group">
+                    <label for="Profissao">Profissão:</label>
+                    <input type="text" class="form-control" name="Profissao" value="{{ $cliente->Profissao }}">
+                </div>
             </div>
+
+            <!-- Responsável e Contato Responsável -->
             <div class="col-md-12">
                 <div class="form-group">
-                    <label for="observacao">Observacao:</label>
-                    <textarea type="text" class="form-control" name="observacao" rows="5">{{ $cliente->observacao }}</textarea>
+                    <label for="Responsavel">Responsável:</label>
+                    <input type="text" class="form-control" name="Responsavel" value="{{ $cliente->Responsavel }}">
+                </div>
+                <div class="form-group">
+                    <label for="ContatoResponsavel">Contato do Responsável:</label>
+                    <input type="text" class="form-control" name="ContatoResponsavel" value="{{ $cliente->ContatoResponsavel }}">
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="observacao">Observações:</label>
+                    <textarea class="form-control" name="observacao" rows="5">{{ $cliente->observacao }}</textarea>
                 </div>
             </div>
         </div>
 
-        <button type="submit" class="btn btn-success">Salvar</button>
-        <a href="{{ route('clientes.index') }}" class="btn btn-secondary">Voltar</a>
+        <div class="form-group mt-3">
+            <button type="submit" class="btn btn-success">Atualizar</button>
+            <a href="{{ route('clientes.index') }}" class="btn btn-secondary">Voltar</a>
+        </div>
     </form>
 </div>
 @stop
 
 @section('css')
-    {{-- Add here extra stylesheets --}}
-    {{-- <link rel="stylesheet" href="/css/admin_custom.css"> --}}
+    {{-- Adicionar estilos personalizados aqui, se necessário --}}
 @stop
 
 @section('js')
-    <script> console.log("Hi, I'm using the Laravel-AdminLTE package!"); </script>
+    <script> console.log("Cliente atualizado com sucesso!"); </script>
 @stop

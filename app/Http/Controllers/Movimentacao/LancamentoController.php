@@ -20,7 +20,8 @@ class LancamentoController extends Controller
 
     public function create()
     {
-        $servicos = Servico::all();
+        $userId = auth()->user()->id;
+        $servicos = Servico::where('user_id', $userId)->get();
         $clientes = User::where('nivel', 'cliente')->get();
         return view('Movimentacao.Lancamento.create', compact('servicos', 'clientes'));
     }
@@ -87,7 +88,8 @@ class LancamentoController extends Controller
 
     public function edit(Lancamento $lancamento)
     {
-        $servicos = Servico::all();
+        $userId = auth()->user()->id;
+        $servicos = Servico::where('user_id', $userId)->get();
         $clientes = User::where('nivel', 'cliente')->get();
         return view('Movimentacao.Lancamento.edit', compact('lancamento', 'servicos', 'clientes'));
     }
@@ -256,10 +258,17 @@ class LancamentoController extends Controller
     {
         
         //dd($id);
-        $servicos = Servico::all();
+        
         $cliente = Cliente::findOrFail($id);
+        $servicos = Servico::where('user_id', $cliente->user_id)->get();
+        $lancamentos = Lancamento::where('cliente_id', $id)
+        ->select('data', 'servico_id', 'valor', 'observacao', 'arquivo')
+        ->with('servico') // Assumindo que há uma relação `servico` para trazer o nome do serviço
+        ->get();
+
+        
        
-        return view('Movimentacao.Lancamento.pagamento', compact('servicos', 'cliente'));
+        return view('Movimentacao.Lancamento.pagamento', compact('servicos', 'cliente', 'lancamentos'));
     }
 
     

@@ -8,10 +8,13 @@
 
 @section('content')
 
-<div class="bg-container text-center">
-    <img src="{{ asset('fundoRevegora.jpg') }}" alt="Imagem de Fundo" class="img-fluid">
-    <p class="text-white mt-3">Seja bem vindo ao sistema Gerenciamento de Cliente</p>
+<div class="d-flex justify-content-center align-items-center vh-100  mt-10">
+    <div class="bg-container text-center  mt-10">
+        <img src="{{ asset('fundoRevegora.jpg') }}" alt="Imagem de Fundo" class="img-fluid">
+        <p class="text-black mt-3">Seja bem-vindo ao sistema Gerenciamento de Cliente</p>
+    </div>
 </div>
+
 @stop
 
 @section('css')

@@ -30,13 +30,7 @@ class ClienteController extends Controller
         
         $request->validate([
             'nome' => 'required|string|max:255',
-            'email' => 'nullable|email',
-            'telefone' => 'nullable|string',
-            'cidade' => 'nullable|string',
-            'uf' => 'nullable|string|max:2',
-            'sexo' => 'required|string|in:Masculino,Feminino,Nao_Informar',
-            'data_nascimento' => 'nullable|date',
-        ]);
+         ]);
 
         
 
@@ -74,13 +68,7 @@ class ClienteController extends Controller
         
         $request->validate([
             'nome' => 'required|string|max:255',
-            'email' => 'nullable|email',
-            'telefone' => 'nullable|string',
-            'cidade' => 'nullable|string',
-            'uf' => 'nullable|string|max:2',
-            'sexo' => 'required|string|in:Masculino,Feminino,Nao_Informar',
-            'data_nascimento' => 'nullable|date',
-        ]);
+           ]);
 
         
         if( $userId = auth()->user()->nivel !== 'profissional')

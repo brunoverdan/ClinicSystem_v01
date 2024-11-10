@@ -9,6 +9,7 @@ use App\Models\Evolucao;
 use App\Models\File;
 use App\Models\Lancamento;
 use App\Models\Medida;
+use App\Models\MedidaLabel;
 use App\Models\Resposta;
 use App\Models\ModeloPergunta;
 use App\Models\servico;
@@ -97,7 +98,8 @@ class FichaClienteController extends Controller
         $evolucoes = Evolucao::where('cliente_id', $id)->get();
         $respostas = Resposta::where('cliente_id', $id)->get();
         
-
+        
+            // Filtro por Usuario
 
         if ($userId = auth()->user()->nivel !== 'profissional') {
             $userId = User::where('nivel', 'profissional')->first();
@@ -137,7 +139,10 @@ class FichaClienteController extends Controller
     $servicos = servico::where('user_id', $userId)->get();
     // Obtenha os lançamentos, ordenados pela data
     $lancamentos = Lancamento::where('cliente_id', $id)->orderBy('data', 'asc')->get();
+    $medida_label = MedidaLabel::where('user_id', $userId)->firstOrFail();
 
+
+   
         return view('Movimentacao.FichaCliente.ficha_cliente', compact(
             'cliente',
             'files',
@@ -149,6 +154,7 @@ class FichaClienteController extends Controller
             'respostasPorAba',
             'servicos',
             'lancamentos',
+            'medida_label',
         ));
     }
 }

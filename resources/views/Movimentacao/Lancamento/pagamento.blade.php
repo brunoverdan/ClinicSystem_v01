@@ -80,6 +80,41 @@
     </form>
 </div>
 
+
+<!-- Relatorio dos lançamentos do pagamento  -->
+<div class="container mt-5">
+    <h1>Relatório de Lançamentos</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Data</th>
+                <th>Serviço</th>
+                <th>Valor</th>
+                <th>Observação</th>
+                <th>Arquivo</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($lancamentos as $lancamento)
+                <tr>
+                    <td>{{ \Carbon\Carbon::parse($lancamento->data)->format('d/m/Y') }}</td>
+                    <td>{{ $lancamento->servico->nome ?? 'N/A' }}</td> <!-- Exibe o nome do serviço -->
+                    <td>R$ {{ number_format($lancamento->valor, 2, ',', '.') }}</td>
+                    <td>{{ $lancamento->observacao }}</td>
+                    <td>
+                        @if($lancamento->arquivo)
+                            <a href="{{ asset('storage/' . $lancamento->arquivo) }}" target="_blank">Ver Arquivo</a>
+                        @else
+                            N/A
+                        @endif
+                    </td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
+</div>
+
 <!-- Script para Calcular o Valor Final e Preencher o Campo Valor -->
 <script>
     document.addEventListener('DOMContentLoaded', function () {
