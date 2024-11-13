@@ -30,7 +30,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="nome_fantasia">Nome Fantasia:</label>
+                            <label for="nome_fantasia">*Nome Fantasia:</label>
                             <input type="text" class="form-control" name="nome_fantasia">
                         </div>
                         <div class="form-group">
@@ -44,11 +44,11 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="telefone">Telefone:</label>
+                            <label for="telefone">*Telefone:</label>
                             <input type="text" class="form-control" name="telefone">
                         </div>
                         <div class="form-group">
-                            <label for="cidade">Cidade:</label>
+                            <label for="cidade">*Cidade:</label>
                             <input type="text" class="form-control" name="cidade">
                         </div>
                         <div class="form-group">
@@ -56,7 +56,7 @@
                             <input type="text" class="form-control" name="endereco">
                         </div>
                         <div class="form-group">
-                            <label for="uf">UF:</label>
+                            <label for="uf">*UF:</label>
                             <input type="text" class="form-control" name="uf" maxlength="2">
                         </div>
                     </div>

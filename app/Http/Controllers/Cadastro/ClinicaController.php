@@ -25,7 +25,7 @@ class ClinicaController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nome' => 'required|string|max:255',
+            'nome_fantasia' => 'required|string|max:255',
             'email' => 'nullable|email',
             'telefone' => 'nullable|string',
             'cidade' => 'nullable|string',
@@ -47,7 +47,7 @@ class ClinicaController extends Controller
     public function update(Request $request, Clinica $clinica)
     {
         $request->validate([
-            'nome' => 'required|string|max:255',
+            'nome_fantasia' => 'required|string|max:255',
             'email' => 'nullable|email',
             'telefone' => 'nullable|string',
             'cidade' => 'nullable|string',
