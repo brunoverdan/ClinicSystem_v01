@@ -9,10 +9,12 @@ use App\Models\Evolucao;
 use Illuminate\Http\Request;
 use App\Models\Ficha;
 use App\Models\File;
+use App\Models\Lancamento;
 use App\Models\Medida;
+use App\Models\MedidaLabel;
 use App\Models\ModeloPergunta;
 use App\Models\Resposta;
-
+use App\Models\servico;
 
 class FichaController extends Controller
 {
@@ -51,7 +53,7 @@ class FichaController extends Controller
 
     // Buscar o cliente pelo ID
     $cliente = Cliente::findOrFail($cliente_id);
-
+    
     //dd($respostas);
 
     return view('Movimentacao.Ficha.edit', compact('cliente', 'perguntas', 'respostas', 'aba'));
@@ -129,8 +131,13 @@ class FichaController extends Controller
                 ->get();
         }
 
+        
+        $medida_label = MedidaLabel::where('user_id', $usuarioId)->firstOrFail();
+        $servicos = servico::where('user_id', $usuarioId)->get();
+        $lancamentos = Lancamento::where('cliente_id', $cliente_id)->orderBy('data', 'asc')->get();
+ 
 
-        return view('Movimentacao.FichaCliente.ficha_cliente', compact('cliente', 'files', 'evolucoes', 'perguntas', 'respostas', 'medidas', 'abas', 'respostasPorAba'));
+        return view('Movimentacao.FichaCliente.ficha_cliente', compact('cliente', 'files', 'evolucoes', 'perguntas', 'respostas', 'medidas', 'abas', 'respostasPorAba','medida_label', 'servicos','lancamentos'));
 
 
         // return redirect()->back()->with('success', 'Perguntas gravadas com sucesso!');
@@ -199,7 +206,11 @@ class FichaController extends Controller
             ->get();
     }
 
-    return view('Movimentacao.FichaCliente.ficha_cliente', compact('cliente', 'files', 'evolucoes', 'perguntas', 'respostas', 'medidas', 'abas', 'respostasPorAba'));
+    $medida_label = MedidaLabel::where('user_id', $usuarioId)->firstOrFail();
+    $servicos = servico::where('user_id', $usuarioId)->get();
+    $lancamentos = Lancamento::where('cliente_id', $cliente_id)->orderBy('data', 'asc')->get();
+
+    return view('Movimentacao.FichaCliente.ficha_cliente', compact('cliente', 'files', 'evolucoes', 'perguntas', 'respostas', 'medidas', 'abas', 'respostasPorAba','medida_label', 'servicos','lancamentos'));
 }
 
 }

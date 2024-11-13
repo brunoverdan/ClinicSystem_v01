@@ -13,13 +13,13 @@ class AbaController extends Controller
 {
     public function index()
     {
-        // Verificar se o usuário logado é de nível 'administrativo'
-        if (auth()->user()->nivel == 'administrativo') {
-            // Se for administrativo, buscar os usuários com nível 'profissional'
+        // Verificar se o usuário logado é de nível 'super'
+        if (auth()->user()->nivel == 'super') {
+            // Se for super, buscar os usuários com nível 'profissional'
             $abas = Aba::all();
             
         } else {
-            // Se o usuário não for administrativo, não passamos nada para 'profissionais'
+            // Se o usuário não for super, não passamos nada para 'profissionais'
             $usuarioId = auth()->user()->id;
             $abas = Aba::where('user_id', $usuarioId)
             ->orderBy('aba', 'asc')
@@ -34,8 +34,8 @@ class AbaController extends Controller
         // Verifica o nível do usuário logado
         $userLevel = Auth::user()->nivel;
 
-        // Obtém usuários profissionais se o nível for administrativo
-        $users = ($userLevel === 'administrativo') ? User::where('nivel', 'profissional')->get() : [];
+        // Obtém usuários profissionais se o nível for super
+        $users = ($userLevel === 'super') ? User::where('nivel', 'profissional')->get() : [];
 
         return view('Cadastro.Aba.create', compact('users'));
     }
@@ -51,7 +51,7 @@ class AbaController extends Controller
         // Cria a aba
         $aba = new Aba();
         $aba->aba = $request->aba;
-        $aba->user_id = (Auth::user()->nivel === 'administrativo') ? $request->user_id : Auth::id();
+        $aba->user_id = (Auth::user()->nivel === 'super') ? $request->user_id : Auth::id();
         $aba->save();
 
         return redirect()->route('abas.index')->with('success', 'Aba criada com sucesso!');
@@ -60,7 +60,7 @@ class AbaController extends Controller
     public function edit(Aba $aba)
     {
         $userLevel = Auth::user()->nivel;
-        $users = ($userLevel === 'administrativo') ? User::where('nivel', 'profissional')->get() : [];
+        $users = ($userLevel === 'super') ? User::where('nivel', 'profissional')->get() : [];
 
         return view('Cadastro.Aba.edit', compact('aba', 'users'));
     }
@@ -73,7 +73,7 @@ class AbaController extends Controller
         ]);
 
         $aba->aba = $request->aba;
-        $aba->user_id = (Auth::user()->nivel === 'administrativo') ? $request->user_id : Auth::id();
+        $aba->user_id = (Auth::user()->nivel === 'super') ? $request->user_id : Auth::id();
         $aba->save();
 
         return redirect()->route('abas.index')->with('success', 'Aba atualizada com sucesso!');

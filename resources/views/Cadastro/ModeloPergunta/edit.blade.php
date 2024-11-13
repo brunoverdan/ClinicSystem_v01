@@ -14,7 +14,7 @@
             @csrf
             @method('PUT')
 
-            @if (auth()->user()->nivel == 'administrativo')
+            @if (auth()->user()->nivel == 'super')
                 <div class="form-group">
                     <label for="user_id">Usuário Profissional</label>
                     <select name="user_id" class="form-control" required>
@@ -40,22 +40,16 @@
             <div class="form-group">
                 <label for="modelo">Modelo</label>
                 <select name="modelo" class="form-control" required>
-                    <option value="modelo_01" {{ $modeloPergunta->modelo == 'modelo_01' ? 'selected' : '' }}>Modelo 01
-                    </option>
-                    <option value="modelo_02" {{ $modeloPergunta->modelo == 'modelo_02' ? 'selected' : '' }}>Modelo 02
-                    </option>
-                    <option value="modelo_03" {{ $modeloPergunta->modelo == 'modelo_03' ? 'selected' : '' }}>Modelo 03
-                    </option>
+                    <option value="modelo_01" {{ $modeloPergunta->modelo == 'modelo_01' ? 'selected' : '' }}> Modelo 01 </option>
+                    <option value="modelo_02" {{ $modeloPergunta->modelo == 'modelo_02' ? 'selected' : '' }}> Modelo 02 </option>
+                    <option value="modelo_03" {{ $modeloPergunta->modelo == 'modelo_03' ? 'selected' : '' }} >Modelo 03 </option>
+                    <option value="modelo_04" {{ $modeloPergunta->modelo == 'modelo_04' ? 'selected' : '' }}> Modelo 04 </option>
+                    <option value="modelo_05" {{ $modeloPergunta->modelo == 'modelo_05' ? 'selected' : '' }}> Modelo 05 </option>
+                    <option value="modelo_06" {{ $modeloPergunta->modelo == 'modelo_06' ? 'selected' : '' }} >Modelo 06 </option>
+                    <option value="modelo_07" {{ $modeloPergunta->modelo == 'modelo_07' ? 'selected' : '' }}> Modelo 07 </option>
+                    
                 </select>
             </div>
-
-            {{--  <div class="form-group">
-                <label for="aba">aba</label>
-                <select name="aba" class="form-control" required>
-                    <option value="Cervical" {{ $modeloPergunta->aba == 'Cervical' ? 'selected' : '' }}>Cervical</option>
-                    <option value="Lombar" {{ $modeloPergunta->aba == 'Lombar' ? 'selected' : '' }}>Lombar</option>
-                </select>
-            </div>  --}}
 
             <div class="form-group">
                 <label for="aba">aba</label>
@@ -70,13 +64,14 @@
             <!-- Descrição dos Modelos -->
             <div class="mt-4">
                 <h4>Descrição dos Modelos:</h4>
+            
                 <div class="card mb-3">
                     <div class="card-body">
                         <h5 class="card-title">Modelo 01</h5>
                         <p class="card-text">Este modelo contém apenas a <strong>pergunta simples</strong>.</p>
                     </div>
                 </div>
-
+            
                 <div class="card mb-3">
                     <div class="card-body">
                         <h5 class="card-title">Modelo 02</h5>
@@ -84,15 +79,44 @@
                             <strong>Não</strong> e uma pergunta adicional como <strong>Quais</strong>.</p>
                     </div>
                 </div>
-
-                <div class="card">
+            
+                <div class="card mb-3">
                     <div class="card-body">
                         <h5 class="card-title">Modelo 03</h5>
-                        <p class="card-text">Este modelo contém alternativas com sinais <strong>(+)</strong>,
-                            <strong>(-)</strong>, e direções como <strong>Esquerda</strong> ou <strong>Direita</strong>.</p>
+                        <p class="card-text">Este modelo contém alternativas com sinais <strong>(+)</strong>, <strong>(-)</strong>,
+                            e direções como <strong>Esquerda</strong> ou <strong>Direita</strong>.</p>
+                    </div>
+                </div>
+            
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Modelo 04</h5>
+                        <p class="card-text">Este modelo contém uma resposta do tipo <strong>texto</strong>, onde o usuário pode especificar uma descrição detalhada.</p>
+                    </div>
+                </div>
+            
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Modelo 05</h5>
+                        <p class="card-text">Este modelo possui campos de texto para que o usuário informe <strong>Há quanto tempo</strong> e uma descrição adicional com o campo <strong>Especifique</strong>.</p>
+                    </div>
+                </div>
+            
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Modelo 06</h5>
+                        <p class="card-text">Este modelo inclui uma pergunta com opções <strong>Sim</strong> ou <strong>Não</strong> e um campo de texto adicional para <strong>Especificar</strong> caso necessário.</p>
+                    </div>
+                </div>
+            
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Modelo 07</h5>
+                        <p class="card-text">Este modelo contém uma pergunta com opções <strong>Sim</strong> ou <strong>Não</strong> apenas, sem necessidade de especificação adicional.</p>
                     </div>
                 </div>
             </div>
+            
 
             <button type="submit" class="btn btn-primary">Atualizar</button>
         </form>

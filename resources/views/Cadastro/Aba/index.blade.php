@@ -8,7 +8,7 @@
 
 @section('content')
 <div class="container mt-4">
-    @can('is-admin')
+    @can('is-super')
     <a href="{{ route('abas.create') }}" class="btn btn-primary mb-3">Criar Aba</a>
     @endcan
     @if(session('success'))

@@ -15,21 +15,26 @@ class ModeloPerguntaController extends Controller
 {
     public function index()
 {
-    $usuarioId = auth()->user()->id; // ou use qualquer método que você tenha para obter o ID
+    // $usuarioId = auth()->user()->id; // ou use qualquer método que você tenha para obter o ID
 
-    // Filtrando pelo ID do usuário
-    $modeloPerguntas = ModeloPergunta::where('user_id', $usuarioId)
-        ->orderBy('modelo', 'asc')
-        ->get();
+    // // Filtrando pelo ID do usuário
+    // $modeloPerguntas = ModeloPergunta::where('user_id', $usuarioId)
+    //     ->orderBy('modelo', 'asc')
+    //     ->get();
     
-    // Verificar se o usuário logado é de nível 'administrativo'
-    if (auth()->user()->nivel == 'administrativo') {
-        // Se for administrativo, buscar os usuários com nível 'profissional'
-        $profissionais = User::where('nivel', 'profissional')->get();
-    } else {
-        // Se o usuário não for administrativo, não passamos nada para 'profissionais'
-        $profissionais = null;
-    }
+    // // Verificar se o usuário logado é de nível 'super'
+    // if (auth()->user()->nivel == 'super') {
+    //     // Se for super, buscar os usuários com nível 'profissional'
+    //     $profissionais = User::where('nivel', 'profissional')->get();
+    // } else {
+    //     // Se o usuário não for super, não passamos nada para 'profissionais'
+    //     $profissionais = null;
+    // }
+
+    $modeloPerguntas = ModeloPergunta::orderBy('modelo', 'asc')
+        ->get();
+
+    $profissionais = null;
 
     // Passar as variáveis para a view
     return view('Cadastro.ModeloPergunta.index', compact('modeloPerguntas', 'profissionais'));
@@ -37,14 +42,14 @@ class ModeloPerguntaController extends Controller
 
 public function create()
 {
-    // Verificar se o usuário logado é de nível 'administrativo'
-    if (auth()->user()->nivel == 'administrativo') {
-        // Se for administrativo, buscar os usuários com nível 'profissional'
+    // Verificar se o usuário logado é de nível 'super'
+    if (auth()->user()->nivel == 'super') {
+        // Se for super, buscar os usuários com nível 'profissional'
         $profissionais = User::where('nivel', 'profissional')->get();
         $abas = Aba::orderBy('aba', 'asc')
             ->get();
     } else {
-        // Se o usuário não for administrativo, não passamos nada para 'profissionais'
+        // Se o usuário não for super, não passamos nada para 'profissionais'
         $profissionais = null;
         $usuarioId = auth()->user()->id;
         $abas = Aba::where('user_id', $usuarioId)
@@ -61,7 +66,7 @@ public function create()
     {
         $request->validate([
             'pergunta' => 'required|string|max:255',
-            'modelo' => 'required|in:modelo_01,modelo_02,modelo_03',
+            'modelo' => 'required|in:modelo_01,modelo_02,modelo_03,modelo_04,modelo_05,modelo_06,modelo_07',
         ]);
 
         ModeloPergunta::create($request->all());
@@ -70,8 +75,8 @@ public function create()
 
     public function edit(ModeloPergunta $modeloPergunta)
     {
-        // Apenas para usuários administrativos, buscar profissionais
-        if (auth()->user()->nivel == 'administrativo') {
+        // Apenas para usuários supers, buscar profissionais
+        if (auth()->user()->nivel == 'super') {
             $profissionais = User::where('nivel', 'profissional')->get();
             $abas = Aba::orderBy('aba', 'asc')
                 ->get();
@@ -92,7 +97,7 @@ public function create()
        
         $request->validate([
             'pergunta' => 'required|string|max:255',
-            'modelo' => 'required|in:modelo_01,modelo_02,,modelo_03',
+            'modelo' => 'required|in:modelo_01,modelo_02,modelo_03,modelo_04,modelo_05,modelo_06,modelo_07',
             'aba' => 'required|string',
             'user_id' => 'required|exists:users,id', // Valida o user_id
         ]);

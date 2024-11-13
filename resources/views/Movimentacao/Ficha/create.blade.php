@@ -126,6 +126,126 @@
                                 </div>
                             </div>
                         @endif
+                        <!-- Modelo 04 -->
+
+                        @if ($pergunta->modelo == 'modelo_04')
+                            <div class="mb-2">
+                                <label class="form-label d-block">Resposta:</label>
+                                <div class="form-check form-check-inline">
+                                    <input type="radio" name="perguntas[{{ $pergunta->id }}][resposta]" value="ata" class="form-check-input">
+                                    <label class="form-check-label">Ata</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input type="radio" name="perguntas[{{ $pergunta->id }}][resposta]" value="baixa" class="form-check-input">
+                                    <label class="form-check-label">Baixa</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input type="radio" name="perguntas[{{ $pergunta->id }}][resposta]" value="normal" class="form-check-input">
+                                    <label class="form-check-label">Normal</label>
+                                </div>
+                                <input type="hidden" name="perguntas[{{ $pergunta->id }}][tipo_modelo]" value="modelo_04">
+                                <input type="hidden" name="perguntas[{{ $pergunta->id }}][pergunta_id]" value="{{ $pergunta->id }}">
+                                <input type="hidden" name="perguntas[{{ $pergunta->id }}][pergunta]" value="{{ $pergunta->pergunta }}">
+                                <input type="hidden" name="perguntas[{{ $pergunta->id }}][aba]" value="{{ $pergunta->aba }}">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="medicacao" class="form-label">Medicação:</label>
+                                <input type="text" name="perguntas[{{ $pergunta->id }}][medicacao]" class="form-control"
+                                    placeholder="Especifique a medicação">
+                                <input type="hidden" name="perguntas[{{ $pergunta->id }}][tipo_modelo]" value="modelo_04">
+                                <input type="hidden" name="perguntas[{{ $pergunta->id }}][pergunta_id]" value="{{ $pergunta->id }}">
+                                <input type="hidden" name="perguntas[{{ $pergunta->id }}][pergunta]" value="{{ $pergunta->pergunta }}">
+                                <input type="hidden" name="perguntas[{{ $pergunta->id }}][aba]" value="{{ $pergunta->aba }}">
+                            </div>
+                        @endif
+
+
+                        <!-- Fim Modelo 04 -->
+
+                        <!-- Modelo 05 -->
+
+                        @if ($pergunta->modelo == 'modelo_05')
+                        <div class="form-group mb-2">
+                            <label for="ha_quanto_tempo" class="form-label">Há quanto tempo:</label>
+                            <input type="text" name="perguntas[{{ $pergunta->id }}][ha_quanto_tempo]" class="form-control"
+                                placeholder="Especifique há quanto tempo">
+                            <input type="hidden" name="perguntas[{{ $pergunta->id }}][tipo_modelo]" value="modelo_05">
+                            <input type="hidden" name="perguntas[{{ $pergunta->id }}][pergunta_id]" value="{{ $pergunta->id }}">
+                            <input type="hidden" name="perguntas[{{ $pergunta->id }}][pergunta]" value="{{ $pergunta->pergunta }}">
+                            <input type="hidden" name="perguntas[{{ $pergunta->id }}][aba]" value="{{ $pergunta->aba }}">
+                        </div>
+                    
+                        <div class="form-group mb-2">
+                            <label for="especifique" class="form-label">Especifique:</label>
+                            <input type="text" name="perguntas[{{ $pergunta->id }}][especifique]" class="form-control"
+                                placeholder="Especifique se necessário">
+                            <input type="hidden" name="perguntas[{{ $pergunta->id }}][tipo_modelo]" value="modelo_05">
+                            <input type="hidden" name="perguntas[{{ $pergunta->id }}][pergunta_id]" value="{{ $pergunta->id }}">
+                            <input type="hidden" name="perguntas[{{ $pergunta->id }}][pergunta]" value="{{ $pergunta->pergunta }}">
+                            <input type="hidden" name="perguntas[{{ $pergunta->id }}][aba]" value="{{ $pergunta->aba }}">
+                        </div>
+                    @endif
+                    
+
+                        <!-- Fim Modelo 05 -->
+
+                        <!-- Modelo 06 -->
+
+                        @if ($pergunta->modelo == 'modelo_06')
+                            <div class="form-group mb-2">
+                                <label class="form-label d-block">Resposta:</label>
+                                <div class="form-check form-check-inline">
+                                    <input type="radio" name="perguntas[{{ $pergunta->id }}][resposta]" value="sim" class="form-check-input">
+                                    <label class="form-check-label">Sim</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input type="radio" name="perguntas[{{ $pergunta->id }}][resposta]" value="nao" class="form-check-input">
+                                    <label class="form-check-label">Não</label>
+                                </div>
+                                <input type="hidden" name="perguntas[{{ $pergunta->id }}][tipo_modelo]" value="modelo_06">
+                                <input type="hidden" name="perguntas[{{ $pergunta->id }}][pergunta_id]" value="{{ $pergunta->id }}">
+                                <input type="hidden" name="perguntas[{{ $pergunta->id }}][pergunta]" value="{{ $pergunta->pergunta }}">
+                                <input type="hidden" name="perguntas[{{ $pergunta->id }}][aba]" value="{{ $pergunta->aba }}">
+                            </div>
+
+                            <div class="form-group mb-2">
+                                <label for="especifique" class="form-label">Especifique:</label>
+                                <input type="text" name="perguntas[{{ $pergunta->id }}][especifique]" class="form-control"
+                                    placeholder="Especifique se necessário">
+                                <input type="hidden" name="perguntas[{{ $pergunta->id }}][tipo_modelo]" value="modelo_06">
+                                <input type="hidden" name="perguntas[{{ $pergunta->id }}][pergunta_id]" value="{{ $pergunta->id }}">
+                                <input type="hidden" name="perguntas[{{ $pergunta->id }}][pergunta]" value="{{ $pergunta->pergunta }}">
+                                <input type="hidden" name="perguntas[{{ $pergunta->id }}][aba]" value="{{ $pergunta->aba }}">
+                            </div>
+                        @endif
+
+
+                        <!-- Fim Modelo 06 -->
+
+                        <!-- Modelo 07 -->
+
+                        @if ($pergunta->modelo == 'modelo_07')
+                            <div class="form-group mb-2">
+                                <label class="form-label d-block">Resposta:</label>
+                                <div class="form-check form-check-inline">
+                                    <input type="radio" name="perguntas[{{ $pergunta->id }}][resposta]" value="sim" class="form-check-input">
+                                    <label class="form-check-label">Sim</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input type="radio" name="perguntas[{{ $pergunta->id }}][resposta]" value="nao" class="form-check-input">
+                                    <label class="form-check-label">Não</label>
+                                </div>
+                                <input type="hidden" name="perguntas[{{ $pergunta->id }}][tipo_modelo]" value="modelo_07">
+                                <input type="hidden" name="perguntas[{{ $pergunta->id }}][pergunta_id]" value="{{ $pergunta->id }}">
+                                <input type="hidden" name="perguntas[{{ $pergunta->id }}][pergunta]" value="{{ $pergunta->pergunta }}">
+                                <input type="hidden" name="perguntas[{{ $pergunta->id }}][aba]" value="{{ $pergunta->aba }}">
+                            </div>
+                        @endif
+
+
+                        <!-- Fim Modelo 07 -->
+
                     </div>
                 @endforeach
 

@@ -19,7 +19,7 @@
             <input type="text" class="form-control" id="aba" name="aba" value="{{ old('aba', $aba->aba) }}" required>
         </div>
 
-        @if(Auth::user()->nivel === 'administrativo')
+        @if(Auth::user()->nivel === 'super')
             <div class="form-group">
                 <label for="user_id">Selecionar Usuário:</label>
                 <select class="form-control" id="user_id" name="user_id" required>

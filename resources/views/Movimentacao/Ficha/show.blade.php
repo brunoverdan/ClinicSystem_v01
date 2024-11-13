@@ -30,6 +30,21 @@
                             <span class="badge bg-primary">{{ $resposta->esquerdo ? 'Esquerdo' : '' }}</span>
                         </div>
                     @endif
+
+                    <!--Modelo 04, 05, 06 e 07 -->
+                    @if ($pergunta->modelo == 'modelo_04')
+                        <p><strong>Resposta:</strong> {{ $resposta->resposta ?? 'Não especificado' }}</p>
+                    @elseif($pergunta->modelo == 'modelo_05')
+                        <p><strong>Há quanto tempo:</strong> {{ $resposta->ha_quanto_tempo ?? 'Não especificado' }}</p>
+                        <p><strong>Especifique:</strong> {{ $resposta->especifique ?? 'Não especificado' }}</p>
+                    @elseif($pergunta->modelo == 'modelo_06')
+                        <p><strong>Resposta:</strong> {{ $resposta->resposta ?? 'Não especificado' }}</p>
+                        <p><strong>Especifique:</strong> {{ $resposta->especifique ?? 'Não especificado' }}</p>
+                    @elseif($pergunta->modelo == 'modelo_07')
+                        <p><strong>Resposta:</strong> {{ $resposta->resposta ?? 'Não especificado' }}</p>
+                    @endif
+
+                    <!--fim Modelo 04, 05, 06 e 07 -->
                 </div>
             @endforeach
 
