@@ -20,7 +20,7 @@
         <table class="table table-striped table-bordered">
             <thead class="thead-light">
                 <tr>
-                    <th>Nome</th>
+                    <th>Nome Fatasia</th>
                     <th>Cidade</th>
                     <th>UF</th>
                     <th>Ações</th>
@@ -29,7 +29,7 @@
             <tbody>
                 @foreach ($clinicas as $clinica)
                 <tr>
-                    <td>{{ $clinica->nome }}</td>
+                    <td>{{ $clinica->nome_fantasia }}</td>
                     <td>{{ $clinica->cidade }}</td>
                     <td>{{ $clinica->uf }}</td>
                     <td>
