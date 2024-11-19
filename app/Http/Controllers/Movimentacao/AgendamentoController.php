@@ -15,7 +15,9 @@ class AgendamentoController extends Controller
     // Lista de agendamentos
     public function index()
     {
-        $agendamentos = agendamento::with(['profissional', 'cliente', 'servico'])->get();
+        $agendamentos = Agendamento::with(['user', 'cliente', 'servico'])
+        ->orderBy('data_agendamento', 'asc') // Ordena em ordem crescente
+        ->get();
         return view('Movimentacao.Agendamento.index', compact('agendamentos'));
     }
 
@@ -49,7 +51,7 @@ class AgendamentoController extends Controller
     // Exibir detalhes de um agendamento (opcional)
     public function show($id)
     {
-        $agendamento = Agendamento::with(['profissional', 'cliente', 'servico'])->findOrFail($id);
+        $agendamento = Agendamento::with(['user', 'cliente', 'servico'])->findOrFail($id);
         return view('Movimentacao.Agendamento.show', compact('agendamento'));
     }
 

@@ -35,7 +35,7 @@
                     <td>{{ $agendamento->user->name }}</td>
                     <td>{{ $agendamento->cliente->nome }}</td>
                     <td>{{ $agendamento->servico->servico }}</td>
-                    <td>{{ $agendamento->data_agendamento }}</td>
+                    <td>{{ \Carbon\Carbon::parse($agendamento->data_agendamento)->format('d/m/Y H:i') }}</td>
                     <td>{{ ucfirst($agendamento->status) }}</td>
                     <td>
                         <a href="{{ route('agendamentos.show', $agendamento->id) }}" class="btn btn-info btn-sm">Detalhes</a>

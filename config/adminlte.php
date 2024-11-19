@@ -340,13 +340,15 @@ return [
             'icon' => 'fas fa-fw fa-money-bill-alt',
             //'can' => 'is-super',
         ],
-        ['header' => 'Agenda', 'can' => 'is-super',],
+        ['header' => 'Agenda', 
+        //'can' => 'is-super',
+        ],
         [
             'text' => 'Agendamento',
             'url' => 'agendamentos',
             'icon_color' => 'lightblue',
             'icon' => 'fas fa-fw fa-calendar-alt',
-            'can' => 'is-super',
+            //'can' => 'is-super',
         ],
         ['header' => 'Ficha do Cliente'],
         [
