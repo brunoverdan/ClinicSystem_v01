@@ -48,8 +48,11 @@ Route::group(['middleware' => 'auth'], function () {
         'agendamentos' => AgendamentoController::class,
     ]);
 
+    
+
     // Rotas Adicionais de Clientes
-    Route::get('cliente/create', [ClienteController::class, 'create'])->name('cliente.create');
+    //Route::get('cliente/create', [ClienteController::class, 'create'])->name('cliente.create');
+    Route::get('cliente', [ClienteController::class, 'create'])->name('cliente.create');
 
     // Ficha Cliente
     Route::prefix('ficha_cliente')->group(function () {
