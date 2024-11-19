@@ -355,7 +355,7 @@ return [
             'icon_color' => 'orange',
             'icon' => 'fas fa-fw fa-file-alt',
         ],
-        ['header' => 'Configurações', 'can' => 'is-super',],
+        ['header' => 'Configuraçõess', 'can' => 'is-super',],
         [
             'text' => 'Pergunta',
             'url' => 'modelo_perguntas',
