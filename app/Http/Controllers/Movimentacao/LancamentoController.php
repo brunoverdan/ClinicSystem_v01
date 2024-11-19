@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Cliente;
 use Illuminate\Http\Request;
 use App\Models\Lancamento;
-use App\Models\Servico;
+use App\Models\servico;
 use App\Models\User;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;

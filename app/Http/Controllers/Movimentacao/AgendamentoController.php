@@ -7,7 +7,7 @@ use App\Models\agendamento;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Cliente;
-use App\Models\Servico;
+use App\Models\servico;
 use Illuminate\Support\Facades\Auth;
 
 class AgendamentoController extends Controller
