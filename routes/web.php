@@ -56,7 +56,7 @@ Route::get('/ficha_cliente', [FichaClienteController::class, 'index'])->name('fi
 
 
 
-Route::any('abrir_ficha_cliente/{id}', 'App\Http\Controllers\Movimentacao\FichaClienteController@abrir_ficha_cliente')->name('abrir_ficha_cliente');
+Route::any('abrir_ficha_cliente/{id}', [FichaClienteController::class, 'abrir_ficha_cliente'])->name('abrir_ficha_cliente');
 Route::get('/fichas_edit/{cliente_id}/{aba}/edit', [FichaController::class, 'edit'])->name('fichas.custom_edit');
 //Route::get('fichas_edit/{cliente_id}/{aba}/edit', [FichaController::class, 'edit'])->name('fichas.edit');
 //Route::put('/fichas/{cliente_id}', [FichaController::class, 'update'])->name('fichas.update');
