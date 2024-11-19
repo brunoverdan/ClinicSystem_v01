@@ -9,6 +9,8 @@ use App\Models\Lancamento;
 use App\Models\Servico;
 use App\Models\User;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
+
 
 class LancamentoController extends Controller
 {
@@ -20,18 +22,23 @@ class LancamentoController extends Controller
 
     public function create()
     {
-        $userId = auth()->user()->id;
+        
+        $user = Auth::user();
+        $userId = $user ? $user->id : null;
         $servicos = Servico::where('user_id', $userId)->get();
         $clientes = User::where('nivel', 'cliente')->get();
         return view('Movimentacao.Lancamento.create', compact('servicos', 'clientes'));
     }
 
-    public function store(Request $request, $cliente_id)
+    public function store(Request $request)
     {
 
         
-        $request['user_id'] = auth()->user()->id;
-        $cliente_id = $cliente_id;
+        $user = Auth::user();
+        $request['user_id'] = $user ? $user->id : null;
+        //$request['user_id'] = auth()->user()->id;
+        $cliente_id = $request->input('cliente_id'); // Ou $request->cliente_id
+        //$cliente_id = $cliente_id;
         //dd($cliente_id);
         //$cliente_id = $request->query('cliente_id');
        
@@ -65,30 +72,38 @@ class LancamentoController extends Controller
             $data['arquivo'] = $request->file('arquivo')->store('comprovantes', 'public');
         }
 
-        // Crie o lançamento com os dados
-        Lancamento::create($data);
         
        
-       if($request['status'] == "pagamento" ){
         
-        return "cadastrou pagamento";
-
-       } else {
-
-        return redirect()->back()->with([
-            'sucesso' => 'Lançamento incluido com sucesso!',
-            'aba' => 'tab8' // Adiciona o parâmetro para manter a aba "Financeiro" ativa
-        ]);
-
-       }
+            // Crie o lançamento com os dados
+            $lancamento = Lancamento::create($data);
+    
+            // Verificar se a criação foi bem-sucedida
+            if ($lancamento) {
+                
+                if($request['status'] == "pagamento" ){
         
+                    return "cadastrou pagamento";
+            
+                   } else {
+            
+                    return redirect()->back()->with([
+                        'sucesso' => 'Lançamento incluido com sucesso!',
+                        'aba' => 'tab8' // Adiciona o parâmetro para manter a aba "Financeiro" ativa
+                    ]);
+            
+                   }
+            } 
 
 
     }
 
     public function edit(Lancamento $lancamento)
     {
-        $userId = auth()->user()->id;
+        
+        $user = Auth::user();
+        $userId = $user ? $user->id : null;
+        //$userId = auth()->user()->id;
         $servicos = Servico::where('user_id', $userId)->get();
         $clientes = User::where('nivel', 'cliente')->get();
         return view('Movimentacao.Lancamento.edit', compact('lancamento', 'servicos', 'clientes'));
@@ -149,7 +164,9 @@ class LancamentoController extends Controller
         //     $descricaoBarraBusca = "Digite Nome, Telefone ou E-mail...";
         // }
 
-        $userId = auth()->user()->id;
+        $user = Auth::user();
+        $userId = $user ? $user->id : null; 
+        //$userId = auth()->user()->id;
         $clientes = Cliente::where('user_id', $userId);
         $usuarios = User::all();
         $lancamentos = Lancamento::all();
@@ -215,7 +232,9 @@ class LancamentoController extends Controller
        
         {
             // Captura o usuário logado e seu nível
-            $user = auth()->user();
+            $user = Auth::user();
+            //$user = $user ? $user->id : null;
+            //$user = auth()->user();
             $nivel = $user->nivel;
     
             // Busca os profissionais apenas se o usuário logado não for de nível 'profissional'
@@ -246,6 +265,7 @@ class LancamentoController extends Controller
             // Ordenação dos resultados (padrão: por nome)
             $clientes = $query->orderBy('nome')->get();
     
+            
             // Retorna a view com os dados filtrados
             return view('Movimentacao.Lancamento.filtroClientePagamento', [
                 'clientes' => $clientes,

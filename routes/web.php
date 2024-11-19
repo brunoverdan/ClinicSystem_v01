@@ -13,81 +13,89 @@ use App\Http\Controllers\Cadastro\MedidaLabelController;
 use App\Http\Controllers\Movimentacao\FichaClienteController;
 use App\Http\Controllers\Movimentacao\FileController;
 use App\Http\Controllers\Movimentacao\LancamentoController;
+use App\Http\Controllers\Movimentacao\AgendamentoController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
 Route::get('/', function () {
-    //return redirect()->route('fichacliente.fichacliente');
     return redirect()->route('home');
 });
 
 Auth::routes();
 
-Route::group(['middleware' => 'auth'], function(){
+Route::group(['middleware' => 'auth'], function () {
+    // Página inicial
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    // Termos de Uso
+    Route::prefix('terms')->group(function () {
+        Route::get('/', [TermsController::class, 'show'])->name('terms.show');
+        Route::post('/accept', [TermsController::class, 'accept'])->name('terms.accept');
+    });
 
-########### TERMO DE USO #################
+    // Cadastros
+    Route::resources([
+        'clinicas' => ClinicaController::class,
+        'clientes' => ClienteController::class,
+        'evolucoes' => EvolucaoController::class,
+        'modelo_perguntas' => ModeloPerguntaController::class,
+        'fichas' => FichaController::class,
+        'medidas' => MedidaController::class,
+        'abas' => AbaController::class,
+        'servicos' => ServicoController::class,
+        'medida_labels' => MedidaLabelController::class,
+        'lancamentos' => LancamentoController::class,
+        'agendamentos' => AgendamentoController::class,
+    ]);
 
-Route::get('/terms', [TermsController::class, 'show'])->name('terms.show');
-Route::post('/terms/accept', [TermsController::class, 'accept'])->name('terms.accept');
+    // Rotas Adicionais de Clientes
+    Route::get('cliente/create', [ClienteController::class, 'create'])->name('cliente.create');
 
+    // Ficha Cliente
+    Route::prefix('ficha_cliente')->group(function () {
+        Route::get('/', [FichaClienteController::class, 'index'])->name('fichacliente.fichacliente');
+        Route::any('/abrir/{id}', [FichaClienteController::class, 'abrir_ficha_cliente'])->name('abrir_ficha_cliente');
+    });
 
-################# CADASTRO ###########################
+    // Edição Personalizada de Fichas
+    Route::prefix('fichas')->group(function () {
+        Route::get('/edit/{cliente_id}/{aba}', [FichaController::class, 'edit'])->name('fichas.custom_edit');
+        Route::put('/update/{cliente_id}', [FichaController::class, 'update'])->name('fichas.custom_update');
+    });
 
-Route::resource('clinicas', ClinicaController::class);
-Route::resource('clientes', ClienteController::class);
-Route::get('cliente', [ClienteController::class, 'create'])->name('cliente.create');
-Route::resource('evolucoes', EvolucaoController::class);
-//Route::get('/evolucoes/{evolucao}/edit', [EvolucaoController::class, 'edit'])->name('evolucoes.edit');
+    // Arquivos
+    Route::prefix('files')->group(function () {
+        Route::get('/', [FileController::class, 'index'])->name('files.index');
+        Route::post('/', [FileController::class, 'store'])->name('files.store');
+        Route::get('/download/{id}', [FileController::class, 'download'])->name('files.download');
+    });
 
-Route::resource('modelo_perguntas', ModeloPerguntaController::class);
-Route::resource('fichas', FichaController::class);
-Route::resource('medidas', MedidaController::class);
-Route::resource('abas', AbaController::class);
-Route::resource('servicos', ServicoController::class);
+    // Pesquisa em Fichas
+    Route::match(['get', 'post'], 'ficha/pesquisar', [FichaClienteController::class, 'search'])->name('fichas.search');
+
+    // Lançamentos
+    // Route::prefix('lancamentos')->group(function () {
+    //     Route::post('/{cliente_id}', [LancamentoController::class, 'store'])->name('lancamentos.store');
+    //     Route::get('/relatorio', [LancamentoController::class, 'relatorio'])->name('relatorio.lancamentos');
+    //     Route::get('/indexRelatorio', [LancamentoController::class, 'indexRelatorio'])->name('lancamentos.indexRelatorio');
+    // });
+
+    // Lançamentos
+// Route::resource('lancamentos', LancamentoController::class)->except(['store']);
+// Route::post('/lancamentos/{cliente_id}', [LancamentoController::class, 'store'])->name('lancamentos.store');
+// Route::get('/lancamentos/relatorio', [LancamentoController::class, 'relatorio'])->name('relatorio.lancamentos');
+// Route::get('/lancamentos/indexRelatorio', [LancamentoController::class, 'indexRelatorio'])->name('lancamentos.indexRelatorio');
+
 Route::resource('lancamentos', LancamentoController::class);
-Route::resource('medida_labels', MedidaLabelController::class);
-
-############# MOVIMENTAÇÃO ################
-
-Route::resource('ficha_cliente', FichaClienteController::class);
-Route::get('/ficha_cliente', [FichaClienteController::class, 'index'])->name('fichacliente.fichacliente');
-
-
-
-Route::any('abrir_ficha_cliente/{id}', [FichaClienteController::class, 'abrir_ficha_cliente'])->name('abrir_ficha_cliente');
-Route::get('/fichas_edit/{cliente_id}/{aba}/edit', [FichaController::class, 'edit'])->name('fichas.custom_edit');
-//Route::get('fichas_edit/{cliente_id}/{aba}/edit', [FichaController::class, 'edit'])->name('fichas.edit');
-//Route::put('/fichas/{cliente_id}', [FichaController::class, 'update'])->name('fichas.update');
-Route::put('/fichas/custom_update/{cliente_id}', [FichaController::class, 'update'])->name('fichas.custom_update');
-
-
-
-
-
-//File
-Route::get('/files', [FileController::class, 'index'])->name('files.index');
-Route::post('/files', [FileController::class, 'store'])->name('files.store');
-Route::get('/files/download/{id}', [FileController::class, 'download'])->name('files.download');
-
-
-######### Filtro ########
-
-//Route::post('/ficha/pesquisar', [FichaClienteController::class, 'search'])->name('fichas.search');
-Route::match(['get', 'post'], 'ficha/pesquisar', [FichaClienteController::class, 'search'])->name('fichas.search');
-
-
-############# Lançamento ##########
-
-Route::post('/lancamentos/{cliente_id}', [LancamentoController::class, 'store'])->name('lancamentos.store');
-Route::get('/lancamentos/relatorio_lancamentos', [LancamentoController::class, 'relatorio'])->name('relatorio.lancamentos');
-Route::get('/listaClientePagamento', [LancamentoController::class, 'listaClientePagamento'])->name('listaClientePagamento');
-Route::get('/cadastroPagamento/{id}', 'App\Http\Controllers\Movimentacao\LancamentoController@cadastroPagamento')->name('cadastroPagamento');
-
+Route::get('/lancamentos/relatorio', [LancamentoController::class, 'relatorio'])->name('relatorio.lancamentos');
 Route::get('/lancamentos/indexRelatorio', [LancamentoController::class, 'indexRelatorio'])->name('lancamentos.indexRelatorio');
 
 
 
 
+    // Pagamentos
+    Route::get('/listaClientePagamento', [LancamentoController::class, 'listaClientePagamento'])->name('listaClientePagamento');
+    Route::prefix('pagamentos')->group(function () {
+        Route::get('/cadastro/{id}', [LancamentoController::class, 'cadastroPagamento'])->name('cadastroPagamento');
+    });
 });

@@ -60,4 +60,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Servico::class);
     }
+
+    public function agendamentos()
+    {
+        return $this->hasMany(Agendamento::class, 'user_id');
+    }
 }

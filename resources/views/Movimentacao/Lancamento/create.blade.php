@@ -31,7 +31,7 @@
         <!-- Valor -->
         <div class="mb-3">
             <label for="valor" class="form-label">Valor:</label>
-            R$<input type="text" name="valor" id="valor" class="form-control" readonly>
+            R$<input type="text" name="valor" id="valor" class="form-control" >
         </div>
 
         <!-- Data -->

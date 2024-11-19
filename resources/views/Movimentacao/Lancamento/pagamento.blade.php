@@ -44,7 +44,7 @@
             <label for="valor" class="form-label">Valor:</label>
             <div class="input-group">
                 <span class="input-group-text">R$</span>
-                <input type="text" name="valor" id="valor" class="form-control" readonly>
+                <input type="text" name="valor" id="valor" class="form-control" >
             </div>
         </div>
 
