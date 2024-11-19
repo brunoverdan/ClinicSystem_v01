@@ -90,7 +90,7 @@ class FichaClienteController extends Controller
     public function abrir_ficha_cliente($id)
     {
 
-
+        
         // Buscar o cliente pelo ID
         $cliente = Cliente::findOrFail($id);
         $files = File::where('cliente_id', $id)->get();
@@ -117,7 +117,7 @@ class FichaClienteController extends Controller
             ->orderBy('aba', 'asc')
             ->get();
 
-
+            
         if (count($respostas) > 0) {
 
             $respostas = ModeloPergunta::with(['respostas' => function ($query) use ($id) {
@@ -127,7 +127,7 @@ class FichaClienteController extends Controller
                 ->orderBy('modelo', 'asc')
                 ->get();
         }
-
+       
        // Organizar as respostas por aba para fácil acesso na view
     $respostasPorAba = [];
     foreach ($abas as $aba) {
@@ -135,13 +135,15 @@ class FichaClienteController extends Controller
             ->where('aba', $aba->aba)
             ->get();
     }
-
+    
     $servicos = servico::where('user_id', $userId)->get();
     // Obtenha os lançamentos, ordenados pela data
+    
     $lancamentos = Lancamento::where('cliente_id', $id)->orderBy('data', 'asc')->get();
+    
     $medida_label = MedidaLabel::where('user_id', $userId)->firstOrFail();
 
-
+   // dd("chegou aqui");
    
         return view('Movimentacao.FichaCliente.ficha_cliente', compact(
             'cliente',

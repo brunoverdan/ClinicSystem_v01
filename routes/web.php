@@ -33,6 +33,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/accept', [TermsController::class, 'accept'])->name('terms.accept');
     });
 
+    //Route::any('abrir_ficha_cliente/{id}', 'App\Http\Controllers\Movimentacao\FichaClienteController@abrir_ficha_cliente')->name('abrir_ficha_cliente');
+
     // Cadastros
     Route::resources([
         'clinicas' => ClinicaController::class,
