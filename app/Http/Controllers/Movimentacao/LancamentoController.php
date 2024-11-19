@@ -166,8 +166,7 @@ class LancamentoController extends Controller
 
         $user = Auth::user();
         $userId = $user ? $user->id : null; 
-        //$userId = auth()->user()->id;
-        $clientes = Cliente::where('user_id', $userId);
+        $clientes = Cliente::where('user_id', $userId)->get();
         $usuarios = User::all();
         $lancamentos = Lancamento::all();
 
@@ -196,83 +195,132 @@ class LancamentoController extends Controller
 
         //return view('Movimentacao.Lancamento.relatorio', compact('clientes','usuarios','lancamentos'));
     }
-    
-    public function relatorio(Request $request)
-    {
-        // Filtros
-    $query = Lancamento::query();
 
-    if ($request->filled('data_inicial') && $request->filled('data_final')) {
-        $query->whereBetween('data', [$request->data_inicial, $request->data_final]);
-    }
+    public function relatorio(Request $request)
+{
+    // Usuário logado
+    $user = Auth::user();
+
+    // Filtro de clientes apenas do usuário logado
+    $clientes = Cliente::where('user_id', $user->id)->get();
+
+    // Query de lançamentos com filtro por cliente
+    $query = Lancamento::where('user_id', $user->id);
 
     if ($request->filled('cliente_id')) {
         $query->where('cliente_id', $request->cliente_id);
     }
 
-    if ($request->filled('user_id')) {
-        $query->where('user_id', $request->user_id);
-    }
-
-    // Somas e dados para o relatório
+    // Dados do relatório
     $lancamentos = $query->get();
     $totalAtendimento = $lancamentos->where('status', 'atendimento')->sum('valor');
     $totalPagamento = $lancamentos->where('status', 'pagamento')->sum('valor');
     $diferenca = $totalPagamento - $totalAtendimento;
     $totalGeral = $lancamentos->sum('valor');
 
-    return view('Movimentacao.Lancamento.relatorio', compact('lancamentos', 'totalAtendimento', 'totalPagamento', 'diferenca', 'totalGeral'));
+    return view('Movimentacao.Lancamento.relatorio', compact('lancamentos', 'clientes', 'totalAtendimento', 'totalPagamento', 'diferenca', 'totalGeral'));
+}
 
     
-    }
+    // public function relatorio(Request $request)
+    // {
+    //     // Filtros
+    // $query = Lancamento::query();
 
-    public function listaClientePagamento(Request $request)
-    {
+    // if ($request->filled('data_inicial') && $request->filled('data_final')) {
+    //     $query->whereBetween('data', [$request->data_inicial, $request->data_final]);
+    // }
+
+    // if ($request->filled('cliente_id')) {
+    //     $query->where('cliente_id', $request->cliente_id);
+    // }
+
+    // if ($request->filled('user_id')) {
+    //     $query->where('user_id', $request->user_id);
+    // }
+
+    // // Somas e dados para o relatório
+    // $lancamentos = $query->get();
+    // $totalAtendimento = $lancamentos->where('status', 'atendimento')->sum('valor');
+    // $totalPagamento = $lancamentos->where('status', 'pagamento')->sum('valor');
+    // $diferenca = $totalPagamento - $totalAtendimento;
+    // $totalGeral = $lancamentos->sum('valor');
+
+    // return view('Movimentacao.Lancamento.relatorio', compact('lancamentos', 'totalAtendimento', 'totalPagamento', 'diferenca', 'totalGeral'));
+
+    
+    // }
+
+    // public function listaClientePagamento(Request $request)
+    // {
         
        
-        {
-            // Captura o usuário logado e seu nível
-            $user = Auth::user();
-            //$user = $user ? $user->id : null;
-            //$user = auth()->user();
-            $nivel = $user->nivel;
+    //     {
+    //         // Captura o usuário logado e seu nível
+    //         $user = Auth::user();
+    //         //$user = $user ? $user->id : null;
+    //         //$user = auth()->user();
+    //         $nivel = $user->nivel;
     
-            // Busca os profissionais apenas se o usuário logado não for de nível 'profissional'
-            $profissionais = [];
-            if ($nivel !== 'profissional') {
-                $profissionais = User::where('nivel', 'profissional')->get();
-            }
+    //         // Busca os profissionais apenas se o usuário logado não for de nível 'profissional'
+    //         $profissionais = [];
+    //         if ($nivel !== 'profissional') {
+    //             $profissionais = User::where('nivel', 'profissional')->get();
+    //         }
     
-            // Configura a query base para buscar clientes
-            $query = Cliente::query();
+    //         // Configura a query base para buscar clientes
+    //         $query = Cliente::query();
             
-            // Filtro por nome do cliente
-            if ($request->filled('cliente')) {
+    //         // Filtro por nome do cliente
+    //         if ($request->filled('cliente')) {
                 
-                $query->where('nome', 'like', '%' . $request->cliente . '%');
+    //             $query->where('nome', 'like', '%' . $request->cliente . '%');
                 
-            }
+    //         }
     
-            // Filtro por profissional se o usuário logado não for 'profissional'
-            if ($nivel !== 'profissional' && $request->filled('user_id')) {
-                $query->where('user_id', $request->user_id);
-            } 
-            // Se o usuário for 'profissional', filtra pelo seu próprio `user_id`
-            elseif ($nivel === 'profissional') {
-                $query->where('user_id', $user->id);
-            }
+    //         // Filtro por profissional se o usuário logado não for 'profissional'
+    //         if ($nivel !== 'profissional' && $request->filled('user_id')) {
+    //             $query->where('user_id', $request->user_id);
+    //         } 
+    //         // Se o usuário for 'profissional', filtra pelo seu próprio `user_id`
+    //         elseif ($nivel === 'profissional') {
+    //             $query->where('user_id', $user->id);
+    //         }
     
-            // Ordenação dos resultados (padrão: por nome)
-            $clientes = $query->orderBy('nome')->get();
+    //         // Ordenação dos resultados (padrão: por nome)
+    //         $clientes = $query->orderBy('nome')->get();
     
             
-            // Retorna a view com os dados filtrados
-            return view('Movimentacao.Lancamento.filtroClientePagamento', [
-                'clientes' => $clientes,
-                'profissionais' => $profissionais,
-            ]);
-        }
+    //         // Retorna a view com os dados filtrados
+    //         return view('Movimentacao.Lancamento.filtroClientePagamento', [
+    //             'clientes' => $clientes,
+    //             'profissionais' => $profissionais,
+    //         ]);
+    //     }
+    // }
+
+    public function listaClientePagamento(Request $request)
+{
+    // Captura o usuário logado
+    $user = Auth::user();
+
+    // Configura a query base para buscar clientes apenas do usuário logado
+    $query = Cliente::where('user_id', $user->id);
+
+    // Filtro por nome do cliente
+    if ($request->filled('cliente')) {
+        $query->where('nome', 'like', '%' . $request->cliente . '%');
     }
+
+    // Ordenação dos resultados (padrão: por nome)
+    $clientes = $query->orderBy('nome')->get();
+
+    // Retorna a view com os dados filtrados
+    return view('Movimentacao.Lancamento.filtroClientePagamento', [
+        'clientes' => $clientes,
+    ]);
+}
+
 
     public function cadastroPagamento($id)
     {

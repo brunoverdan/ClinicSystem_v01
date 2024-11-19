@@ -1,118 +1,80 @@
 @extends('adminlte::page')
 
-@section('title', 'Adicionar Clínica')
+@section('title', 'Relatório de Clientes')
 
 @section('content_header')
-    <h2 class="my-4">Relatório de Clientes</h2>
+    <h2 class="my-4 text-center">Relatório de Clientes</h2>
 @stop
 
 @section('content')
 <div class="container">
-    
-
-    <!-- Mensagens de erro -->
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
-
     <!-- Filtro de pesquisa -->
     <form method="GET" action="{{ route('listaClientePagamento') }}" class="mb-4">
-        <div class="row g-3 align-items-center">
-            <!-- Campo de busca por nome do cliente -->
-            <div class="col-md-6">
-                <label for="cliente" class="form-label">Buscar Cliente</label>
-                <input type="text" name="cliente" id="cliente" class="form-control" placeholder="Digite o nome do cliente" value="{{ request('cliente') }}">
-            </div>
-
-            <!-- Filtro por profissional, apenas se o usuário logado não for 'profissional' -->
-            @if(auth()->user()->nivel !== 'profissional')
-                <div class="col-md-4">
-                    <label for="user_id" class="form-label">Selecionar Profissional</label>
-                    <select name="user_id" id="user_id" class="form-select">
-                        <option value="">Todos os Profissionais</option>
-                        @foreach ($profissionais as $profissional)
-                            <option value="{{ $profissional->id }}" {{ request('user_id') == $profissional->id ? 'selected' : '' }}>
-                                {{ $profissional->name }}
-                            </option>
-                        @endforeach
-                    </select>
+        <div class="card shadow-sm p-4">
+            <div class="row align-items-center">
+                <!-- Campo de busca por nome do cliente -->
+                <div class="col-lg-10 col-md-8 col-sm-12">
+                    <label for="cliente" class="form-label fw-bold">Buscar Cliente</label>
+                    <input type="text" name="cliente" id="cliente" class="form-control" placeholder="Digite o nome do cliente" value="{{ request('cliente') }}">
                 </div>
-            @endif
-
-            <!-- Botão de pesquisa -->
-            <div class="col-md-2">
-                <button type="submit" class="btn btn-primary w-100 mt-4">Pesquisar</button>
+                <!-- Botão de pesquisa -->
+                <div class="col-lg-2 col-md-4 col-sm-12 mt-md-0 mt-3">
+                    <button type="submit" class="btn btn-primary w-100">Pesquisar</button>
+                </div>
             </div>
         </div>
     </form>
 
-    <!-- Campo de ordenação -->
-    <div class="d-flex justify-content-between mb-3">
-        <h5>Resultados</h5>
-        <div>
-            <label for="sort" class="form-label me-2">Ordenar por:</label>
-            <select id="sort" class="form-select d-inline-block w-auto" onchange="sortTable()">
-                <option value="name">Nome</option>
-                <option value="data">Data</option>
-            </select>
-        </div>
-    </div>
-
     <!-- Tabela de resultados -->
-    <table class="table table-hover" id="resultadoTable">
-        <thead>
-            <tr>
-                <th>Nome do Cliente</th>
-                <th>Data</th>
-                <th>Profissional</th>
-                <th>Ações</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($clientes as $cliente)
+    <div class="card shadow-sm p-4">
+        <h5 class="fw-bold mb-3">Resultados</h5>
+        <table class="table table-striped table-hover">
+            <thead class="table-dark">
                 <tr>
-                    <td>{{ $cliente->nome }}</td>
-                    <td>{{ $cliente->data }}</td>
-                    <td>{{ $cliente->user->name ?? 'N/A' }}</td>
-                    <td>
-                        <a href="{{ route('cadastroPagamento', $cliente->id) }}" class="btn btn-sm btn-info">Cad.Pagamento</a>
-                    </td>
+                    <th>Nome do Cliente</th>
+                    <th>Ações</th>
                 </tr>
-            @endforeach
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @forelse ($clientes as $cliente)
+                    <tr>
+                        <td>{{ $cliente->nome }}</td>
+                        <td>
+                            <a href="{{ route('cadastroPagamento', $cliente->id) }}" class="btn btn-sm btn-info">Cad.Pagamento</a>
+                        </td>
+                    </tr>
+                @empty
+                    <tr>
+                        <td colspan="2" class="text-center">Nenhum cliente encontrado.</td>
+                    </tr>
+                @endforelse
+            </tbody>
+        </table>
+    </div>
 </div>
-
-<!-- Script para ordenação da tabela -->
-<script>
-    function sortTable() {
-        const sortOption = document.getElementById('sort').value;
-        const table = document.getElementById('resultadoTable').getElementsByTagName('tbody')[0];
-        const rows = Array.from(table.rows);
-
-        rows.sort((a, b) => {
-            const cellA = a.querySelector(`td:nth-child(${sortOption === 'name' ? 1 : 2})`).textContent.toLowerCase();
-            const cellB = b.querySelector(`td:nth-child(${sortOption === 'name' ? 1 : 2})`).textContent.toLowerCase();
-            return cellA.localeCompare(cellB);
-        });
-
-        rows.forEach(row => table.appendChild(row));
-    }
-</script>
 @stop
 
 @section('css')
-    {{-- Add here extra stylesheets --}}
-    {{-- <link rel="stylesheet" href="/css/admin_custom.css"> --}}
+<style>
+    .container {
+        max-width: 900px;
+        margin: 0 auto;
+    }
+    .card {
+        border: 1px solid #ddd;
+        border-radius: 10px;
+    }
+    .table-striped > tbody > tr:nth-of-type(odd) {
+        background-color: #f9f9f9;
+    }
+    .table-hover tbody tr:hover {
+        background-color: #f1f1f1;
+    }
+</style>
 @stop
 
 @section('js')
-    <script> console.log("Hi, I'm using the Laravel-AdminLTE package!"); </script>
+<script>
+    console.log("Relatório de Clientes carregado.");
+</script>
 @stop
-
