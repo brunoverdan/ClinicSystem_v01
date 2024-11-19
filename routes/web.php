@@ -59,8 +59,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::prefix('ficha_cliente')->group(function () {
         Route::get('/', [FichaClienteController::class, 'index'])->name('fichacliente.fichacliente');
         //Route::get('/abrir/{id}', [FichaClienteController::class, 'abrir_ficha_cliente'])->name('abrir_ficha_cliente');
-        Route::get('/abrir/{id}', 'App\Http\Controllers\Movimentacao\FichaClienteController@abrir_ficha_cliente')->name('abrir_ficha_cliente');
+        //Route::get('/abrir/{id}', 'App\Http\Controllers\Movimentacao\FichaClienteController@abrir_ficha_cliente')->name('abrir_ficha_cliente');
     });
+
+    Route::any('abrir_ficha_cliente/{id}', 'App\Http\Controllers\Movimentacao\FichaClienteController@abrir_ficha_cliente')->name('abrir_ficha_cliente');
+
 
    
     // Edição Personalizada de Fichas
