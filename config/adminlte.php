@@ -315,7 +315,7 @@ return [
         ],
         [
             'text' => 'Cliente',
-            'url' => 'cliente',
+            'url' => 'clientes/create',
             'icon' => 'fas fa-fw fa-user',
         ],
         ['header' => 'Financeiro'],

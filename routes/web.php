@@ -51,8 +51,9 @@ Route::group(['middleware' => 'auth'], function () {
     
 
     // Rotas Adicionais de Clientes
-    //Route::get('cliente/create', [ClienteController::class, 'create'])->name('cliente.create');
-    Route::get('cliente', [ClienteController::class, 'create'])->name('cliente.create');
+   // Route::get('/lancamentos/indexRelatorio', [LancamentoController::class, 'indexRelatorio'])->name('lancamentos.indexRelatorio');
+    Route::get('clientes/create', [ClienteController::class, 'create'])->name('clientes.create');
+    //Route::get('clientes', [ClienteController::class, 'create'])->name('cliente.create');
 
     // Ficha Cliente
     Route::prefix('ficha_cliente')->group(function () {
