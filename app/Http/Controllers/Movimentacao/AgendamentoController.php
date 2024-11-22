@@ -124,34 +124,8 @@ public static function getStatusColor($status)
         Agendamento::create($request->all());
 
 
-        //return redirect()->route('agendamentos.index')->with('success', 'Agendamento criado com sucesso!');
-// Obtém o usuário logado
-$user = Auth::user();
+       return redirect()->route('lancamentos.indexRelatorio')->with('success', 'Agendamento criado com sucesso!');
 
-// Filtros opcionais
-$query = Agendamento::query();
-
-// Se o usuário for um profissional, traz apenas os agendamentos deste profissional
-if ($user->nivel === 'profissional') {
-    $query->where('user_id', $user->id);
-}
-
-// Recupera os agendamentos filtrados
-$agendamentos = $query->with(['cliente', 'user'])->get();
-
-// Formatar os agendamentos para o FullCalendar
-$agendamentosCalendario = $agendamentos->map(function ($agendamento) {
-    $agendamento->color = $this->getStatusColor($agendamento->status);
-    return $agendamento;
-    
-});
-
-// Dados para os filtros
-$clientes = $user->nivel === 'profissional' ? Cliente::where('user_id', $user->id)->get() : Cliente::all();
-
-
-// Retornar para a view
-return view('Movimentacao.Agendamento.index', compact('agendamentos', 'agendamentosCalendario', 'clientes'));
 
     }
 
