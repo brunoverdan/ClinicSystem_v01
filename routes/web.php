@@ -110,4 +110,14 @@ Route::get('/lancamentos/indexRelatorio', [LancamentoController::class, 'indexRe
     Route::prefix('pagamentos')->group(function () {
         Route::get('/cadastro/{id}', [LancamentoController::class, 'cadastroPagamento'])->name('cadastroPagamento');
     });
+
+    //Agendamento
+    //Route::post('agendamentos/{agendamento}/status', [AgendamentoController::class, 'updateStatus'])->name('agendamentos.status');
+    //Route::post('agendamentos/{id}/status', [AgendamentoController::class, 'mudarStatus'])->name('agendamentos.status');
+    //Route::post('agendamentos/{id}/status', [AgendamentoController::class, 'mudarStatus'])->name('agendamentos.status');
+    Route::post('agendamentos/{id}/status', [AgendamentoController::class, 'mudarStatus'])->name('agendamentos.status');
+
+
+
+
 });
