@@ -124,7 +124,7 @@ public static function getStatusColor($status)
         Agendamento::create($request->all());
 
 
-       return redirect()->route('lancamentos.indexRelatorio')->with('success', 'Agendamento criado com sucesso!');
+       return redirect()->route('agendamentos.index')->with('success', 'Agendamento criado com sucesso!');
 
 
     }
