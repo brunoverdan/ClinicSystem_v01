@@ -14,7 +14,7 @@ class Lancamento extends Model
 
     public function servico()
     {
-        return $this->belongsTo(Servico::class);
+        return $this->belongsTo(servico::class);
     }
 
     // Relacionamento com Usuário (quem registrou o lançamento)
