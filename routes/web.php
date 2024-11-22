@@ -112,9 +112,6 @@ Route::get('/lancamentos/indexRelatorio', [LancamentoController::class, 'indexRe
     });
 
     //Agendamento
-    //Route::post('agendamentos/{agendamento}/status', [AgendamentoController::class, 'updateStatus'])->name('agendamentos.status');
-    //Route::post('agendamentos/{id}/status', [AgendamentoController::class, 'mudarStatus'])->name('agendamentos.status');
-    //Route::post('agendamentos/{id}/status', [AgendamentoController::class, 'mudarStatus'])->name('agendamentos.status');
     Route::post('agendamentos/{id}/status', [AgendamentoController::class, 'mudarStatus'])->name('agendamentos.status');
 
 
