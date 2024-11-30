@@ -90,7 +90,7 @@ class FichaClienteController extends Controller
     public function abrir_ficha_cliente($id)
     {
 
-        dd("chegou aqui");
+        
         // Buscar o cliente pelo ID
         $cliente = Cliente::findOrFail($id);
         $files = File::where('cliente_id', $id)->get();
